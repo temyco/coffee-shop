@@ -1,13 +1,26 @@
 # CoffeeShop
-Flutter based sample application.
+Flutter based sample ecommerce application about coffee ordering. Main goal of whitch is to gain more expertice in mobile cross platform app-development.
 
-## Flutter
+## Envirorment
+- Go to Flutter [original installation guide here] (https://flutter.dev/docs/get-started/install)
+- Choose your OS and follow the instalation guide
+- Run `flutter doctor` and make sure you've installed all missing components
+- Run `flutter doctor` and install all missing components
+- [Set up an editor you like](https://flutter.dev/docs/get-started/editor). Android Studio is prefarable choise.
 
-A few resources to get you started if this is your first Flutter project:
+## Technical Tools
+- [Flutter](https://flutter.dev/)
+- [Dart](https://dart.dev/)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Supported devices
+- Android 4.1+
+- iOS 8+
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Design
+[Design scketches can be found here.](https://sketch.cloud/s/DYVOn/a/L84bvd/play)
+
+## Code convention
+We are following to the official Dart [code style guide](https://dart.dev/guides/language/effective-dart/style).
+
+## Acrhitecture
+Topic that is to be discussed yet. Could be choosed from the [official documentation recomendations](https://flutter.dev/docs/development/data-and-backend/state-mgmt/options).
