@@ -5,7 +5,6 @@ Flutter based sample ecommerce application about coffee ordering. Main goal of w
 - Go to Flutter [original installation guide here] (https://flutter.dev/docs/get-started/install)
 - Choose your OS and follow the instalation guide
 - Run `flutter doctor` and make sure you've installed all missing components
-- Run `flutter doctor` and install all missing components
 - [Set up an editor you like](https://flutter.dev/docs/get-started/editor). Android Studio is prefarable choise.
 
 ## Technical Tools
