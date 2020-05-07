@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapp/presentation/product_details_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text('Hello World')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Center(child: Text('Hello World')),
+            Center(
+                child: RaisedButton(
+                    child: Text('Open product details stub'),
+                    color: Colors.teal[100],
+                    onPressed: () {
+                      _openProductDetails(context);
+                    }))
+          ],
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         unselectedItemColor: Colors.black,
         selectedItemColor: Colors.teal[400],
@@ -34,4 +50,9 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+void _openProductDetails(BuildContext context) {
+  Navigator.push(
+      context, MaterialPageRoute(builder: (context) => ProductDetailsScreen()));
 }
