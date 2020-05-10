@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapp/messages.dart';
 import 'package:flutterapp/presentation/basket_route.dart';
 import 'package:flutterapp/presentation/location_route.dart';
 import 'package:flutterapp/presentation/orders_route.dart';
@@ -24,7 +25,9 @@ class _HomeRouteState extends State<HomeRoute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _TabView(selectedTabIndex: _selectedTabIndex),
+      body: SafeArea(
+        child: _TabView(selectedTabIndex: _selectedTabIndex),
+      ),
       bottomNavigationBar: _BottomTabsView(
         selectedTabIndex: _selectedTabIndex,
         onTapListener: _onTabSelected,
@@ -33,6 +36,8 @@ class _HomeRouteState extends State<HomeRoute> {
   }
 }
 
+/// Creates a tab route for passed [selectedTabIndex].
+/// Throws an error if [selectedTabIndex] can not be recognized.
 class _TabView extends StatelessWidget {
   final int selectedTabIndex;
 
@@ -69,7 +74,6 @@ class _BottomTabsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO add StringsProvider for multi-lang support
     // TODO add correct icons
 
     return BottomNavigationBar(
@@ -78,23 +82,23 @@ class _BottomTabsView extends StatelessWidget {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.location_on),
-          title: Text('Location'),
+          title: Text(Messages.locationTitle),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.shop),
-          title: Text('Shop'),
+          title: Text(Messages.shopTitle),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.note),
-          title: Text('Orders'),
+          title: Text(Messages.ordersTitle),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.shopping_cart),
-          title: Text('Basket'),
+          title: Text(Messages.basketTitle),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.account_circle),
-          title: Text('Profile'),
+          title: Text(Messages.profileTitle),
         ),
       ],
       currentIndex: selectedTabIndex,
