@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 var mainTheme = ThemeData(
   primarySwatch: colorWhite,
+  /// We should use SFUIDisplay for AppBar title
+  fontFamily: 'SFUIDisplay'
 );
 
 // TODO create color scheme that will match our design
