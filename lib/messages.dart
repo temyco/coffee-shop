@@ -9,4 +9,7 @@ class Messages {
   static const String ordersTitle = "Orders";
   static const String profileTitle = "Profile";
   static const String shopTitle = "Shop";
+
+  /// Product Details Route
+  static const String nextButtonTitle = "Next";
 }

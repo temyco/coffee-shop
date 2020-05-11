@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapp/messages.dart';
 
 /// Screen represents stateless static Product Details [see in Sketch](https://www.sketch.com/s/a67f7ba8-f681-4ce8-abf4-ccb72cb57eb0/a/gx178z)
 /// TODO: Don't use hardcoded strings, consider to add localization later.
 /// TODO: Find out real color values from design and create a color system for the project.
 /// TODO: Create other project resources: dimensions, view styles, etc.
-class ProductDetailsScreen extends StatelessWidget {
+class ProductDetailsRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // TODO: remove Scaffold and AppBar from here when AppBar listener is implemented
         appBar: AppBar(
           title: Center(child: Text('Product name')),
           leading: IconButton(
@@ -158,7 +160,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     child: RaisedButton(
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
                         child: Text(
-                            'Next',
+                            Messages.nextButtonTitle,
                             style: TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.bold,
