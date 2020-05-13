@@ -1,24 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/messages.dart';
 
-/// Screen represents stateless static Product Details [see in Sketch](https://www.sketch.com/s/a67f7ba8-f681-4ce8-abf4-ccb72cb57eb0/a/gx178z)
-/// TODO: Don't use hardcoded strings, consider to add localization later.
-/// TODO: Find out real color values from design and create a color system for the project.
-/// TODO: Create other project resources: dimensions, view styles, etc.
-class ProductDetailsRoute extends StatelessWidget {
+/// Screen represents static Product Details [see in Sketch](https://www.sketch.com/s/a67f7ba8-f681-4ce8-abf4-ccb72cb57eb0/a/gx178z)
+// TODO: update colors and dimensions when resources implemented.
+class ProductDetailsRoute extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _ProductDetailsRouteState();
+  }
+}
+
+class _ProductDetailsRouteState extends State<ProductDetailsRoute> {
+  bool _isFavoriteSelected = false;
+  Color _favoriteIconColor = Colors.grey[300];
+
+  void _onFavoritePressed() {
+    setState(() {
+      _isFavoriteSelected = !_isFavoriteSelected;
+      _favoriteIconColor = _isFavoriteSelected ? Colors.pink[300] : Colors.grey[300];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // TODO: remove Scaffold and AppBar from here when AppBar listener is implemented
         appBar: AppBar(
-          title: Center(child: Text('Product name')),
+          title: Center(child: Text(
+            'Product name',
+            style: TextStyle(fontFamily: 'SFUIDisplay', fontWeight: FontWeight.w600, fontSize: 17),
+          )),
           leading: IconButton(
               icon: Icon(Icons.keyboard_arrow_left, color: Colors.black)),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.favorite),
-              color: Colors.grey[300],
-              onPressed: () {},
+              color: _favoriteIconColor,
+              onPressed: () {
+                setState(() {
+                  _onFavoritePressed();
+                });
+              },
             )
           ],
           elevation: 0,
@@ -41,29 +63,30 @@ class ProductDetailsRoute extends StatelessWidget {
                         Text(
                           'Flat white',
                           style: TextStyle(
+                              fontWeight: FontWeight.w700,
                               fontSize: 20,
-                              fontWeight: FontWeight.bold,
                               color: Color.fromARGB(255, 74, 84, 79)),
                         ),
                         Text(
                           '\$ 12.00',
                           style: TextStyle(
+                              fontFamily: 'SFUIDisplay',
+                              fontWeight: FontWeight.w700,
                               fontSize: 20,
-                              fontWeight: FontWeight.bold,
                               color: Color.fromARGB(255, 74, 84, 79)),
                         ),
                       ],
                     )),
                 Container(
-                    margin: const EdgeInsets.only(top: 5, left: 20, right: 20),
+                    margin: const EdgeInsets.only(top: 7, left: 20, right: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
                           'Special',
                           style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15,
                               color: Colors.grey[500]),
                         ),
                         IntrinsicHeight(
@@ -71,8 +94,8 @@ class ProductDetailsRoute extends StatelessWidget {
                               children: <Widget>[
                                 Text('10 min',
                                     style: TextStyle(
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 13,
                                         color: Colors.grey[500])),
                                 VerticalDivider(
                                   color: Colors.grey[500],
@@ -85,8 +108,8 @@ class ProductDetailsRoute extends StatelessWidget {
                                     margin: const EdgeInsets.only(left: 5),
                                     child: Text('4.3',
                                         style: TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 13,
                                             color: Colors.grey[500])))
                               ],
                             ))
@@ -98,11 +121,12 @@ class ProductDetailsRoute extends StatelessWidget {
                     child: Text(
                         'We believe coffee should be as simple complex as you want it to be. Perfect start your day',
                         style: TextStyle(
-                            fontSize: 17,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 13,
                             color: Colors.grey[600]))
                 ),
                 Container(
-                    margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
+                    margin: const EdgeInsets.only(top: 15, left: 20, right: 20),
                     child: IntrinsicHeight(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -116,8 +140,12 @@ class ProductDetailsRoute extends StatelessWidget {
                                 ),
                                 padding: EdgeInsets.only(top: 7, left: 20, right: 20, bottom: 7),
                                 child: Text(
-                                  'Calories\n176 cal',
-                                  textAlign: TextAlign.center,
+                                    'Calories\n176 cal',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 12,
+                                        color: Colors.grey[600])
                                 ),
                               ),
                             ),
@@ -131,7 +159,11 @@ class ProductDetailsRoute extends StatelessWidget {
                                 ),
                                 padding: EdgeInsets.only(top: 7, left: 20, right: 20, bottom: 7),
                                 child: Text(
-                                    'Strong'
+                                    'Strong',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 12,
+                                        color: Colors.grey[600])
                                 ),
                               ),
                             ),
@@ -146,7 +178,11 @@ class ProductDetailsRoute extends StatelessWidget {
                                   ),
                                   padding: EdgeInsets.only(top: 7, left: 20, right: 20, bottom: 7),
                                   child: Text(
-                                      'Arabica'
+                                      'Arabica',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12,
+                                          color: Colors.grey[600])
                                   ),
                                 )
                             )
@@ -162,8 +198,9 @@ class ProductDetailsRoute extends StatelessWidget {
                         child: Text(
                             Messages.nextButtonTitle,
                             style: TextStyle(
+                                fontFamily: 'SFProText',
                                 fontSize: 17,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w700,
                                 color: Colors.white)),
                         color: Color.fromARGB(255, 34, 40, 49),
                         onPressed: () {})

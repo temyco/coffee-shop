@@ -11,6 +11,7 @@ class LocationRoute extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Center(child: Text(Messages.locationTitle)),
+          /// Just need to open product details from somewhere.
           Center(
               child: RaisedButton(
                   child: Text('Open product details stub'),
