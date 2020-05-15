@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterapp/messages.dart';
+import 'package:flutterapp/resources/app_messages.dart';
 import 'package:flutterapp/presentation/basket_route.dart';
 import 'package:flutterapp/presentation/location_route.dart';
 import 'package:flutterapp/presentation/orders_route.dart';
@@ -82,23 +82,23 @@ class _BottomTabsView extends StatelessWidget {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.location_on),
-          title: Text(Messages.locationTitle),
+          title: Text(AppMessages.locationTitle),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.shop),
-          title: Text(Messages.shopTitle),
+          title: Text(AppMessages.shopTitle),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.note),
-          title: Text(Messages.ordersTitle),
+          title: Text(AppMessages.ordersTitle),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.shopping_cart),
-          title: Text(Messages.basketTitle),
+          title: Text(AppMessages.basketTitle),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.account_circle),
-          title: Text(Messages.profileTitle),
+          title: Text(AppMessages.profileTitle),
         ),
       ],
       currentIndex: selectedTabIndex,
