@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/resources/app_messages.dart';
-import 'package:flutterapp/theme.dart';
+import 'package:flutterapp/resources/app_theme.dart';
 
 class ShopRoute extends StatelessWidget {
   @override
