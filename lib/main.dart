@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutterapp/messages.dart';
+import 'package:flutterapp/resources/app_messages.dart';
 
 import 'presentation/home_route.dart';
-import 'theme.dart';
+import 'resources/app_theme.dart';
 
 void main() => runApp(CoffeeShop());
 
@@ -12,7 +12,7 @@ class CoffeeShop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: Messages.appTitle,
+      title: AppMessages.appTitle,
       theme: mainTheme,
       home: HomeRoute(),
     );
