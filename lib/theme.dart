@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 var mainTheme = ThemeData(
   primarySwatch: colorWhite,
@@ -22,3 +23,10 @@ const MaterialColor colorWhite = const MaterialColor(
     900: const Color(0xFFFFFFFF),
   },
 );
+
+void setWhiteStatusBar() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.white,
+      statusBarIconBrightness: Brightness.dark
+  ));
+}
