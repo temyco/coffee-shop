@@ -10,4 +10,13 @@ class AppMessages {
   static const String profileTitle = "Profile";
   static const String shopTitle = "Shop";
   static const String stepsToFreeCoffee = "Steps to Free Coffee";
+  static const String daily = "Daily";
+  static const String random = "Random";
+  static const String boss = "Boss";
+  static const String achievements = "Achievements";
+  static const String exp = "exp";
+  static const String destroyedCroissants = "Destroyed croissants";
+  static const String drankLattes = "Drank lattes";
+  static const String drankAmericanos = "Drank americanos";
+  static const String joinTheGame = "Join the game";
 }

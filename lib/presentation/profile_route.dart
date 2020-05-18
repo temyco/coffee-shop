@@ -8,6 +8,7 @@ import 'package:flutterapp/widgets/progress/arc_progress.dart';
 import 'package:flutterapp/widgets/text/protext_widget.dart';
 import 'package:flutterapp/resources/app_text_sizes.dart';
 import 'package:flutterapp/widgets/progress/linear_progress.dart';
+import 'package:flutterapp/widgets/achievement_widget.dart';
 
 class ProfileRoute extends StatefulWidget {
   @override
@@ -31,9 +32,14 @@ class _ProfileRouteState extends State<ProfileRoute> {
               SizedBox(height: 38),
               _UserProfileInfoWidget(),
               SizedBox(height: 20),
+              AchievementsWidget(),
+              SizedBox(height: 37),
+              ExpandAchievementsLabelWidget(),
+              SizedBox(height: 5)
             ],
           ),
         ),
+        JoinTheGameWidget(),
       ],
     );
   }
@@ -73,7 +79,7 @@ class _UserAvatarWidget extends StatelessWidget {
               startAngle: 45,
               endAngle: 225,
               strokeWidth: 3,
-              color: AppColors.colorBondiWaters),
+              arcColor: AppColors.colorBondiWaters),
           Align(
               child: SvgPicture.asset(AppImages.bronzeCup),
               alignment: Alignment.bottomRight),
@@ -91,7 +97,8 @@ class _UserNameAndStatisticWidget extends StatelessWidget {
 
   final double defaultMargin = 4;
   final double progressTextWidth = 124;
-  final double progressBarWidth = 118; //width is different just to align text and gift image with linear progress
+  final double progressBarWidth =
+      118; //width is different just to align text and gift image with linear progress
 
   _UserNameAndStatisticWidget(this.userName, this.stepsToFreeCoffee,
       this.currentExpProgress, this.totalExpProgress);
@@ -104,8 +111,12 @@ class _UserNameAndStatisticWidget extends StatelessWidget {
         Row(
           children: [
             SizedBox(width: defaultMargin),
-            ProTextWidget(userName, AppColors.colorLavender, AppTextSizes.s17,
-                FontWeight.w500),
+            ProTextWidget(
+                text: userName,
+                color: AppColors.colorLavender,
+                fontSize: AppTextSizes.s17,
+                fontWeight: FontWeight.w500,
+                letterSpacing: -0.26),
             SizedBox(width: 32),
             SvgPicture.asset(AppImages.edit)
           ],
@@ -114,12 +125,13 @@ class _UserNameAndStatisticWidget extends StatelessWidget {
           margin: EdgeInsets.only(
               left: defaultMargin, top: defaultMargin, bottom: defaultMargin),
           child: ProTextWidget(
-              stepsToFreeCoffee.toString() +
+              text: stepsToFreeCoffee.toString() +
                   " " +
                   AppMessages.stepsToFreeCoffee,
-              AppColors.colorWhite,
-              AppTextSizes.s10,
-              FontWeight.w300),
+              color: AppColors.colorWhite,
+              fontSize: AppTextSizes.s10,
+              fontWeight: FontWeight.w300,
+              letterSpacing: -0.08),
         ),
         _StepsToFreeCoffeeWidget(itemCount: 5, completedCount: 2),
         SizedBox(height: 12),
@@ -131,27 +143,29 @@ class _UserNameAndStatisticWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ProTextWidget(
-                  currentExpProgress.toString() +
+                  text: currentExpProgress.toString() +
                       '/' +
-                      totalExpProgress.toString(),
-                  AppColors.colorWhite,
-                  AppTextSizes.s10,
-                  FontWeight.w500),
+                      totalExpProgress.toString() +
+                      ' ' +
+                      AppMessages.exp,
+                  color: AppColors.colorWhite,
+                  fontSize: AppTextSizes.s10,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: -0.08),
               SvgPicture.asset(AppImages.gift)
             ],
           ),
         ),
         Container(
-          margin: EdgeInsets.only(left: 7.5, top: 8), //magic number just to align text with linear progress
-          width: progressBarWidth,
-          child: LinearProgress(
-              width: progressBarWidth - defaultMargin,
-              height: 6,
-              currentProgress: currentExpProgress / totalExpProgress,
-              background: AppColors.colorWhite,
-              progress: AppColors.colorBondiWaters
-          )
-        )
+            margin: EdgeInsets.only(left: 7.5, top: 8),
+            //magic number just to align text with linear progress
+            width: progressBarWidth,
+            child: LinearProgress(
+                width: progressBarWidth - defaultMargin,
+                height: 6,
+                currentProgress: currentExpProgress / totalExpProgress,
+                background: AppColors.colorWhite,
+                progress: AppColors.colorBondiWaters))
       ],
     );
   }
@@ -177,4 +191,93 @@ class _StepsToFreeCoffeeWidget extends StatelessWidget {
       return SvgPicture.asset(AppImages.ticket);
     }
   }
+}
+
+class AchievementsWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: AchievementWidget(
+              title: AppMessages.daily,
+              name: AppMessages.destroyedCroissants,
+              maxProgress: 20,
+              currentProgress: 7,
+              progressColor: AppColors.colorOrange,
+              icon: AppImages.goldMedal),
+          flex: 1,
+        ),
+        Expanded(
+          child: AchievementWidget(
+              title: AppMessages.random,
+              name: AppMessages.drankLattes,
+              maxProgress: 10,
+              currentProgress: 3,
+              progressColor: AppColors.colorTangerine,
+              icon: AppImages.goldCup),
+          flex: 1,
+        ),
+        Expanded(
+          child: AchievementWidget(
+              title: AppMessages.boss,
+              name: AppMessages.drankAmericanos,
+              maxProgress: 3,
+              currentProgress: 2,
+              progressColor: AppColors.colorBondiWaters,
+              icon: AppImages.silverMedal),
+          flex: 1,
+        ),
+      ],
+    );
+  }
+}
+
+class ExpandAchievementsLabelWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => {
+        //TODO will be implemented later
+      },
+      child: Column(
+        children: [
+          ProTextWidget(
+              text: AppMessages.achievements.toUpperCase(),
+              color: AppColors.colorWhite,
+              fontSize: AppTextSizes.s10,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 1.0),
+          SvgPicture.asset(AppImages.arrowDown)
+        ],
+      ),
+    );
+  }
+}
+
+class JoinTheGameWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(left: 46, top: 16, right: 46, bottom: 20),
+      child: MaterialButton(
+          onPressed: () => {
+            //TODO will be implemented later
+          },
+          textColor: AppColors.colorWhite,
+          color: AppColors.colorBlackGray,
+          height: 44,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6)
+          ),
+          child: ProTextWidget(
+            text: AppMessages.joinTheGame,
+            color: AppColors.colorWhite,
+            fontSize: AppTextSizes.s17,
+            fontWeight: FontWeight.w700,
+            letterSpacing: -0.3,
+          )),
+    );
+  }
+
 }

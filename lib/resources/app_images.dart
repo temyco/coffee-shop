@@ -8,4 +8,8 @@ class AppImages {
   static const String ticket = _imagesPath + "ticket.svg";
   static const String ticketFilled = _imagesPath + "ticket_filled.svg";
   static const String gift = _imagesPath + "gift.svg";
+  static const String goldMedal = _imagesPath + "gold_medal.svg";
+  static const String silverMedal = _imagesPath + "silver_medal.svg";
+  static const String goldCup = _imagesPath + "gold_cup.svg";
+  static const String arrowDown = _imagesPath + "arrow_down.svg";
 }
