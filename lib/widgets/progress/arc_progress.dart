@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
 
-class ArcProgressPainter extends CustomPainter {
+class ArcProgress extends CustomPaint {
+  ArcProgress(
+      {double circleSize,
+      int startAngle = 0,
+      int endAngle = 0,
+      int strokeWidth = 4,
+      Color color})
+      : super(
+            size: Size(circleSize, circleSize),
+            painter: ArcProgressPainter(
+                circleSize.round(), startAngle, endAngle, strokeWidth, color));
+}
 
+class ArcProgressPainter extends CustomPainter {
   final int arcSize;
   final int startAngle;
   final int endAngle;
@@ -9,7 +21,8 @@ class ArcProgressPainter extends CustomPainter {
   Paint _arcPaint;
   double _radian;
 
-  ArcProgressPainter(this.arcSize, this.startAngle, this.endAngle, int strokeWidth, Color color) {
+  ArcProgressPainter(this.arcSize, this.startAngle, this.endAngle,
+      int strokeWidth, Color color) {
     _arcPaint = Paint()
       ..color = color
       ..strokeWidth = strokeWidth.roundToDouble()
@@ -25,8 +38,9 @@ class ArcProgressPainter extends CustomPainter {
     Offset offset = Offset(arcSize / 2, arcSize / 2);
     Rect rect = Rect.fromCircle(
         center: offset,
-        radius: arcSize / 2 - 1 //just to have line in the middle of (for example) avatar bg
-    );
+        radius: arcSize / 2 -
+            1 //just to have line in the middle of (for example) avatar bg
+        );
 
     double startRadians = startAngle * _radian;
     double endRadians = endAngle * _radian;

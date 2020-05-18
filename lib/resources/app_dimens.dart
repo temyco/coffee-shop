@@ -1,1 +1,3 @@
-class AppDimens {}
+class AppDimens {
+
+}

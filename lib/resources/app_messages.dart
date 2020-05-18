@@ -9,4 +9,5 @@ class AppMessages {
   static const String ordersTitle = "Orders";
   static const String profileTitle = "Profile";
   static const String shopTitle = "Shop";
+  static const String stepsToFreeCoffee = "Steps to Free Coffee";
 }
