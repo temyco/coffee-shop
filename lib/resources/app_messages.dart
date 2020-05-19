@@ -19,4 +19,10 @@ class AppMessages {
   static const String drankLattes = "Drank lattes";
   static const String drankAmericanos = "Drank americanos";
   static const String joinTheGame = "Join the game";
+  static const String loyaltySystem = "Loyalty system";
+  static const String giftCards = "Gift Cards";
+  static const String bonuses = "Bonuses";
+  static const String setting = "Setting";
+  static const String paymentMethods = "Payment Methods";
+  static const String signOut = "Sign Out";
 }

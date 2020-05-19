@@ -12,4 +12,8 @@ class AppImages {
   static const String silverMedal = _imagesPath + "silver_medal.svg";
   static const String goldCup = _imagesPath + "gold_cup.svg";
   static const String arrowDown = _imagesPath + "arrow_down.svg";
+  static const String bonus = _imagesPath + "bonus.svg";
+  static const String giftCards = _imagesPath + "gift_cards.svg";
+  static const String payment = _imagesPath + "payment.svg";
+  static const String signOut = _imagesPath + "sign_out.svg";
 }

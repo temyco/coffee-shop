@@ -23,24 +23,34 @@ class _ProfileRouteState extends State<ProfileRoute> {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: AppColors.colorBlackGray,
         statusBarIconBrightness: Brightness.light));
-    return ListView(
-      children: [
-        Container(
-          color: AppColors.colorBlackGray,
-          child: Column(
-            children: [
-              SizedBox(height: 38),
-              _UserProfileInfoWidget(),
-              SizedBox(height: 20),
-              AchievementsWidget(),
-              SizedBox(height: 37),
-              ExpandAchievementsLabelWidget(),
-              SizedBox(height: 5)
-            ],
+    return Container(
+      child: ListView(
+        children: [
+          Container(
+            color: AppColors.colorBlackGray,
+            child: Column(
+              children: [
+                SizedBox(height: 38),
+                _UserProfileInfoWidget(),
+                SizedBox(height: 20),
+                _AchievementsWidget(),
+                SizedBox(height: 37),
+                _ExpandAchievementsLabelWidget(),
+                SizedBox(height: 5)
+              ],
+            ),
           ),
-        ),
-        JoinTheGameWidget(),
-      ],
+          _JoinTheGameWidget(),
+          _CardWidget(AppMessages.loyaltySystem.toUpperCase(), AppImages.giftCards,
+              AppMessages.giftCards, AppImages.bonus, AppMessages.bonuses),
+          _CardWidget(
+              AppMessages.setting.toUpperCase(),
+              AppImages.payment,
+              AppMessages.paymentMethods,
+              AppImages.signOut,
+              AppMessages.signOut),
+        ],
+      ),
     );
   }
 }
@@ -193,7 +203,7 @@ class _StepsToFreeCoffeeWidget extends StatelessWidget {
   }
 }
 
-class AchievementsWidget extends StatelessWidget {
+class _AchievementsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -233,7 +243,7 @@ class AchievementsWidget extends StatelessWidget {
   }
 }
 
-class ExpandAchievementsLabelWidget extends StatelessWidget {
+class _ExpandAchievementsLabelWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -255,21 +265,19 @@ class ExpandAchievementsLabelWidget extends StatelessWidget {
   }
 }
 
-class JoinTheGameWidget extends StatelessWidget {
+class _JoinTheGameWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(left: 46, top: 16, right: 46, bottom: 20),
       child: MaterialButton(
           onPressed: () => {
-            //TODO will be implemented later
-          },
+                //TODO will be implemented later
+              },
           textColor: AppColors.colorWhite,
           color: AppColors.colorBlackGray,
           height: 44,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(6)
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
           child: ProTextWidget(
             text: AppMessages.joinTheGame,
             color: AppColors.colorWhite,
@@ -279,5 +287,79 @@ class JoinTheGameWidget extends StatelessWidget {
           )),
     );
   }
+}
 
+class _CardWidget extends StatelessWidget {
+  final String cardTitle;
+  final String firstItemIcon;
+  final String firstItemTitle;
+  final String secondItemIcon;
+  final String secondItemTitle;
+
+  _CardWidget(this.cardTitle, this.firstItemIcon, this.firstItemTitle,
+      this.secondItemIcon, this.secondItemTitle);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          color: AppColors.colorWhite, borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              offset: Offset(0, 4),
+              blurRadius: 10,
+              color: AppColors.colorShadow
+            )
+          ]
+      ),
+      margin: EdgeInsets.only(left: 16, right: 16, bottom: 10),
+      padding: EdgeInsets.only(left: 12, right: 12, top: 10, bottom: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: EdgeInsets.only(left: 4, right: 4, bottom: 10),
+            child: ProTextWidget(
+                text: cardTitle,
+                color: AppColors.colorGray,
+                fontSize: AppTextSizes.s10,
+                fontWeight: FontWeight.w500,
+                letterSpacing: 1),
+          ),
+          _CardRowWidget(firstItemIcon, firstItemTitle),
+          Divider(
+            color: AppColors.colorGrayLight,
+            height: 1,
+          ),
+          _CardRowWidget(secondItemIcon, secondItemTitle)
+        ],
+      ),
+    );
+  }
+}
+
+class _CardRowWidget extends StatelessWidget {
+  final String icon;
+  final String title;
+
+  _CardRowWidget(this.icon, this.title);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 10, bottom: 10, right: 4, left: 4),
+      child: Row(
+        children: [
+          SvgPicture.asset(icon),
+          SizedBox(width: 15),
+          ProTextWidget(
+            text: title,
+            color: AppColors.colorBlackGray,
+            fontSize: AppTextSizes.s17,
+            fontWeight: FontWeight.w400,
+          )
+        ],
+      ),
+    );
+  }
 }
