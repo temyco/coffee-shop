@@ -18,6 +18,14 @@ class ProfileRoute extends StatefulWidget {
 }
 
 class _ProfileRouteState extends State<ProfileRoute> {
+  bool isExpanded = false;
+
+  onExpandAchievementsPressed() {
+    setState(() {
+      isExpanded = !isExpanded;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -27,7 +35,10 @@ class _ProfileRouteState extends State<ProfileRoute> {
       child: ListView(
         children: [
           Container(
-            color: AppColors.colorBlackGray,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(AppImages.profileHeader),
+                    fit: BoxFit.fill)),
             child: Column(
               children: [
                 SizedBox(height: 38),
@@ -35,14 +46,18 @@ class _ProfileRouteState extends State<ProfileRoute> {
                 SizedBox(height: 20),
                 _AchievementsWidget(),
                 SizedBox(height: 37),
-                _ExpandAchievementsLabelWidget(),
+                _ExpandAchievementsLabelWidget(onExpandAchievementsPressed),
                 SizedBox(height: 5)
               ],
             ),
           ),
           _JoinTheGameWidget(),
-          _CardWidget(AppMessages.loyaltySystem.toUpperCase(), AppImages.giftCards,
-              AppMessages.giftCards, AppImages.bonus, AppMessages.bonuses),
+          _CardWidget(
+              AppMessages.loyaltySystem.toUpperCase(),
+              AppImages.giftCards,
+              AppMessages.giftCards,
+              AppImages.bonus,
+              AppMessages.bonuses),
           _CardWidget(
               AppMessages.setting.toUpperCase(),
               AppImages.payment,
@@ -244,12 +259,14 @@ class _AchievementsWidget extends StatelessWidget {
 }
 
 class _ExpandAchievementsLabelWidget extends StatelessWidget {
+  final Function() onExpandPressed;
+
+  _ExpandAchievementsLabelWidget(this.onExpandPressed);
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => {
-        //TODO will be implemented later
-      },
+      onTap: () => onExpandPressed.call(),
       child: Column(
         children: [
           ProTextWidget(
@@ -303,15 +320,14 @@ class _CardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: AppColors.colorWhite, borderRadius: BorderRadius.circular(10),
+          color: AppColors.colorWhite,
+          borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              offset: Offset(0, 4),
-              blurRadius: 10,
-              color: AppColors.colorShadow
-            )
-          ]
-      ),
+                offset: Offset(0, 4),
+                blurRadius: 10,
+                color: AppColors.colorShadow)
+          ]),
       margin: EdgeInsets.only(left: 16, right: 16, bottom: 10),
       padding: EdgeInsets.only(left: 12, right: 12, top: 10, bottom: 10),
       child: Column(

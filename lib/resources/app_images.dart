@@ -16,4 +16,5 @@ class AppImages {
   static const String giftCards = _imagesPath + "gift_cards.svg";
   static const String payment = _imagesPath + "payment.svg";
   static const String signOut = _imagesPath + "sign_out.svg";
+  static const String profileHeader = _imagesPath + "profile_header.png";
 }
