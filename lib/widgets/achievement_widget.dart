@@ -3,7 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutterapp/resources/app_colors.dart';
 import 'package:flutterapp/resources/app_text_sizes.dart';
 import 'package:flutterapp/widgets/progress/arc_progress.dart';
-import 'package:flutterapp/widgets/text/protext_widget.dart';
+import 'package:flutterapp/widgets/text/uidisplay_widget.dart';
+import 'package:flutterapp/widgets/text/uitext_widget.dart';
 
 class AchievementWidget extends StatelessWidget {
   final String title;
@@ -30,7 +31,7 @@ class AchievementWidget extends StatelessWidget {
 
     return Column(
       children: [
-        ProTextWidget(
+        UIDisplayWidget(
           text: title,
           color: AppColors.colorWhite,
           fontSize: AppTextSizes.s10,
@@ -54,7 +55,7 @@ class AchievementWidget extends StatelessWidget {
           ],
         ),
         SizedBox(height: 6),
-        ProTextWidget(
+        UIDisplayWidget(
           text: name,
           color: AppColors.colorWhite,
           fontSize: AppTextSizes.s10,
@@ -62,7 +63,7 @@ class AchievementWidget extends StatelessWidget {
           letterSpacing: -0.08,
         ),
         SizedBox(height: 2),
-        ProTextWidget(
+        UITextWidget(
           text: currentProgress.toString() + "/" + maxProgress.toString(),
           color: AppColors.colorBondiWaters,
           fontSize: AppTextSizes.s10,

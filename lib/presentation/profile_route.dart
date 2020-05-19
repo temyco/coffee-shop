@@ -5,10 +5,11 @@ import 'package:flutterapp/resources/app_colors.dart';
 import 'package:flutterapp/resources/app_images.dart';
 import 'package:flutterapp/resources/app_messages.dart';
 import 'package:flutterapp/widgets/progress/arc_progress.dart';
-import 'package:flutterapp/widgets/text/protext_widget.dart';
 import 'package:flutterapp/resources/app_text_sizes.dart';
 import 'package:flutterapp/widgets/progress/linear_progress.dart';
 import 'package:flutterapp/widgets/achievement_widget.dart';
+import 'package:flutterapp/widgets/text/uidisplay_widget.dart';
+import 'package:flutterapp/widgets/text/uitext_widget.dart';
 
 class ProfileRoute extends StatefulWidget {
   @override
@@ -136,7 +137,7 @@ class _UserNameAndStatisticWidget extends StatelessWidget {
         Row(
           children: [
             SizedBox(width: defaultMargin),
-            ProTextWidget(
+            UIDisplayWidget(
                 text: userName,
                 color: AppColors.colorLavender,
                 fontSize: AppTextSizes.s17,
@@ -149,7 +150,7 @@ class _UserNameAndStatisticWidget extends StatelessWidget {
         Container(
           margin: EdgeInsets.only(
               left: defaultMargin, top: defaultMargin, bottom: defaultMargin),
-          child: ProTextWidget(
+          child: UIDisplayWidget(
               text: stepsToFreeCoffee.toString() +
                   " " +
                   AppMessages.stepsToFreeCoffee,
@@ -167,7 +168,7 @@ class _UserNameAndStatisticWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ProTextWidget(
+              UIDisplayWidget(
                   text: currentExpProgress.toString() +
                       '/' +
                       totalExpProgress.toString() +
@@ -269,7 +270,7 @@ class _ExpandAchievementsLabelWidget extends StatelessWidget {
       onTap: () => onExpandPressed.call(),
       child: Column(
         children: [
-          ProTextWidget(
+          UIDisplayWidget(
               text: AppMessages.achievements.toUpperCase(),
               color: AppColors.colorWhite,
               fontSize: AppTextSizes.s10,
@@ -295,7 +296,7 @@ class _JoinTheGameWidget extends StatelessWidget {
           color: AppColors.colorBlackGray,
           height: 44,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-          child: ProTextWidget(
+          child: UITextWidget(
             text: AppMessages.joinTheGame,
             color: AppColors.colorWhite,
             fontSize: AppTextSizes.s17,
@@ -335,7 +336,7 @@ class _CardWidget extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.only(left: 4, right: 4, bottom: 10),
-            child: ProTextWidget(
+            child: UIDisplayWidget(
                 text: cardTitle,
                 color: AppColors.colorGray,
                 fontSize: AppTextSizes.s10,
@@ -368,7 +369,7 @@ class _CardRowWidget extends StatelessWidget {
         children: [
           SvgPicture.asset(icon),
           SizedBox(width: 15),
-          ProTextWidget(
+          UIDisplayWidget(
             text: title,
             color: AppColors.colorBlackGray,
             fontSize: AppTextSizes.s17,
