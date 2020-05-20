@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutterapp/presentation/profile/profile_dimens.dart';
 import 'package:flutterapp/resources/app_colors.dart';
+import 'package:flutterapp/resources/app_dimens.dart';
 import 'package:flutterapp/resources/app_images.dart';
 import 'package:flutterapp/resources/app_messages.dart';
+import 'package:flutterapp/resources/app_text_letter_spacing.dart';
 import 'package:flutterapp/resources/app_theme.dart';
 import 'package:flutterapp/widgets/progress/arc_progress.dart';
 import 'package:flutterapp/resources/app_text_sizes.dart';
@@ -52,11 +55,12 @@ class _ProfileRouteState extends State<ProfileRoute> {
             ),
             child: Column(
               children: [
-                SizedBox(height: 26),
+                SizedBox(height: ProfileDimens.screenTopMargin),
                 _UserProfileInfoWidget(),
-                SizedBox(height: 20),
+                SizedBox(height: ProfileDimens.achievementsMarginTop),
                 _AchievementsWidget(),
-                SizedBox(height: 32),
+                SizedBox(
+                    height: ProfileDimens.expandAchievementsButtonMarginTop),
                 _ExpandAchievementsLabelWidget(
                   onExpandAchievementsPressed,
                   false,
@@ -94,9 +98,9 @@ class _ProfileRouteState extends State<ProfileRoute> {
       color: AppColors.colorBlackGray,
       child: Column(
         children: [
-          SizedBox(height: 38),
+          SizedBox(height: ProfileDimens.screenTopMargin),
           _UserProfileInfoWidget(),
-          SizedBox(height: 20),
+          SizedBox(height: ProfileDimens.achievementsMarginTop),
           Expanded(
             flex: 1,
             child: StaggeredGridView.countBuilder(
@@ -107,16 +111,28 @@ class _ProfileRouteState extends State<ProfileRoute> {
                 alignment: AlignmentDirectional.center,
                 child: Column(
                   children: [
-                    getGridAchievement(index, gridCrossAxisCount),
-                    SizedBox(height: 15),
+                    getGridAchievement(
+                      index,
+                      gridCrossAxisCount,
+                    ),
+                    SizedBox(
+                      height: ProfileDimens.achievementsGridHorizontalSpacing,
+                    ),
                   ],
                 ),
               ),
             ),
           ),
-          SizedBox(height: 16),
-          _ExpandAchievementsLabelWidget(onExpandAchievementsPressed, true),
-          SizedBox(height: 6)
+          SizedBox(
+            height: ProfileDimens.collapseAchievementsButtonMarginTop,
+          ),
+          _ExpandAchievementsLabelWidget(
+            onExpandAchievementsPressed,
+            true,
+          ),
+          SizedBox(
+            height: ProfileDimens.collapseAchievementsButtonMarginBottom,
+          )
         ],
       ),
     );
@@ -164,7 +180,9 @@ class _UserProfileInfoWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _UserAvatarWidget(),
-        SizedBox(width: 18),
+        SizedBox(
+          width: ProfileDimens.avatarHolderMarginRight,
+        ),
         _UserNameAndStatisticWidget(
           'Alex Banner',
           3,
@@ -177,28 +195,28 @@ class _UserProfileInfoWidget extends StatelessWidget {
 }
 
 class _UserAvatarWidget extends StatelessWidget {
-  final double userAvatarSize = 98;
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: userAvatarSize,
-      height: userAvatarSize,
-      margin: EdgeInsets.only(top: 12),
+      width: ProfileDimens.avatarSize,
+      height: ProfileDimens.avatarSize,
+      margin: EdgeInsets.only(
+        top: ProfileDimens.avatarMarginTop,
+      ),
       child: Stack(
         alignment: AlignmentDirectional.bottomCenter,
         children: [
           SvgPicture.asset(
             AppImages.bgUserAvatar,
-            height: userAvatarSize,
-            width: userAvatarSize,
+            height: ProfileDimens.avatarSize,
+            width: ProfileDimens.avatarSize,
           ),
           Image.asset(AppImages.userAvatar),
           ArcProgress(
-            circleSize: userAvatarSize,
+            circleSize: ProfileDimens.avatarSize,
             startAngle: 45,
             endAngle: 225,
-            strokeWidth: 3,
+            strokeWidth: ProfileDimens.arcProgressStrokeWidth,
             arcColor: AppColors.colorBondiWaters,
           ),
           Align(
@@ -217,11 +235,6 @@ class _UserNameAndStatisticWidget extends StatelessWidget {
   final int currentExpProgress;
   final int totalExpProgress;
 
-  final double defaultMargin = 4;
-  final double progressTextWidth = 124;
-  final double progressBarWidth =
-      118; //width is different just to align text and gift image with linear progress
-
   _UserNameAndStatisticWidget(
     this.userName,
     this.stepsToFreeCoffee,
@@ -238,15 +251,19 @@ class _UserNameAndStatisticWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Column(children: [
-              SizedBox(height: 14),
+              SizedBox(
+                height: ProfileDimens.userNameMarginTop,
+              ),
               UIDisplayWidget(
                 text: userName,
                 color: AppColors.colorLavender,
                 fontSize: AppTextSizes.s17,
                 fontWeight: FontWeight.w500,
-                letterSpacing: -0.26,
+                letterSpacing: AppTextLetterSpacing.spN026,
               ),
-              SizedBox(height: defaultMargin),
+              SizedBox(
+                height: ProfileDimens.userInfoItemsDefaultMargin,
+              ),
               UIDisplayWidget(
                 text: stepsToFreeCoffee.toString() +
                     " " +
@@ -254,32 +271,50 @@ class _UserNameAndStatisticWidget extends StatelessWidget {
                 color: AppColors.colorWhite,
                 fontSize: AppTextSizes.s10,
                 fontWeight: FontWeight.w300,
-                letterSpacing: -0.08,
+                letterSpacing: AppTextLetterSpacing.spN008,
               ),
-              SizedBox(height: defaultMargin),
+              SizedBox(
+                height: ProfileDimens.userInfoItemsDefaultMargin,
+              ),
               _StepsToFreeCoffeeWidget(
                 itemCount: 5,
                 completedCount: 2,
               ),
             ]),
-            SizedBox(width: 16),
+            SizedBox(
+              width: ProfileDimens.editButtonMarginLeft,
+            ),
             Material(
               color: AppColors.transparent,
               child: InkWell(
-                onTap: () => {},
-                borderRadius: BorderRadius.circular(32),
+                onTap: () => {
+                  //TODO will be implemented later
+                },
+                borderRadius: BorderRadius.circular(
+                  ProfileDimens.editButtonSelectorRadius,
+                ),
                 child: Container(
-                  padding: EdgeInsets.all(12),
-                  child: SvgPicture.asset(AppImages.edit),
+                  padding: EdgeInsets.all(
+                    ProfileDimens.editButtonHolderPadding,
+                  ),
+                  child: SvgPicture.asset(
+                    AppImages.edit,
+                    height: ProfileDimens.editButtonSize,
+                    width: ProfileDimens.editButtonSize,
+                  ),
                 ),
               ),
             ),
           ],
         ),
-        SizedBox(height: 12),
+        SizedBox(
+          height: ProfileDimens.userExperienceHolderMarginTop,
+        ),
         Container(
-          margin: EdgeInsets.only(left: defaultMargin),
-          width: progressTextWidth,
+          margin: EdgeInsets.only(
+            left: ProfileDimens.userInfoItemsDefaultMargin,
+          ),
+          width: ProfileDimens.userExperienceProgressTextWidth,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -293,7 +328,7 @@ class _UserNameAndStatisticWidget extends StatelessWidget {
                 color: AppColors.colorWhite,
                 fontSize: AppTextSizes.s10,
                 fontWeight: FontWeight.w500,
-                letterSpacing: -0.08,
+                letterSpacing: AppTextLetterSpacing.spN008,
               ),
               SvgPicture.asset(AppImages.gift)
             ],
@@ -301,14 +336,14 @@ class _UserNameAndStatisticWidget extends StatelessWidget {
         ),
         Container(
           margin: EdgeInsets.only(
-            left: 7.5,
-            top: 8,
+            left: ProfileDimens.userExperienceProgressMarginLeft,
+            top: ProfileDimens.userExperienceProgressMarginTop,
           ),
-          //magic number just to align text with linear progress
-          width: progressBarWidth,
+          width: ProfileDimens.userExperienceProgressBarWidth,
           child: LinearProgress(
-            width: progressBarWidth - defaultMargin,
-            height: 6,
+            width: ProfileDimens.userExperienceProgressBarWidth -
+                ProfileDimens.userInfoItemsDefaultMargin,
+            height: ProfileDimens.userExperienceProgressBarHeight,
             currentProgress: currentExpProgress / totalExpProgress,
             background: AppColors.colorWhite,
             progress: AppColors.colorBondiWaters,
@@ -421,11 +456,15 @@ class _ExpandAchievementsLabelWidget extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         borderRadius: BorderRadius.all(
-          Radius.circular(4),
+          Radius.circular(
+            AppDimens.selectorBorderRadius,
+          ),
         ),
         onTap: () => onExpandPressed.call(),
         child: Container(
-          padding: EdgeInsets.all(6),
+          padding: EdgeInsets.all(
+            ProfileDimens.expandAchievementsPadding,
+          ),
           child: Column(
             children: [
               UIDisplayWidget(
@@ -433,7 +472,7 @@ class _ExpandAchievementsLabelWidget extends StatelessWidget {
                 color: AppColors.colorWhite,
                 fontSize: AppTextSizes.s10,
                 fontWeight: FontWeight.w500,
-                letterSpacing: 1.0,
+                letterSpacing: AppTextLetterSpacing.sp1,
               ),
               SvgPicture.asset(arrowIcon)
             ],
@@ -449,10 +488,10 @@ class _JoinTheGameWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        left: 46,
-        top: 16,
-        right: 46,
-        bottom: 20,
+        left: ProfileDimens.joinGameButtonMarginHorizontal,
+        top: ProfileDimens.joinGameButtonMarginTop,
+        right: ProfileDimens.joinGameButtonMarginHorizontal,
+        bottom: ProfileDimens.joinGameButtonMarginBottom,
       ),
       child: MaterialButton(
           onPressed: () => {
@@ -460,14 +499,18 @@ class _JoinTheGameWidget extends StatelessWidget {
               },
           textColor: AppColors.colorWhite,
           color: AppColors.colorBlackGray,
-          height: 44,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+          height: ProfileDimens.joinGameButtonHeight,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              ProfileDimens.joinGameButtonBorderRadius,
+            ),
+          ),
           child: UITextWidget(
             text: AppMessages.joinTheGame,
             color: AppColors.colorWhite,
             fontSize: AppTextSizes.s17,
             fontWeight: FontWeight.w700,
-            letterSpacing: -0.3,
+            letterSpacing: AppTextLetterSpacing.spN03,
           )),
     );
   }
@@ -497,40 +540,45 @@ class _CardWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           color: AppColors.colorWhite,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(
+            ProfileDimens.cardBorderRadius,
+          ),
           boxShadow: [
             BoxShadow(
-              offset: Offset(0, 4),
-              blurRadius: 10,
+              offset: Offset(
+                ProfileDimens.cardShadowOffsetX,
+                ProfileDimens.cardShadowOffsetY,
+              ),
+              blurRadius: ProfileDimens.cardShadowRadius,
               color: AppColors.colorShadow,
             )
           ]),
       margin: EdgeInsets.only(
-        left: 16,
-        right: 16,
-        bottom: 10,
+        left: AppDimens.cardMarginHorizontal,
+        right: AppDimens.cardMarginHorizontal,
+        bottom: AppDimens.cardMarginVertical,
       ),
       padding: EdgeInsets.only(
-        left: 12,
-        right: 12,
-        top: 10,
-        bottom: 10,
+        left: AppDimens.cardPaddingHorizontal,
+        right: AppDimens.cardPaddingHorizontal,
+        top: AppDimens.cardPaddingVertical,
+        bottom: AppDimens.cardPaddingVertical,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             margin: EdgeInsets.only(
-              left: 4,
-              right: 4,
-              bottom: 10,
+              left: ProfileDimens.cardTitlePaddingHorizontal,
+              right: ProfileDimens.cardTitlePaddingHorizontal,
+              bottom: ProfileDimens.cardTitlePaddingBottom,
             ),
             child: UIDisplayWidget(
               text: cardTitle,
               color: AppColors.colorGray,
               fontSize: AppTextSizes.s10,
               fontWeight: FontWeight.w500,
-              letterSpacing: 1,
+              letterSpacing: AppTextLetterSpacing.sp1,
             ),
           ),
           _CardRowWidget(
@@ -540,7 +588,7 @@ class _CardWidget extends StatelessWidget {
           ),
           Divider(
             color: AppColors.colorGrayLight,
-            height: 1,
+            height: ProfileDimens.cardItemDividerHeight,
           ),
           _CardRowWidget(
             secondItemIcon,
@@ -564,19 +612,21 @@ class _CardRowWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       child: InkWell(
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(AppDimens.selectorBorderRadius),
         onTap: onPressed,
         child: Container(
           padding: EdgeInsets.only(
-            top: 10,
-            bottom: 10,
-            right: 4,
-            left: 4,
+            top: ProfileDimens.cardItemPaddingVertical,
+            bottom: ProfileDimens.cardItemPaddingVertical,
+            right: ProfileDimens.cardItemPaddingHorizontal,
+            left: ProfileDimens.cardItemPaddingHorizontal,
           ),
           child: Row(
             children: [
               SvgPicture.asset(icon),
-              SizedBox(width: 15),
+              SizedBox(
+                width: ProfileDimens.cardItemIconMarginRight,
+              ),
               UIDisplayWidget(
                 text: title,
                 color: AppColors.colorBlackGray,
