@@ -3,7 +3,7 @@ import 'package:flutterapp/resources/app_colors.dart';
 
 var mainTheme = ThemeData(
   primaryColor: AppColors.colorWhite,
-  accentColor: AppColors.colorBondiWaters,
+  accentColor: AppColors.colorTurquoiseBlue,
   /// We should use SFUIDisplay for AppBar title
   fontFamily: 'SFUIDisplay'
 );
