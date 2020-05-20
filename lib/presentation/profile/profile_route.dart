@@ -175,21 +175,27 @@ Widget getGridAchievement(int index, int crossAxisCount) {
 class _UserProfileInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _UserAvatarWidget(),
-        SizedBox(
-          width: ProfileDimens.avatarHolderMarginRight,
-        ),
-        _UserNameAndStatisticWidget(
-          'Alex Banner',
-          3,
-          240,
-          500,
-        )
-      ],
+    return Padding(
+      padding: EdgeInsets.only(
+        left: ProfileDimens.avatarAndNameHolderMarginHorizontal,
+        right: ProfileDimens.avatarAndNameHolderMarginHorizontal,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _UserAvatarWidget(),
+          SizedBox(
+            width: ProfileDimens.avatarHolderMarginRight,
+          ),
+          _UserInfoWidget(
+            'Alex Banner',
+            3,
+            240,
+            500,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -229,13 +235,13 @@ class _UserAvatarWidget extends StatelessWidget {
   }
 }
 
-class _UserNameAndStatisticWidget extends StatelessWidget {
+class _UserInfoWidget extends StatelessWidget {
   final String userName;
   final int stepsToFreeCoffee;
   final int currentExpProgress;
   final int totalExpProgress;
 
-  _UserNameAndStatisticWidget(
+  _UserInfoWidget(
     this.userName,
     this.stepsToFreeCoffee,
     this.currentExpProgress,
@@ -244,22 +250,98 @@ class _UserNameAndStatisticWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Flexible(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Flexible(
+            child: _UserNameAndStepsWidget(userName, stepsToFreeCoffee),
+          ),
+          SizedBox(
+            height: ProfileDimens.userExperienceHolderMarginTop,
+          ),
+          Container(
+            margin: EdgeInsets.only(
+              left: ProfileDimens.userInfoItemsDefaultMargin,
+            ),
+            width: ProfileDimens.userExperienceProgressTextWidth,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                UIDisplayWidget(
+                  text: currentExpProgress.toString() +
+                      '/' +
+                      totalExpProgress.toString() +
+                      ' ' +
+                      AppMessages.exp,
+                  color: AppColors.colorWhite,
+                  fontSize: AppTextSizes.s10,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: AppTextLetterSpacing.spN008,
+                ),
+                SvgPicture.asset(AppImages.gift)
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(
+              left: ProfileDimens.userExperienceProgressMarginLeft,
+              top: ProfileDimens.userExperienceProgressMarginTop,
+            ),
+            width: ProfileDimens.userExperienceProgressBarWidth,
+            child: LinearProgress(
+              width: ProfileDimens.userExperienceProgressBarWidth -
+                  ProfileDimens.userInfoItemsDefaultMargin,
+              height: ProfileDimens.userExperienceProgressBarHeight,
+              currentProgress: currentExpProgress / totalExpProgress,
+              background: AppColors.colorWhite,
+              progress: AppColors.colorBondiWaters,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _UserNameAndStepsWidget extends StatelessWidget {
+  final String userName;
+  final int stepsToFreeCoffee;
+
+  _UserNameAndStepsWidget(
+    this.userName,
+    this.stepsToFreeCoffee,
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(children: [
+      children: [
+        SizedBox(
+          width: ProfileDimens.userInfoItemsDefaultMargin,
+        ),
+        Flexible(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               SizedBox(
                 height: ProfileDimens.userNameMarginTop,
               ),
-              UIDisplayWidget(
-                text: userName,
-                color: AppColors.colorLavender,
-                fontSize: AppTextSizes.s17,
-                fontWeight: FontWeight.w500,
-                letterSpacing: AppTextLetterSpacing.spN026,
+              Text(
+                userName,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: AppColors.colorLavender,
+                  fontSize: AppTextSizes.s17,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: AppTextLetterSpacing.spN026,
+                ),
               ),
               SizedBox(
                 height: ProfileDimens.userInfoItemsDefaultMargin,
@@ -280,75 +362,33 @@ class _UserNameAndStatisticWidget extends StatelessWidget {
                 itemCount: 5,
                 completedCount: 2,
               ),
-            ]),
-            SizedBox(
-              width: ProfileDimens.editButtonMarginLeft,
-            ),
-            Material(
-              color: AppColors.transparent,
-              child: InkWell(
-                onTap: () => {
-                  //TODO will be implemented later
-                },
-                borderRadius: BorderRadius.circular(
-                  ProfileDimens.editButtonSelectorRadius,
-                ),
-                child: Container(
-                  padding: EdgeInsets.all(
-                    ProfileDimens.editButtonHolderPadding,
-                  ),
-                  child: SvgPicture.asset(
-                    AppImages.edit,
-                    height: ProfileDimens.editButtonSize,
-                    width: ProfileDimens.editButtonSize,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: ProfileDimens.userExperienceHolderMarginTop,
-        ),
-        Container(
-          margin: EdgeInsets.only(
-            left: ProfileDimens.userInfoItemsDefaultMargin,
-          ),
-          width: ProfileDimens.userExperienceProgressTextWidth,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              UIDisplayWidget(
-                text: currentExpProgress.toString() +
-                    '/' +
-                    totalExpProgress.toString() +
-                    ' ' +
-                    AppMessages.exp,
-                color: AppColors.colorWhite,
-                fontSize: AppTextSizes.s10,
-                fontWeight: FontWeight.w500,
-                letterSpacing: AppTextLetterSpacing.spN008,
-              ),
-              SvgPicture.asset(AppImages.gift)
             ],
           ),
         ),
-        Container(
-          margin: EdgeInsets.only(
-            left: ProfileDimens.userExperienceProgressMarginLeft,
-            top: ProfileDimens.userExperienceProgressMarginTop,
+        SizedBox(
+          width: ProfileDimens.editButtonMarginLeft,
+        ),
+        Material(
+          color: AppColors.transparent,
+          child: InkWell(
+            onTap: () => {
+              //TODO will be implemented later
+            },
+            borderRadius: BorderRadius.circular(
+              ProfileDimens.editButtonSelectorRadius,
+            ),
+            child: Container(
+              padding: EdgeInsets.all(
+                ProfileDimens.editButtonHolderPadding,
+              ),
+              child: SvgPicture.asset(
+                AppImages.edit,
+                height: ProfileDimens.editButtonSize,
+                width: ProfileDimens.editButtonSize,
+              ),
+            ),
           ),
-          width: ProfileDimens.userExperienceProgressBarWidth,
-          child: LinearProgress(
-            width: ProfileDimens.userExperienceProgressBarWidth -
-                ProfileDimens.userInfoItemsDefaultMargin,
-            height: ProfileDimens.userExperienceProgressBarHeight,
-            currentProgress: currentExpProgress / totalExpProgress,
-            background: AppColors.colorWhite,
-            progress: AppColors.colorBondiWaters,
-          ),
-        )
+        ),
       ],
     );
   }

@@ -15,7 +15,7 @@ class ProfileDimens {
   static const double avatarMarginTop = 10;
   static const double userInfoItemsDefaultMargin = 4;
   static const double userNameMarginTop = 14;
-  static const double editButtonMarginLeft = 16;
+  static const double editButtonMarginLeft = 4;
   static const double editButtonSize = 20;
   static const double editButtonHolderPadding = 12;
   static const double editButtonSelectorRadius =
@@ -42,4 +42,5 @@ class ProfileDimens {
   static const double cardItemPaddingHorizontal = 4;
   static const double cardItemIconMarginRight = 15;
   static const double joinGameButtonBorderRadius = 6;
+  static const double avatarAndNameHolderMarginHorizontal = 56;
 }
