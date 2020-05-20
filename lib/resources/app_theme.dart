@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/resources/app_colors.dart';
 import 'package:flutter/services.dart';
-import 'package:flutterapp/resources/app_text_styles.dart';
+import 'package:flutterapp/resources/app_font_families.dart';
 
 var mainTheme = ThemeData(
-  primaryColor: AppColors.colorWhite,
-  accentColor: AppColors.colorBondiWaters,
-  /// We should use SFUIDisplay for AppBar title
-  fontFamily: AppTextStyles.SFUIDisplay
-);
+    primaryColor: AppColors.colorWhite,
+    accentColor: AppColors.colorBondiWaters,
+
+    /// We should use SFUIDisplay for AppBar title
+    fontFamily: AppFontFamilies.SFUIDisplay);
 
 // TODO create color scheme that will match our design
 const MaterialColor colorWhite = const MaterialColor(
@@ -27,9 +27,14 @@ const MaterialColor colorWhite = const MaterialColor(
   },
 );
 
-void setWhiteStatusBar() {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.white,
-      statusBarIconBrightness: Brightness.dark
-  ));
+void setStatusBarColor(
+  Color statusBarColor, {
+  Brightness statusBarIconBrightness = Brightness.dark,
+}) {
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarColor: statusBarColor,
+      statusBarIconBrightness: statusBarIconBrightness,
+    ),
+  );
 }

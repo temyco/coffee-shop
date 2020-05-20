@@ -9,6 +9,8 @@ class AppMessages {
   static const String ordersTitle = "Orders";
   static const String profileTitle = "Profile";
   static const String shopTitle = "Shop";
+
+  ///Profile route
   static const String stepsToFreeCoffee = "Steps to Free Coffee";
   static const String daily = "Daily";
   static const String random = "Random";

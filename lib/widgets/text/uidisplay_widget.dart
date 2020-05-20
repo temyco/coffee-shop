@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutterapp/resources/app_text_styles.dart';
+import 'package:flutterapp/resources/app_font_families.dart';
 
 class UIDisplayWidget extends Text {
+
+  UIDisplayWidget.style(
+        String text,
+        TextStyle style,
+      ) : super(text, style: style);
+
   UIDisplayWidget(
       {String text,
       Color color,
@@ -10,7 +16,7 @@ class UIDisplayWidget extends Text {
       double letterSpacing = 0.0})
       : super(text,
             style: TextStyle(
-                fontFamily: AppTextStyles.SFUIDisplay,
+                fontFamily: AppFontFamilies.SFUIDisplay,
                 color: color,
                 fontSize: fontSize,
                 fontWeight: fontWeight,

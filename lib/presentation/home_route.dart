@@ -3,7 +3,7 @@ import 'package:flutterapp/resources/app_messages.dart';
 import 'package:flutterapp/presentation/basket_route.dart';
 import 'package:flutterapp/presentation/location_route.dart';
 import 'package:flutterapp/presentation/orders_route.dart';
-import 'package:flutterapp/presentation/profile_route.dart';
+import 'package:flutterapp/presentation/profile/profile_route.dart';
 import 'package:flutterapp/presentation/shop_route.dart';
 
 class HomeRoute extends StatefulWidget {

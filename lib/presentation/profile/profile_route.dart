@@ -4,10 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutterapp/resources/app_colors.dart';
 import 'package:flutterapp/resources/app_images.dart';
 import 'package:flutterapp/resources/app_messages.dart';
+import 'package:flutterapp/resources/app_theme.dart';
 import 'package:flutterapp/widgets/progress/arc_progress.dart';
 import 'package:flutterapp/resources/app_text_sizes.dart';
 import 'package:flutterapp/widgets/progress/linear_progress.dart';
-import 'package:flutterapp/widgets/achievement_widget.dart';
+import 'package:flutterapp/presentation/profile/achievement_widget.dart';
 import 'package:flutterapp/widgets/text/uidisplay_widget.dart';
 import 'package:flutterapp/widgets/text/uitext_widget.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -30,9 +31,7 @@ class _ProfileRouteState extends State<ProfileRoute> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: AppColors.colorBlackGray,
-        statusBarIconBrightness: Brightness.light));
+    setStatusBarColor(AppColors.colorBlackGray, statusBarIconBrightness: Brightness.light);
     return _getProfileWidget();
   }
 
