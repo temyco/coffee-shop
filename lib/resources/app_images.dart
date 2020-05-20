@@ -1,6 +1,7 @@
 class AppImages {
   static const String _imagesPath = "assets/images/";
 
+  ///Profile route
   static const String userAvatar = _imagesPath + "user_avatar.png";
   static const String bgUserAvatar = _imagesPath + "bg_user_avatar.svg";
   static const String bronzeCup = _imagesPath + "bronze_cup.svg";

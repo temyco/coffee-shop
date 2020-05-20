@@ -23,15 +23,10 @@ class ProfileRoute extends StatefulWidget {
 class _ProfileRouteState extends State<ProfileRoute> {
   bool isExpanded = false;
 
-  onExpandAchievementsPressed() {
-    setState(() {
-      isExpanded = !isExpanded;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    setStatusBarColor(AppColors.colorBlackGray, statusBarIconBrightness: Brightness.light);
+    setStatusBarColor(AppColors.colorBlackGray,
+        statusBarIconBrightness: Brightness.light);
     return _getProfileWidget();
   }
 
@@ -57,7 +52,7 @@ class _ProfileRouteState extends State<ProfileRoute> {
             ),
             child: Column(
               children: [
-                SizedBox(height: 38),
+                SizedBox(height: 26),
                 _UserProfileInfoWidget(),
                 SizedBox(height: 20),
                 _AchievementsWidget(),
@@ -74,15 +69,19 @@ class _ProfileRouteState extends State<ProfileRoute> {
             AppMessages.loyaltySystem.toUpperCase(),
             AppImages.giftCards,
             AppMessages.giftCards,
+            onGiftCardsPressed,
             AppImages.bonus,
             AppMessages.bonuses,
+            onBonusesPressed,
           ),
           _CardWidget(
             AppMessages.setting.toUpperCase(),
             AppImages.payment,
             AppMessages.paymentMethods,
+            onPaymentMethodsPressed,
             AppImages.signOut,
             AppMessages.signOut,
+            onSignOutPressed,
           ),
         ],
       ),
@@ -121,6 +120,28 @@ class _ProfileRouteState extends State<ProfileRoute> {
         ],
       ),
     );
+  }
+
+  onExpandAchievementsPressed() {
+    setState(() {
+      isExpanded = !isExpanded;
+    });
+  }
+
+  onGiftCardsPressed() {
+    //TODO will be implemented later
+  }
+
+  onBonusesPressed() {
+    //TODO will be implemented later
+  }
+
+  onPaymentMethodsPressed() {
+    //TODO will be implemented later
+  }
+
+  onSignOutPressed() {
+    //TODO will be implemented later
   }
 }
 
@@ -163,6 +184,7 @@ class _UserAvatarWidget extends StatelessWidget {
     return Container(
       width: userAvatarSize,
       height: userAvatarSize,
+      margin: EdgeInsets.only(top: 12),
       child: Stack(
         alignment: AlignmentDirectional.bottomCenter,
         children: [
@@ -200,8 +222,12 @@ class _UserNameAndStatisticWidget extends StatelessWidget {
   final double progressBarWidth =
       118; //width is different just to align text and gift image with linear progress
 
-  _UserNameAndStatisticWidget(this.userName, this.stepsToFreeCoffee,
-      this.currentExpProgress, this.totalExpProgress);
+  _UserNameAndStatisticWidget(
+    this.userName,
+    this.stepsToFreeCoffee,
+    this.currentExpProgress,
+    this.totalExpProgress,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -209,38 +235,46 @@ class _UserNameAndStatisticWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(width: defaultMargin),
-            UIDisplayWidget(
-              text: userName,
-              color: AppColors.colorLavender,
-              fontSize: AppTextSizes.s17,
-              fontWeight: FontWeight.w500,
-              letterSpacing: -0.26,
+            Column(children: [
+              SizedBox(height: 14),
+              UIDisplayWidget(
+                text: userName,
+                color: AppColors.colorLavender,
+                fontSize: AppTextSizes.s17,
+                fontWeight: FontWeight.w500,
+                letterSpacing: -0.26,
+              ),
+              SizedBox(height: defaultMargin),
+              UIDisplayWidget(
+                text: stepsToFreeCoffee.toString() +
+                    " " +
+                    AppMessages.stepsToFreeCoffee,
+                color: AppColors.colorWhite,
+                fontSize: AppTextSizes.s10,
+                fontWeight: FontWeight.w300,
+                letterSpacing: -0.08,
+              ),
+              SizedBox(height: defaultMargin),
+              _StepsToFreeCoffeeWidget(
+                itemCount: 5,
+                completedCount: 2,
+              ),
+            ]),
+            SizedBox(width: 16),
+            Material(
+              color: AppColors.transparent,
+              child: InkWell(
+                onTap: () => {},
+                borderRadius: BorderRadius.circular(32),
+                child: Container(
+                  padding: EdgeInsets.all(12),
+                  child: SvgPicture.asset(AppImages.edit),
+                ),
+              ),
             ),
-            SizedBox(width: 32),
-            SvgPicture.asset(AppImages.edit)
           ],
-        ),
-        Container(
-          margin: EdgeInsets.only(
-            left: defaultMargin,
-            top: defaultMargin,
-            bottom: defaultMargin,
-          ),
-          child: UIDisplayWidget(
-            text: stepsToFreeCoffee.toString() +
-                " " +
-                AppMessages.stepsToFreeCoffee,
-            color: AppColors.colorWhite,
-            fontSize: AppTextSizes.s10,
-            fontWeight: FontWeight.w300,
-            letterSpacing: -0.08,
-          ),
-        ),
-        _StepsToFreeCoffeeWidget(
-          itemCount: 5,
-          completedCount: 2,
         ),
         SizedBox(height: 12),
         Container(
@@ -289,7 +323,10 @@ class _StepsToFreeCoffeeWidget extends StatelessWidget {
   final int itemCount;
   final int completedCount;
 
-  _StepsToFreeCoffeeWidget({this.itemCount = 5, this.completedCount = 0});
+  _StepsToFreeCoffeeWidget({
+    this.itemCount = 5,
+    this.completedCount = 0,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -379,21 +416,28 @@ class _ExpandAchievementsLabelWidget extends StatelessWidget {
     } else {
       arrowIcon = AppImages.arrowDown;
     }
-    return GestureDetector(
-      onTap: () => onExpandPressed.call(),
-      child: Container(
-        padding: EdgeInsets.all(5),
-        child: Column(
-          children: [
-            UIDisplayWidget(
-              text: AppMessages.achievements.toUpperCase(),
-              color: AppColors.colorWhite,
-              fontSize: AppTextSizes.s10,
-              fontWeight: FontWeight.w500,
-              letterSpacing: 1.0,
-            ),
-            SvgPicture.asset(arrowIcon)
-          ],
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: BorderRadius.all(
+          Radius.circular(4),
+        ),
+        onTap: () => onExpandPressed.call(),
+        child: Container(
+          padding: EdgeInsets.all(6),
+          child: Column(
+            children: [
+              UIDisplayWidget(
+                text: AppMessages.achievements.toUpperCase(),
+                color: AppColors.colorWhite,
+                fontSize: AppTextSizes.s10,
+                fontWeight: FontWeight.w500,
+                letterSpacing: 1.0,
+              ),
+              SvgPicture.asset(arrowIcon)
+            ],
+          ),
         ),
       ),
     );
@@ -433,15 +477,19 @@ class _CardWidget extends StatelessWidget {
   final String cardTitle;
   final String firstItemIcon;
   final String firstItemTitle;
+  final Function() onFirstItemPressed;
   final String secondItemIcon;
   final String secondItemTitle;
+  final Function() onSecondItemPressed;
 
   _CardWidget(
     this.cardTitle,
     this.firstItemIcon,
     this.firstItemTitle,
+    this.onFirstItemPressed,
     this.secondItemIcon,
     this.secondItemTitle,
+    this.onSecondItemPressed,
   );
 
   @override
@@ -488,6 +536,7 @@ class _CardWidget extends StatelessWidget {
           _CardRowWidget(
             firstItemIcon,
             firstItemTitle,
+            onFirstItemPressed,
           ),
           Divider(
             color: AppColors.colorGrayLight,
@@ -496,6 +545,7 @@ class _CardWidget extends StatelessWidget {
           _CardRowWidget(
             secondItemIcon,
             secondItemTitle,
+            onSecondItemPressed,
           )
         ],
       ),
@@ -506,29 +556,36 @@ class _CardWidget extends StatelessWidget {
 class _CardRowWidget extends StatelessWidget {
   final String icon;
   final String title;
+  final Function() onPressed;
 
-  _CardRowWidget(this.icon, this.title);
+  _CardRowWidget(this.icon, this.title, this.onPressed);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(
-        top: 10,
-        bottom: 10,
-        right: 4,
-        left: 4,
-      ),
-      child: Row(
-        children: [
-          SvgPicture.asset(icon),
-          SizedBox(width: 15),
-          UIDisplayWidget(
-            text: title,
-            color: AppColors.colorBlackGray,
-            fontSize: AppTextSizes.s17,
-            fontWeight: FontWeight.w400,
-          )
-        ],
+    return Material(
+      child: InkWell(
+        borderRadius: BorderRadius.circular(4),
+        onTap: onPressed,
+        child: Container(
+          padding: EdgeInsets.only(
+            top: 10,
+            bottom: 10,
+            right: 4,
+            left: 4,
+          ),
+          child: Row(
+            children: [
+              SvgPicture.asset(icon),
+              SizedBox(width: 15),
+              UIDisplayWidget(
+                text: title,
+                color: AppColors.colorBlackGray,
+                fontSize: AppTextSizes.s17,
+                fontWeight: FontWeight.w400,
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

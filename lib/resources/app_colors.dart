@@ -1,6 +1,7 @@
 import 'package:flutter/painting.dart';
 
 class AppColors {
+  static const Color transparent = Color(0x00000000);
   static const Color colorWhite = Color(0xFFFFFFFF);
   static const Color colorBlackGray = Color(0xFF222831);
   static const Color colorShaleGray = Color(0xFF393E46);
