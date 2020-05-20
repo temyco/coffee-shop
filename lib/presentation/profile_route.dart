@@ -10,6 +10,7 @@ import 'package:flutterapp/widgets/progress/linear_progress.dart';
 import 'package:flutterapp/widgets/achievement_widget.dart';
 import 'package:flutterapp/widgets/text/uidisplay_widget.dart';
 import 'package:flutterapp/widgets/text/uitext_widget.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class ProfileRoute extends StatefulWidget {
   @override
@@ -32,42 +33,106 @@ class _ProfileRouteState extends State<ProfileRoute> {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: AppColors.colorBlackGray,
         statusBarIconBrightness: Brightness.light));
+    return _getProfileWidget();
+  }
+
+  Widget _getProfileWidget() {
+    if (isExpanded) {
+      return _getExpandedWidget();
+    } else {
+      return _getDefaultWidget();
+    }
+  }
+
+  Widget _getDefaultWidget() {
     return Container(
+      color: AppColors.colorWhiteGray,
       child: ListView(
         children: [
           Container(
             decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(AppImages.profileHeader),
-                    fit: BoxFit.fill)),
+              image: DecorationImage(
+                image: AssetImage(AppImages.profileHeader),
+                fit: BoxFit.fill,
+              ),
+            ),
             child: Column(
               children: [
                 SizedBox(height: 38),
                 _UserProfileInfoWidget(),
                 SizedBox(height: 20),
                 _AchievementsWidget(),
-                SizedBox(height: 37),
-                _ExpandAchievementsLabelWidget(onExpandAchievementsPressed),
-                SizedBox(height: 5)
+                SizedBox(height: 32),
+                _ExpandAchievementsLabelWidget(
+                  onExpandAchievementsPressed,
+                  false,
+                ),
               ],
             ),
           ),
           _JoinTheGameWidget(),
           _CardWidget(
-              AppMessages.loyaltySystem.toUpperCase(),
-              AppImages.giftCards,
-              AppMessages.giftCards,
-              AppImages.bonus,
-              AppMessages.bonuses),
+            AppMessages.loyaltySystem.toUpperCase(),
+            AppImages.giftCards,
+            AppMessages.giftCards,
+            AppImages.bonus,
+            AppMessages.bonuses,
+          ),
           _CardWidget(
-              AppMessages.setting.toUpperCase(),
-              AppImages.payment,
-              AppMessages.paymentMethods,
-              AppImages.signOut,
-              AppMessages.signOut),
+            AppMessages.setting.toUpperCase(),
+            AppImages.payment,
+            AppMessages.paymentMethods,
+            AppImages.signOut,
+            AppMessages.signOut,
+          ),
         ],
       ),
     );
+  }
+
+  Widget _getExpandedWidget() {
+    int gridCrossAxisCount = 3;
+    return Container(
+      color: AppColors.colorBlackGray,
+      child: Column(
+        children: [
+          SizedBox(height: 38),
+          _UserProfileInfoWidget(),
+          SizedBox(height: 20),
+          Expanded(
+            flex: 1,
+            child: StaggeredGridView.countBuilder(
+              crossAxisCount: gridCrossAxisCount,
+              staggeredTileBuilder: (index) => StaggeredTile.fit(1),
+              itemCount: 24,
+              itemBuilder: (context, index) => Container(
+                alignment: AlignmentDirectional.center,
+                child: Column(
+                  children: [
+                    getGridAchievement(index, gridCrossAxisCount),
+                    SizedBox(height: 15),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 16),
+          _ExpandAchievementsLabelWidget(onExpandAchievementsPressed, true),
+          SizedBox(height: 6)
+        ],
+      ),
+    );
+  }
+}
+
+Widget getGridAchievement(int index, int crossAxisCount) {
+  switch (index % crossAxisCount) {
+    case 0:
+      return _DailyAchievement();
+    case 1:
+      return _RandomAchievement();
+    default:
+      return _BossAchievement();
   }
 }
 
@@ -80,7 +145,12 @@ class _UserProfileInfoWidget extends StatelessWidget {
       children: [
         _UserAvatarWidget(),
         SizedBox(width: 18),
-        _UserNameAndStatisticWidget('Alex Banner', 3, 240, 500)
+        _UserNameAndStatisticWidget(
+          'Alex Banner',
+          3,
+          240,
+          500,
+        )
       ],
     );
   }
@@ -97,18 +167,23 @@ class _UserAvatarWidget extends StatelessWidget {
       child: Stack(
         alignment: AlignmentDirectional.bottomCenter,
         children: [
-          SvgPicture.asset(AppImages.bgUserAvatar,
-              height: userAvatarSize, width: userAvatarSize),
+          SvgPicture.asset(
+            AppImages.bgUserAvatar,
+            height: userAvatarSize,
+            width: userAvatarSize,
+          ),
           Image.asset(AppImages.userAvatar),
           ArcProgress(
-              circleSize: userAvatarSize,
-              startAngle: 45,
-              endAngle: 225,
-              strokeWidth: 3,
-              arcColor: AppColors.colorBondiWaters),
+            circleSize: userAvatarSize,
+            startAngle: 45,
+            endAngle: 225,
+            strokeWidth: 3,
+            arcColor: AppColors.colorBondiWaters,
+          ),
           Align(
-              child: SvgPicture.asset(AppImages.bronzeCup),
-              alignment: Alignment.bottomRight),
+            child: SvgPicture.asset(AppImages.bronzeCup),
+            alignment: Alignment.bottomRight,
+          ),
         ],
       ),
     );
@@ -138,28 +213,36 @@ class _UserNameAndStatisticWidget extends StatelessWidget {
           children: [
             SizedBox(width: defaultMargin),
             UIDisplayWidget(
-                text: userName,
-                color: AppColors.colorLavender,
-                fontSize: AppTextSizes.s17,
-                fontWeight: FontWeight.w500,
-                letterSpacing: -0.26),
+              text: userName,
+              color: AppColors.colorLavender,
+              fontSize: AppTextSizes.s17,
+              fontWeight: FontWeight.w500,
+              letterSpacing: -0.26,
+            ),
             SizedBox(width: 32),
             SvgPicture.asset(AppImages.edit)
           ],
         ),
         Container(
           margin: EdgeInsets.only(
-              left: defaultMargin, top: defaultMargin, bottom: defaultMargin),
+            left: defaultMargin,
+            top: defaultMargin,
+            bottom: defaultMargin,
+          ),
           child: UIDisplayWidget(
-              text: stepsToFreeCoffee.toString() +
-                  " " +
-                  AppMessages.stepsToFreeCoffee,
-              color: AppColors.colorWhite,
-              fontSize: AppTextSizes.s10,
-              fontWeight: FontWeight.w300,
-              letterSpacing: -0.08),
+            text: stepsToFreeCoffee.toString() +
+                " " +
+                AppMessages.stepsToFreeCoffee,
+            color: AppColors.colorWhite,
+            fontSize: AppTextSizes.s10,
+            fontWeight: FontWeight.w300,
+            letterSpacing: -0.08,
+          ),
         ),
-        _StepsToFreeCoffeeWidget(itemCount: 5, completedCount: 2),
+        _StepsToFreeCoffeeWidget(
+          itemCount: 5,
+          completedCount: 2,
+        ),
         SizedBox(height: 12),
         Container(
           margin: EdgeInsets.only(left: defaultMargin),
@@ -169,29 +252,35 @@ class _UserNameAndStatisticWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               UIDisplayWidget(
-                  text: currentExpProgress.toString() +
-                      '/' +
-                      totalExpProgress.toString() +
-                      ' ' +
-                      AppMessages.exp,
-                  color: AppColors.colorWhite,
-                  fontSize: AppTextSizes.s10,
-                  fontWeight: FontWeight.w500,
-                  letterSpacing: -0.08),
+                text: currentExpProgress.toString() +
+                    '/' +
+                    totalExpProgress.toString() +
+                    ' ' +
+                    AppMessages.exp,
+                color: AppColors.colorWhite,
+                fontSize: AppTextSizes.s10,
+                fontWeight: FontWeight.w500,
+                letterSpacing: -0.08,
+              ),
               SvgPicture.asset(AppImages.gift)
             ],
           ),
         ),
         Container(
-            margin: EdgeInsets.only(left: 7.5, top: 8),
-            //magic number just to align text with linear progress
-            width: progressBarWidth,
-            child: LinearProgress(
-                width: progressBarWidth - defaultMargin,
-                height: 6,
-                currentProgress: currentExpProgress / totalExpProgress,
-                background: AppColors.colorWhite,
-                progress: AppColors.colorBondiWaters))
+          margin: EdgeInsets.only(
+            left: 7.5,
+            top: 8,
+          ),
+          //magic number just to align text with linear progress
+          width: progressBarWidth,
+          child: LinearProgress(
+            width: progressBarWidth - defaultMargin,
+            height: 6,
+            currentProgress: currentExpProgress / totalExpProgress,
+            background: AppColors.colorWhite,
+            progress: AppColors.colorBondiWaters,
+          ),
+        )
       ],
     );
   }
@@ -225,33 +314,15 @@ class _AchievementsWidget extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: AchievementWidget(
-              title: AppMessages.daily,
-              name: AppMessages.destroyedCroissants,
-              maxProgress: 20,
-              currentProgress: 7,
-              progressColor: AppColors.colorOrange,
-              icon: AppImages.goldMedal),
+          child: _DailyAchievement(),
           flex: 1,
         ),
         Expanded(
-          child: AchievementWidget(
-              title: AppMessages.random,
-              name: AppMessages.drankLattes,
-              maxProgress: 10,
-              currentProgress: 3,
-              progressColor: AppColors.colorTangerine,
-              icon: AppImages.goldCup),
+          child: _RandomAchievement(),
           flex: 1,
         ),
         Expanded(
-          child: AchievementWidget(
-              title: AppMessages.boss,
-              name: AppMessages.drankAmericanos,
-              maxProgress: 3,
-              currentProgress: 2,
-              progressColor: AppColors.colorBondiWaters,
-              icon: AppImages.silverMedal),
+          child: _BossAchievement(),
           flex: 1,
         ),
       ],
@@ -259,25 +330,72 @@ class _AchievementsWidget extends StatelessWidget {
   }
 }
 
+class _DailyAchievement extends AchievementWidget {
+  _DailyAchievement()
+      : super(
+          title: AppMessages.daily,
+          name: AppMessages.destroyedCroissants,
+          maxProgress: 20,
+          currentProgress: 7,
+          progressColor: AppColors.colorOrange,
+          icon: AppImages.goldMedal,
+        );
+}
+
+class _RandomAchievement extends AchievementWidget {
+  _RandomAchievement()
+      : super(
+          title: AppMessages.random,
+          name: AppMessages.drankLattes,
+          maxProgress: 10,
+          currentProgress: 3,
+          progressColor: AppColors.colorTangerine,
+          icon: AppImages.goldCup,
+        );
+}
+
+class _BossAchievement extends AchievementWidget {
+  _BossAchievement()
+      : super(
+          title: AppMessages.boss,
+          name: AppMessages.drankAmericanos,
+          maxProgress: 3,
+          currentProgress: 2,
+          progressColor: AppColors.colorBondiWaters,
+          icon: AppImages.silverMedal,
+        );
+}
+
 class _ExpandAchievementsLabelWidget extends StatelessWidget {
   final Function() onExpandPressed;
+  final bool isExpanded;
 
-  _ExpandAchievementsLabelWidget(this.onExpandPressed);
+  _ExpandAchievementsLabelWidget(this.onExpandPressed, this.isExpanded);
 
   @override
   Widget build(BuildContext context) {
+    String arrowIcon;
+    if (isExpanded) {
+      arrowIcon = AppImages.arrowUp;
+    } else {
+      arrowIcon = AppImages.arrowDown;
+    }
     return GestureDetector(
       onTap: () => onExpandPressed.call(),
-      child: Column(
-        children: [
-          UIDisplayWidget(
+      child: Container(
+        padding: EdgeInsets.all(5),
+        child: Column(
+          children: [
+            UIDisplayWidget(
               text: AppMessages.achievements.toUpperCase(),
               color: AppColors.colorWhite,
               fontSize: AppTextSizes.s10,
               fontWeight: FontWeight.w500,
-              letterSpacing: 1.0),
-          SvgPicture.asset(AppImages.arrowDown)
-        ],
+              letterSpacing: 1.0,
+            ),
+            SvgPicture.asset(arrowIcon)
+          ],
+        ),
       ),
     );
   }
@@ -287,7 +405,12 @@ class _JoinTheGameWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 46, top: 16, right: 46, bottom: 20),
+      padding: EdgeInsets.only(
+        left: 46,
+        top: 16,
+        right: 46,
+        bottom: 20,
+      ),
       child: MaterialButton(
           onPressed: () => {
                 //TODO will be implemented later
@@ -314,8 +437,13 @@ class _CardWidget extends StatelessWidget {
   final String secondItemIcon;
   final String secondItemTitle;
 
-  _CardWidget(this.cardTitle, this.firstItemIcon, this.firstItemTitle,
-      this.secondItemIcon, this.secondItemTitle);
+  _CardWidget(
+    this.cardTitle,
+    this.firstItemIcon,
+    this.firstItemTitle,
+    this.secondItemIcon,
+    this.secondItemTitle,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -325,30 +453,51 @@ class _CardWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-                offset: Offset(0, 4),
-                blurRadius: 10,
-                color: AppColors.colorShadow)
+              offset: Offset(0, 4),
+              blurRadius: 10,
+              color: AppColors.colorShadow,
+            )
           ]),
-      margin: EdgeInsets.only(left: 16, right: 16, bottom: 10),
-      padding: EdgeInsets.only(left: 12, right: 12, top: 10, bottom: 10),
+      margin: EdgeInsets.only(
+        left: 16,
+        right: 16,
+        bottom: 10,
+      ),
+      padding: EdgeInsets.only(
+        left: 12,
+        right: 12,
+        top: 10,
+        bottom: 10,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: EdgeInsets.only(left: 4, right: 4, bottom: 10),
+            margin: EdgeInsets.only(
+              left: 4,
+              right: 4,
+              bottom: 10,
+            ),
             child: UIDisplayWidget(
-                text: cardTitle,
-                color: AppColors.colorGray,
-                fontSize: AppTextSizes.s10,
-                fontWeight: FontWeight.w500,
-                letterSpacing: 1),
+              text: cardTitle,
+              color: AppColors.colorGray,
+              fontSize: AppTextSizes.s10,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 1,
+            ),
           ),
-          _CardRowWidget(firstItemIcon, firstItemTitle),
+          _CardRowWidget(
+            firstItemIcon,
+            firstItemTitle,
+          ),
           Divider(
             color: AppColors.colorGrayLight,
             height: 1,
           ),
-          _CardRowWidget(secondItemIcon, secondItemTitle)
+          _CardRowWidget(
+            secondItemIcon,
+            secondItemTitle,
+          )
         ],
       ),
     );
@@ -364,7 +513,12 @@ class _CardRowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 10, bottom: 10, right: 4, left: 4),
+      padding: EdgeInsets.only(
+        top: 10,
+        bottom: 10,
+        right: 4,
+        left: 4,
+      ),
       child: Row(
         children: [
           SvgPicture.asset(icon),

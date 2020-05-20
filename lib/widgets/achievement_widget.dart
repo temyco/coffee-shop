@@ -15,14 +15,15 @@ class AchievementWidget extends StatelessWidget {
   final Color progressBgColor;
   final String icon;
 
-  AchievementWidget(
-      {this.title,
-      this.name,
-      this.maxProgress,
-      this.currentProgress,
-      this.progressColor,
-      this.icon,
-      this.progressBgColor = AppColors.colorShaleGray});
+  AchievementWidget({
+    this.title,
+    this.name,
+    this.maxProgress,
+    this.currentProgress,
+    this.progressColor,
+    this.icon,
+    this.progressBgColor = AppColors.colorShaleGray,
+  });
 
   @override
   Widget build(BuildContext context) {

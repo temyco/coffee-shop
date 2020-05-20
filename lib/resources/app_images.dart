@@ -17,4 +17,5 @@ class AppImages {
   static const String payment = _imagesPath + "payment.svg";
   static const String signOut = _imagesPath + "sign_out.svg";
   static const String profileHeader = _imagesPath + "profile_header.png";
+  static const String arrowUp = _imagesPath + "arrow_up.svg";
 }
