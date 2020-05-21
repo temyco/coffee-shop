@@ -6,8 +6,8 @@ import 'package:flutterapp/resources/app_text_sizes.dart';
 /// All project's text styles located on:
 /// https://app.zeplin.io/project/5ebd52f3c3b62d4b25115ecd/screen/5ebe8e8738a1a0335abb2550
 ///
-/// Note: text styles don't manage text alignment and characters capitalizing.
-/// All text styles with 'overline' prefix must be capitalized in corresponding widget.
+/// Note: In flutter there is no way to capitalize and align text inside of a style.
+/// This must be done in corresponding widgets. Overline styles are capitalized in styleguide.
 class AppTextStyles {
 
   /// TODO: Use AppTextFamilies constants when it's merged for fontFamily to master.
