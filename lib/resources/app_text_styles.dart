@@ -16,21 +16,21 @@ class AppTextStyles {
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s25,
     fontWeight: FontWeight.w500,
-    color: AppColors.colorCharcoalGray,
+    color: AppColors.charcoalGray,
   );
 
   static const TextStyle h2BoldPrimary = TextStyle(
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s20,
     fontWeight: FontWeight.w700,
-    color: AppColors.colorDark,
+    color: AppColors.dark,
   );
 
   static const TextStyle h2MediumSecondary = TextStyle(
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s20,
     fontWeight: FontWeight.w500,
-    color: AppColors.colorDark,
+    color: AppColors.dark,
     letterSpacing: AppTextLetterSpacing.spN04,
   );
 
@@ -38,7 +38,7 @@ class AppTextStyles {
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s17,
     fontWeight: FontWeight.w500,
-    color: AppColors.colorDark,
+    color: AppColors.dark,
     letterSpacing: AppTextLetterSpacing.spN023,
   );
 
@@ -46,7 +46,7 @@ class AppTextStyles {
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s17,
     fontWeight: FontWeight.w500,
-    color: AppColors.colorCharcoalGray,
+    color: AppColors.charcoalGray,
     letterSpacing: AppTextLetterSpacing.spN023,
   );
 
@@ -54,14 +54,14 @@ class AppTextStyles {
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s17,
     fontWeight: FontWeight.w500,
-    color: AppColors.colorDark,
+    color: AppColors.dark,
   );
 
   static const TextStyle h4BoldPrimary = TextStyle(
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s15,
     fontWeight: FontWeight.w700,
-    color: AppColors.colorDark,
+    color: AppColors.dark,
     letterSpacing: AppTextLetterSpacing.spN02,
   );
 
@@ -69,7 +69,7 @@ class AppTextStyles {
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s15,
     fontWeight: FontWeight.w500,
-    color: AppColors.colorCharcoalGray,
+    color: AppColors.charcoalGray,
     letterSpacing: AppTextLetterSpacing.spN026,
   );
 
@@ -77,7 +77,7 @@ class AppTextStyles {
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s15,
     fontWeight: FontWeight.w500,
-    color: AppColors.colorCharcoalGray,
+    color: AppColors.charcoalGray,
     letterSpacing: AppTextLetterSpacing.spN026,
   );
 
@@ -85,7 +85,7 @@ class AppTextStyles {
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s15,
     fontWeight: FontWeight.w500,
-    color: AppColors.colorPaleGray,
+    color: AppColors.paleGray,
     letterSpacing: AppTextLetterSpacing.spN026,
   );
 
@@ -93,7 +93,7 @@ class AppTextStyles {
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s15,
     fontWeight: FontWeight.w400,
-    color: AppColors.colorCharcoalGray,
+    color: AppColors.charcoalGray,
     letterSpacing: AppTextLetterSpacing.spN026,
   );
 
@@ -101,7 +101,7 @@ class AppTextStyles {
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s15,
     fontWeight: FontWeight.w400,
-    color: AppColors.colorGunMetal08,
+    color: AppColors.gunMetal08,
     letterSpacing: AppTextLetterSpacing.spN026,
   );
 
@@ -109,7 +109,7 @@ class AppTextStyles {
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s15,
     fontWeight: FontWeight.w400,
-    color: AppColors.colorGunMetal,
+    color: AppColors.gunMetal,
     letterSpacing: AppTextLetterSpacing.spN02,
   );
 
@@ -117,7 +117,7 @@ class AppTextStyles {
     fontFamily: 'SFUIText',
     fontSize: AppTextSizes.s13,
     fontWeight: FontWeight.w700,
-    color: AppColors.colorCharcoalGray,
+    color: AppColors.charcoalGray,
     letterSpacing: AppTextLetterSpacing.spN017,
   );
 
@@ -125,7 +125,7 @@ class AppTextStyles {
     fontFamily: 'SFUIText',
     fontSize: AppTextSizes.s13,
     fontWeight: FontWeight.w700,
-    color: AppColors.colorGunMetal08,
+    color: AppColors.gunMetal08,
     letterSpacing: AppTextLetterSpacing.spN017,
   );
 
@@ -133,7 +133,7 @@ class AppTextStyles {
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s15,
     fontWeight: FontWeight.w500,
-    color: AppColors.colorDark,
+    color: AppColors.dark,
     letterSpacing: AppTextLetterSpacing.sp15,
   );
 
@@ -141,14 +141,14 @@ class AppTextStyles {
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s15,
     fontWeight: FontWeight.w500,
-    color: AppColors.colorRedOrange,
+    color: AppColors.redOrange,
   );
 
   static const TextStyle overlineMediumQuaternary = TextStyle(
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s10,
     fontWeight: FontWeight.w500,
-    color: AppColors.colorGunMetal08,
+    color: AppColors.gunMetal08,
     letterSpacing: AppTextLetterSpacing.sp1,
   );
 
@@ -156,14 +156,14 @@ class AppTextStyles {
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s13,
     fontWeight: FontWeight.w500,
-    color: AppColors.colorDark,
+    color: AppColors.dark,
   );
 
   static const TextStyle bodyMediumSecondary = TextStyle(
     fontFamily: 'SFUIText',
     fontSize: AppTextSizes.s13,
     fontWeight: FontWeight.w500,
-    color: AppColors.colorDark,
+    color: AppColors.dark,
     letterSpacing: AppTextLetterSpacing.spN01,
   );
 
@@ -171,28 +171,28 @@ class AppTextStyles {
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s13,
     fontWeight: FontWeight.w500,
-    color: AppColors.colorGunMetal,
+    color: AppColors.gunMetal,
   );
 
   static const TextStyle bodyRegularPrimary = TextStyle(
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s13,
     fontWeight: FontWeight.w400,
-    color: AppColors.colorCharcoalGray,
+    color: AppColors.charcoalGray,
   );
 
   static const TextStyle bodyRegularQuaternary = TextStyle(
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s13,
     fontWeight: FontWeight.w400,
-    color: AppColors.colorGunMetal08,
+    color: AppColors.gunMetal08,
   );
 
   static const TextStyle bodyLightPrimary = TextStyle(
     fontFamily: 'SFUIText',
     fontSize: AppTextSizes.s13,
     fontWeight: FontWeight.w300,
-    color: AppColors.colorDark,
+    color: AppColors.dark,
     letterSpacing: AppTextLetterSpacing.spN01,
   );
 
@@ -200,7 +200,7 @@ class AppTextStyles {
     fontFamily: 'SFUIText',
     fontSize: AppTextSizes.s13,
     fontWeight: FontWeight.w300,
-    color: AppColors.colorPumpkinOrange,
+    color: AppColors.pumpkinOrange,
     letterSpacing: AppTextLetterSpacing.spN01,
   );
 
@@ -208,7 +208,7 @@ class AppTextStyles {
     fontFamily: 'SFUIText',
     fontSize: AppTextSizes.s10,
     fontWeight: FontWeight.w700,
-    color: AppColors.colorTurquoiseBlue,
+    color: AppColors.turquoiseBlue,
     letterSpacing: AppTextLetterSpacing.spN008,
   );
 
@@ -216,7 +216,7 @@ class AppTextStyles {
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s10,
     fontWeight: FontWeight.w500,
-    color: AppColors.colorWhite,
+    color: AppColors.white,
     letterSpacing: AppTextLetterSpacing.spN008,
   );
 
@@ -224,7 +224,7 @@ class AppTextStyles {
     fontFamily: 'SFUIDisplay',
     fontSize: AppTextSizes.s10,
     fontWeight: FontWeight.w300,
-    color: AppColors.colorWhite,
+    color: AppColors.white,
     letterSpacing: AppTextLetterSpacing.spN008,
   );
 }
