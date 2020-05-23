@@ -2,7 +2,7 @@
 /// "Messages" name was chosen to follow l10n naming format.
 /// See https://flutter.dev/docs/development/accessibility-and-localization/internationalization
 /// TODO add l10n internationalization for multi-lang support
-class Messages {
+class AppMessages {
   static const String appTitle = "CoffeeShop";
   static const String basketTitle = "Basket";
   static const String locationTitle = "Location";

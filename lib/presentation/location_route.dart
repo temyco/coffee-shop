@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterapp/messages.dart';
 import 'package:flutterapp/presentation/product_details_route.dart';
+import 'package:flutterapp/resources/app_messages.dart';
 
 class LocationRoute extends StatelessWidget {
   @override
@@ -10,7 +10,7 @@ class LocationRoute extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Center(child: Text(Messages.locationTitle)),
+          Center(child: Text(AppMessages.locationTitle)),
           /// Just need to open product details from somewhere.
           Center(
               child: RaisedButton(
