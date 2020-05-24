@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapp/resources/app_icons.dart';
 import 'package:flutterapp/resources/app_messages.dart';
 import 'package:flutterapp/presentation/basket_route.dart';
 import 'package:flutterapp/presentation/location_route.dart';
 import 'package:flutterapp/presentation/orders_route.dart';
 import 'package:flutterapp/presentation/profile_route.dart';
 import 'package:flutterapp/presentation/shop_route.dart';
+import 'package:flutterapp/widgets/svg_icon.dart';
 
 class HomeRoute extends StatefulWidget {
   @override
@@ -81,23 +83,23 @@ class _BottomTabsView extends StatelessWidget {
       selectedItemColor: Colors.teal[400],
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.location_on),
+          icon: SvgIcon(AppIcons.location),
           title: Text(AppMessages.locationTitle),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.shop),
+          icon: SvgIcon(AppIcons.shop),
           title: Text(AppMessages.shopTitle),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.note),
+          icon: SvgIcon(AppIcons.orders),
           title: Text(AppMessages.ordersTitle),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_cart),
+          icon: SvgIcon(AppIcons.basket),
           title: Text(AppMessages.basketTitle),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.account_circle),
+          icon: SvgIcon(AppIcons.profile),
           title: Text(AppMessages.profileTitle),
         ),
       ],
