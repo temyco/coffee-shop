@@ -92,6 +92,38 @@ class _DefaultWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> loyaltySystemCardRows = List();
+    loyaltySystemCardRows.add(
+      _CardRowWidget(
+        AppImages.giftCards,
+        AppMessages.giftCards,
+        onGiftCardsPressed,
+      ),
+    );
+    loyaltySystemCardRows.add(
+      _CardRowWidget(
+        AppImages.bonus,
+        AppMessages.bonuses,
+        onBonusesPressed,
+      ),
+    );
+
+    List<Widget> settingsCardsRow = List();
+    settingsCardsRow.add(
+      _CardRowWidget(
+        AppImages.payment,
+        AppMessages.paymentMethods,
+        onPaymentMethodsPressed,
+      ),
+    );
+    settingsCardsRow.add(
+      _CardRowWidget(
+        AppImages.signOut,
+        AppMessages.signOut,
+        onSignOutPressed,
+      ),
+    );
+
     return Container(
       color: AppColors.colorWhiteGray,
       child: ListView(
@@ -100,21 +132,11 @@ class _DefaultWidget extends StatelessWidget {
           _JoinTheGameWidget(),
           _CardWidget(
             AppMessages.loyaltySystem.toUpperCase(),
-            AppImages.giftCards,
-            AppMessages.giftCards,
-            onGiftCardsPressed,
-            AppImages.bonus,
-            AppMessages.bonuses,
-            onBonusesPressed,
+            loyaltySystemCardRows,
           ),
           _CardWidget(
             AppMessages.setting.toUpperCase(),
-            AppImages.payment,
-            AppMessages.paymentMethods,
-            onPaymentMethodsPressed,
-            AppImages.signOut,
-            AppMessages.signOut,
-            onSignOutPressed,
+            settingsCardsRow,
           ),
         ],
       ),
@@ -176,7 +198,6 @@ class _ExpandedWidget extends StatelessWidget {
 }
 
 class _DefaultHeaderWidget extends StatelessWidget {
-
   final Function() onExpandAchievementsPressed;
 
   _DefaultHeaderWidget(this.onExpandAchievementsPressed);
@@ -196,8 +217,7 @@ class _DefaultHeaderWidget extends StatelessWidget {
           _UserProfileInfoWidget(),
           SizedBox(height: ProfileDimens.achievementsMarginTop),
           _AchievementsWidget(),
-          SizedBox(
-              height: ProfileDimens.expandAchievementsButtonMarginTop),
+          SizedBox(height: ProfileDimens.expandAchievementsButtonMarginTop),
           _ExpandAchievementsLabelWidget(
             onExpandAchievementsPressed,
             false,
@@ -603,22 +623,22 @@ class _JoinTheGameWidget extends StatelessWidget {
 
 class _CardWidget extends StatelessWidget {
   final String cardTitle;
-  final String firstItemIcon;
-  final String firstItemTitle;
-  final Function() onFirstItemPressed;
-  final String secondItemIcon;
-  final String secondItemTitle;
-  final Function() onSecondItemPressed;
+  final List<Widget> children = List();
 
-  _CardWidget(
-    this.cardTitle,
-    this.firstItemIcon,
-    this.firstItemTitle,
-    this.onFirstItemPressed,
-    this.secondItemIcon,
-    this.secondItemTitle,
-    this.onSecondItemPressed,
-  );
+  _CardWidget(this.cardTitle, List<Widget> rows) {
+    children.add(_CardRowHeader(cardTitle));
+
+    for (int index = 0; index < rows.length; index++) {
+      Widget row = rows[index];
+      children.add(row);
+      if (index != rows.length - 1) {
+        children.add(Divider(
+          color: AppColors.colorGrayLight,
+          height: ProfileDimens.cardItemDividerHeight,
+        ));
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -651,36 +671,31 @@ class _CardWidget extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: EdgeInsets.only(
-              left: ProfileDimens.cardTitlePaddingHorizontal,
-              right: ProfileDimens.cardTitlePaddingHorizontal,
-              bottom: ProfileDimens.cardTitlePaddingBottom,
-            ),
-            child: UIDisplayWidget(
-              text: cardTitle,
-              color: AppColors.colorGray,
-              fontSize: AppTextSizes.s10,
-              fontWeight: FontWeight.w500,
-              letterSpacing: AppTextLetterSpacing.sp1,
-            ),
-          ),
-          _CardRowWidget(
-            firstItemIcon,
-            firstItemTitle,
-            onFirstItemPressed,
-          ),
-          Divider(
-            color: AppColors.colorGrayLight,
-            height: ProfileDimens.cardItemDividerHeight,
-          ),
-          _CardRowWidget(
-            secondItemIcon,
-            secondItemTitle,
-            onSecondItemPressed,
-          )
-        ],
+        children: children,
+      ),
+    );
+  }
+}
+
+class _CardRowHeader extends StatelessWidget {
+  final String title;
+
+  _CardRowHeader(this.title);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(
+        left: ProfileDimens.cardTitlePaddingHorizontal,
+        right: ProfileDimens.cardTitlePaddingHorizontal,
+        bottom: ProfileDimens.cardTitlePaddingBottom,
+      ),
+      child: UIDisplayWidget(
+        text: title,
+        color: AppColors.colorGray,
+        fontSize: AppTextSizes.s10,
+        fontWeight: FontWeight.w500,
+        letterSpacing: AppTextLetterSpacing.sp1,
       ),
     );
   }
