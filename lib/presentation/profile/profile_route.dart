@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutterapp/presentation/profile/card_widget.dart';
 import 'package:flutterapp/presentation/profile/profile_dimens.dart';
 import 'package:flutterapp/resources/app_colors.dart';
 import 'package:flutterapp/resources/app_dimens.dart';
@@ -91,14 +92,14 @@ class _DefaultWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> loyaltySystemCardRows = List();
     loyaltySystemCardRows.add(
-      _CardRowWidget(
+      CardRowWidget(
         AppImages.giftCards,
         AppMessages.giftCards,
         onGiftCardsPressed,
       ),
     );
     loyaltySystemCardRows.add(
-      _CardRowWidget(
+      CardRowWidget(
         AppImages.bonus,
         AppMessages.bonuses,
         onBonusesPressed,
@@ -107,14 +108,14 @@ class _DefaultWidget extends StatelessWidget {
 
     List<Widget> settingsCardsRow = List();
     settingsCardsRow.add(
-      _CardRowWidget(
+      CardRowWidget(
         AppImages.payment,
         AppMessages.paymentMethods,
         onPaymentMethodsPressed,
       ),
     );
     settingsCardsRow.add(
-      _CardRowWidget(
+      CardRowWidget(
         AppImages.signOut,
         AppMessages.signOut,
         onSignOutPressed,
@@ -127,11 +128,11 @@ class _DefaultWidget extends StatelessWidget {
         children: [
           _DefaultHeaderWidget(onExpandAchievementsPressed),
           _JoinTheGameWidget(),
-          _CardWidget(
+          CardWidget(
             AppMessages.loyaltySystem.toUpperCase(),
             loyaltySystemCardRows,
           ),
-          _CardWidget(
+          CardWidget(
             AppMessages.setting.toUpperCase(),
             settingsCardsRow,
           ),
@@ -225,6 +226,8 @@ class _DefaultHeaderWidget extends StatelessWidget {
   }
 }
 
+//it's just for testing. With real API this functional will be based on real
+//Achievements list and then no needs in such method to generate test data.
 Widget getGridAchievement(int index, int crossAxisCount) {
   switch (index % crossAxisCount) {
     case 0:
@@ -597,122 +600,6 @@ class _JoinTheGameWidget extends StatelessWidget {
             AppMessages.joinTheGame,
             style: AppTextStyles.buttonBoldWhite,
           )),
-    );
-  }
-}
-
-class _CardWidget extends StatelessWidget {
-  final String cardTitle;
-  final List<Widget> children = List();
-
-  _CardWidget(this.cardTitle, List<Widget> rows) {
-    children.add(_CardRowHeader(cardTitle));
-
-    for (int index = 0; index < rows.length; index++) {
-      Widget row = rows[index];
-      children.add(row);
-      if (index != rows.length - 1) {
-        children.add(Divider(
-          color: AppColors.divider,
-          height: ProfileDimens.cardItemDividerHeight,
-        ));
-      }
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(
-            ProfileDimens.cardBorderRadius,
-          ),
-          boxShadow: [
-            BoxShadow(
-              offset: Offset(
-                ProfileDimens.cardShadowOffsetX,
-                ProfileDimens.cardShadowOffsetY,
-              ),
-              blurRadius: ProfileDimens.cardShadowRadius,
-              color: AppColors.cardShadow,
-            )
-          ]),
-      margin: EdgeInsets.only(
-        left: AppDimens.cardMarginHorizontal,
-        right: AppDimens.cardMarginHorizontal,
-        bottom: AppDimens.cardMarginVertical,
-      ),
-      padding: EdgeInsets.only(
-        left: AppDimens.cardPaddingHorizontal,
-        right: AppDimens.cardPaddingHorizontal,
-        top: AppDimens.cardPaddingVertical,
-        bottom: AppDimens.cardPaddingVertical,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: children,
-      ),
-    );
-  }
-}
-
-class _CardRowHeader extends StatelessWidget {
-  final String title;
-
-  _CardRowHeader(this.title);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(
-        left: ProfileDimens.cardTitlePaddingHorizontal,
-        right: ProfileDimens.cardTitlePaddingHorizontal,
-        bottom: ProfileDimens.cardTitlePaddingBottom,
-      ),
-      child: Text(
-        title,
-        style: AppTextStyles.overlineMediumGunMetal08,
-      ),
-    );
-  }
-}
-
-class _CardRowWidget extends StatelessWidget {
-  final String icon;
-  final String title;
-  final Function() onPressed;
-
-  _CardRowWidget(this.icon, this.title, this.onPressed);
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: AppColors.white,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(AppDimens.selectorBorderRadius),
-        onTap: onPressed,
-        child: Padding(
-          padding: EdgeInsets.only(
-            top: ProfileDimens.cardItemPaddingVertical,
-            bottom: ProfileDimens.cardItemPaddingVertical,
-            right: ProfileDimens.cardItemPaddingHorizontal,
-            left: ProfileDimens.cardItemPaddingHorizontal,
-          ),
-          child: Row(
-            children: [
-              SvgPicture.asset(icon),
-              SizedBox(
-                width: ProfileDimens.cardItemIconMarginRight,
-              ),
-              Text(
-                title,
-                style: AppTextStyles.h3RegularPrimary,
-              )
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
