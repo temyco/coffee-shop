@@ -143,7 +143,6 @@ class _DefaultWidget extends StatelessWidget {
 }
 
 class _ExpandedWidget extends StatelessWidget {
-  final int gridCrossAxisCount = 3;
   final Function() onExpandAchievementsPressed;
 
   _ExpandedWidget(this.onExpandAchievementsPressed);
@@ -157,28 +156,7 @@ class _ExpandedWidget extends StatelessWidget {
           SizedBox(height: ProfileDimens.screenTopMargin),
           _UserProfileInfoWidget(),
           SizedBox(height: ProfileDimens.achievementsMarginTop),
-          Expanded(
-            flex: 1,
-            child: StaggeredGridView.countBuilder(
-              crossAxisCount: gridCrossAxisCount,
-              staggeredTileBuilder: (index) => StaggeredTile.fit(1),
-              itemCount: 24,
-              itemBuilder: (context, index) => Container(
-                alignment: AlignmentDirectional.center,
-                child: Column(
-                  children: [
-                    getGridAchievement(
-                      index,
-                      gridCrossAxisCount,
-                    ),
-                    SizedBox(
-                      height: ProfileDimens.achievementsGridHorizontalSpacing,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          _AchievementGridWidget(),
           SizedBox(
             height: ProfileDimens.collapseAchievementsButtonMarginTop,
           ),
@@ -221,6 +199,36 @@ class _DefaultHeaderWidget extends StatelessWidget {
             false,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _AchievementGridWidget extends StatelessWidget {
+  final int gridCrossAxisCount = 3;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 1,
+      child: StaggeredGridView.countBuilder(
+        crossAxisCount: gridCrossAxisCount,
+        staggeredTileBuilder: (index) => StaggeredTile.fit(1),
+        itemCount: 24,
+        itemBuilder: (context, index) => Container(
+          alignment: AlignmentDirectional.center,
+          child: Column(
+            children: [
+              getGridAchievement(
+                index,
+                gridCrossAxisCount,
+              ),
+              SizedBox(
+                height: ProfileDimens.achievementsGridHorizontalSpacing,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -317,6 +325,15 @@ class _UserInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String currentExperience = currentExpProgress.toString() +
+        '/' +
+        totalExpProgress.toString() +
+        ' ' +
+        AppMessages.exp;
+
+    double linearProgressWidth = ProfileDimens.userExperienceProgressBarWidth -
+        ProfileDimens.userInfoItemsDefaultMargin;
+
     return Flexible(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -338,11 +355,7 @@ class _UserInfoWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  currentExpProgress.toString() +
-                      '/' +
-                      totalExpProgress.toString() +
-                      ' ' +
-                      AppMessages.exp,
+                  currentExperience,
                   style: AppTextStyles.captionMediumPrimary,
                 ),
                 SvgPicture.asset(AppImages.gift)
@@ -356,8 +369,7 @@ class _UserInfoWidget extends StatelessWidget {
             ),
             width: ProfileDimens.userExperienceProgressBarWidth,
             child: LinearProgress(
-              width: ProfileDimens.userExperienceProgressBarWidth -
-                  ProfileDimens.userInfoItemsDefaultMargin,
+              width: linearProgressWidth,
               height: ProfileDimens.userExperienceProgressBarHeight,
               currentProgress: currentExpProgress / totalExpProgress,
               background: AppColors.white,
