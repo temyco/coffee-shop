@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutterapp/presentation/profile/profile_dimens.dart';
 import 'package:flutterapp/resources/app_colors.dart';
-import 'package:flutterapp/resources/app_text_letter_spacing.dart';
-import 'package:flutterapp/resources/app_text_sizes.dart';
+import 'package:flutterapp/resources/app_text_styles.dart';
 import 'package:flutterapp/widgets/progress/arc_progress.dart';
-import 'package:flutterapp/widgets/text/uidisplay_widget.dart';
-import 'package:flutterapp/widgets/text/uitext_widget.dart';
 
 class AchievementWidget extends StatelessWidget {
   final String title;
@@ -24,7 +21,7 @@ class AchievementWidget extends StatelessWidget {
     this.currentProgress,
     this.progressColor,
     this.icon,
-    this.progressBgColor = AppColors.colorShaleGray,
+    this.progressBgColor = AppColors.charcoalGray,
   });
 
   @override
@@ -34,12 +31,9 @@ class AchievementWidget extends StatelessWidget {
 
     return Column(
       children: [
-        UIDisplayWidget(
-          text: title,
-          color: AppColors.colorWhite,
-          fontSize: AppTextSizes.s10,
-          fontWeight: FontWeight.w500,
-          letterSpacing: AppTextLetterSpacing.spN008,
+        Text(
+          title,
+          style: AppTextStyles.captionMediumPrimary,
         ),
         SizedBox(height: ProfileDimens.achievementProgressMarginTop),
         Stack(
@@ -58,20 +52,14 @@ class AchievementWidget extends StatelessWidget {
           ],
         ),
         SizedBox(height: ProfileDimens.achievementNameMarginTop),
-        UIDisplayWidget(
-          text: name,
-          color: AppColors.colorWhite,
-          fontSize: AppTextSizes.s10,
-          fontWeight: FontWeight.w500,
-          letterSpacing: AppTextLetterSpacing.spN008,
+        Text(
+          name,
+          style: AppTextStyles.captionMediumPrimary,
         ),
         SizedBox(height: ProfileDimens.achievementNameMarginBottom),
-        UITextWidget(
-          text: currentProgress.toString() + "/" + maxProgress.toString(),
-          color: AppColors.colorBondiWaters,
-          fontSize: AppTextSizes.s10,
-          fontWeight: FontWeight.w700,
-          letterSpacing: AppTextLetterSpacing.spN008,
+        Text(
+          currentProgress.toString() + "/" + maxProgress.toString(),
+          style: AppTextStyles.captionBoldBlue,
         ),
       ],
     );

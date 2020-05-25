@@ -13,5 +13,6 @@ class AppColors {
   static const Color gunMetal = Color(0x4e535a);
   static const Color gunMetal08 = Color(0xcc4e535a);
   static const Color redOrange = Color(0xFFF54343);
-  static const Color colorShadow = Color(0x99BCCAE0);
+  static const Color cardShadow = Color(0x99BCCAE0);
+  static const Color divider = Color(0xFFD8D8D8);
 }

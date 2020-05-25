@@ -6,7 +6,7 @@ import 'package:flutterapp/resources/app_theme.dart';
 class OrdersRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    setStatusBarColor(AppColors.colorWhite);
+    setStatusBarColor(AppColors.white);
     return Center(child: Text(AppMessages.ordersTitle));
   }
 }

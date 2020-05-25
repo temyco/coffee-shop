@@ -6,14 +6,11 @@ import 'package:flutterapp/resources/app_colors.dart';
 import 'package:flutterapp/resources/app_dimens.dart';
 import 'package:flutterapp/resources/app_images.dart';
 import 'package:flutterapp/resources/app_messages.dart';
-import 'package:flutterapp/resources/app_text_letter_spacing.dart';
+import 'package:flutterapp/resources/app_text_styles.dart';
 import 'package:flutterapp/resources/app_theme.dart';
 import 'package:flutterapp/widgets/progress/arc_progress.dart';
-import 'package:flutterapp/resources/app_text_sizes.dart';
 import 'package:flutterapp/widgets/progress/linear_progress.dart';
 import 'package:flutterapp/presentation/profile/achievement_widget.dart';
-import 'package:flutterapp/widgets/text/uidisplay_widget.dart';
-import 'package:flutterapp/widgets/text/uitext_widget.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class ProfileRoute extends StatefulWidget {
@@ -29,7 +26,7 @@ class _ProfileRouteState extends State<ProfileRoute> {
   @override
   Widget build(BuildContext context) {
     setStatusBarColor(
-      AppColors.colorBlackGray,
+      AppColors.dark,
       statusBarIconBrightness: Brightness.light,
     );
 
@@ -125,7 +122,7 @@ class _DefaultWidget extends StatelessWidget {
     );
 
     return Container(
-      color: AppColors.colorWhiteGray,
+      color: AppColors.paleGray,
       child: ListView(
         children: [
           _DefaultHeaderWidget(onExpandAchievementsPressed),
@@ -153,7 +150,7 @@ class _ExpandedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.colorBlackGray,
+      color: AppColors.dark,
       child: Column(
         children: [
           SizedBox(height: ProfileDimens.screenTopMargin),
@@ -290,7 +287,7 @@ class _UserAvatarWidget extends StatelessWidget {
             startAngle: 45,
             endAngle: 225,
             strokeWidth: ProfileDimens.arcProgressStrokeWidth,
-            arcColor: AppColors.colorBondiWaters,
+            arcColor: AppColors.turquoiseBlue,
           ),
           Align(
             child: SvgPicture.asset(AppImages.bronzeCup),
@@ -337,16 +334,13 @@ class _UserInfoWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                UIDisplayWidget(
-                  text: currentExpProgress.toString() +
+                Text(
+                  currentExpProgress.toString() +
                       '/' +
                       totalExpProgress.toString() +
                       ' ' +
                       AppMessages.exp,
-                  color: AppColors.colorWhite,
-                  fontSize: AppTextSizes.s10,
-                  fontWeight: FontWeight.w500,
-                  letterSpacing: AppTextLetterSpacing.spN008,
+                  style: AppTextStyles.captionMediumPrimary,
                 ),
                 SvgPicture.asset(AppImages.gift)
               ],
@@ -363,8 +357,8 @@ class _UserInfoWidget extends StatelessWidget {
                   ProfileDimens.userInfoItemsDefaultMargin,
               height: ProfileDimens.userExperienceProgressBarHeight,
               currentProgress: currentExpProgress / totalExpProgress,
-              background: AppColors.colorWhite,
-              progress: AppColors.colorBondiWaters,
+              background: AppColors.white,
+              progress: AppColors.turquoiseBlue,
             ),
           )
         ],
@@ -401,24 +395,16 @@ class _UserNameAndStepsWidget extends StatelessWidget {
                 userName,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  color: AppColors.colorLavender,
-                  fontSize: AppTextSizes.s17,
-                  fontWeight: FontWeight.w500,
-                  letterSpacing: AppTextLetterSpacing.spN026,
-                ),
+                style: AppTextStyles.h4MediumWhite,
               ),
               SizedBox(
                 height: ProfileDimens.userInfoItemsDefaultMargin,
               ),
-              UIDisplayWidget(
-                text: stepsToFreeCoffee.toString() +
+              Text(
+                stepsToFreeCoffee.toString() +
                     " " +
                     AppMessages.stepsToFreeCoffee,
-                color: AppColors.colorWhite,
-                fontSize: AppTextSizes.s10,
-                fontWeight: FontWeight.w300,
-                letterSpacing: AppTextLetterSpacing.spN008,
+                style: AppTextStyles.captionLightSecondary,
               ),
               SizedBox(
                 height: ProfileDimens.userInfoItemsDefaultMargin,
@@ -513,7 +499,7 @@ class _DailyAchievement extends AchievementWidget {
           name: AppMessages.destroyedCroissants,
           maxProgress: 20,
           currentProgress: 7,
-          progressColor: AppColors.colorOrange,
+          progressColor: AppColors.orange,
           icon: AppImages.goldMedal,
         );
 }
@@ -525,7 +511,7 @@ class _RandomAchievement extends AchievementWidget {
           name: AppMessages.drankLattes,
           maxProgress: 10,
           currentProgress: 3,
-          progressColor: AppColors.colorTangerine,
+          progressColor: AppColors.pumpkinOrange,
           icon: AppImages.goldCup,
         );
 }
@@ -537,7 +523,7 @@ class _BossAchievement extends AchievementWidget {
           name: AppMessages.drankAmericanos,
           maxProgress: 3,
           currentProgress: 2,
-          progressColor: AppColors.colorBondiWaters,
+          progressColor: AppColors.turquoiseBlue,
           icon: AppImages.silverMedal,
         );
 }
@@ -572,12 +558,9 @@ class _ExpandAchievementsLabelWidget extends StatelessWidget {
           ),
           child: Column(
             children: [
-              UIDisplayWidget(
-                text: AppMessages.achievements.toUpperCase(),
-                color: AppColors.colorWhite,
-                fontSize: AppTextSizes.s10,
-                fontWeight: FontWeight.w500,
-                letterSpacing: AppTextLetterSpacing.sp1,
+              Text(
+                AppMessages.achievements.toUpperCase(),
+                style: AppTextStyles.overlineMediumWhite,
               ),
               SvgPicture.asset(arrowIcon)
             ],
@@ -602,20 +585,17 @@ class _JoinTheGameWidget extends StatelessWidget {
           onPressed: () => {
                 //TODO will be implemented later
               },
-          textColor: AppColors.colorWhite,
-          color: AppColors.colorBlackGray,
+          textColor: AppColors.white,
+          color: AppColors.dark,
           height: ProfileDimens.joinGameButtonHeight,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
               ProfileDimens.joinGameButtonBorderRadius,
             ),
           ),
-          child: UITextWidget(
-            text: AppMessages.joinTheGame,
-            color: AppColors.colorWhite,
-            fontSize: AppTextSizes.s17,
-            fontWeight: FontWeight.w700,
-            letterSpacing: AppTextLetterSpacing.spN03,
+          child: Text(
+            AppMessages.joinTheGame,
+            style: AppTextStyles.buttonBoldWhite,
           )),
     );
   }
@@ -633,7 +613,7 @@ class _CardWidget extends StatelessWidget {
       children.add(row);
       if (index != rows.length - 1) {
         children.add(Divider(
-          color: AppColors.colorGrayLight,
+          color: AppColors.divider,
           height: ProfileDimens.cardItemDividerHeight,
         ));
       }
@@ -644,7 +624,7 @@ class _CardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: AppColors.colorWhite,
+          color: AppColors.white,
           borderRadius: BorderRadius.circular(
             ProfileDimens.cardBorderRadius,
           ),
@@ -655,7 +635,7 @@ class _CardWidget extends StatelessWidget {
                 ProfileDimens.cardShadowOffsetY,
               ),
               blurRadius: ProfileDimens.cardShadowRadius,
-              color: AppColors.colorShadow,
+              color: AppColors.cardShadow,
             )
           ]),
       margin: EdgeInsets.only(
@@ -690,12 +670,9 @@ class _CardRowHeader extends StatelessWidget {
         right: ProfileDimens.cardTitlePaddingHorizontal,
         bottom: ProfileDimens.cardTitlePaddingBottom,
       ),
-      child: UIDisplayWidget(
-        text: title,
-        color: AppColors.colorGray,
-        fontSize: AppTextSizes.s10,
-        fontWeight: FontWeight.w500,
-        letterSpacing: AppTextLetterSpacing.sp1,
+      child: Text(
+        title,
+        style: AppTextStyles.overlineMediumGunMetal08,
       ),
     );
   }
@@ -711,6 +688,7 @@ class _CardRowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: AppColors.white,
       child: InkWell(
         borderRadius: BorderRadius.circular(AppDimens.selectorBorderRadius),
         onTap: onPressed,
@@ -727,11 +705,9 @@ class _CardRowWidget extends StatelessWidget {
               SizedBox(
                 width: ProfileDimens.cardItemIconMarginRight,
               ),
-              UIDisplayWidget(
-                text: title,
-                color: AppColors.colorBlackGray,
-                fontSize: AppTextSizes.s17,
-                fontWeight: FontWeight.w400,
+              Text(
+                title,
+                style: AppTextStyles.h3RegularPrimary,
               )
             ],
           ),
