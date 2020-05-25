@@ -28,46 +28,75 @@ class _ProfileRouteState extends State<ProfileRoute> {
 
   @override
   Widget build(BuildContext context) {
-    setStatusBarColor(AppColors.colorBlackGray,
-        statusBarIconBrightness: Brightness.light);
-    return _getProfileWidget();
-  }
+    setStatusBarColor(
+      AppColors.colorBlackGray,
+      statusBarIconBrightness: Brightness.light,
+    );
 
-  Widget _getProfileWidget() {
+    Widget widgetToShow;
+
     if (isExpanded) {
-      return _getExpandedWidget();
+      widgetToShow = _ExpandedWidget(
+        onExpandAchievementsPressed,
+      );
     } else {
-      return _getDefaultWidget();
+      widgetToShow = _DefaultWidget(
+        onExpandAchievementsPressed,
+        onGiftCardsPressed,
+        onBonusesPressed,
+        onPaymentMethodsPressed,
+        onSignOutPressed,
+      );
     }
+
+    return widgetToShow;
   }
 
-  Widget _getDefaultWidget() {
+  onExpandAchievementsPressed() {
+    setState(() {
+      isExpanded = !isExpanded;
+    });
+  }
+
+  onGiftCardsPressed() {
+    //TODO will be implemented later
+  }
+
+  onBonusesPressed() {
+    //TODO will be implemented later
+  }
+
+  onPaymentMethodsPressed() {
+    //TODO will be implemented later
+  }
+
+  onSignOutPressed() {
+    //TODO will be implemented later
+  }
+}
+
+class _DefaultWidget extends StatelessWidget {
+  final Function() onExpandAchievementsPressed;
+  final Function() onGiftCardsPressed;
+  final Function() onBonusesPressed;
+  final Function() onPaymentMethodsPressed;
+  final Function() onSignOutPressed;
+
+  _DefaultWidget(
+    this.onExpandAchievementsPressed,
+    this.onGiftCardsPressed,
+    this.onBonusesPressed,
+    this.onPaymentMethodsPressed,
+    this.onSignOutPressed,
+  );
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       color: AppColors.colorWhiteGray,
       child: ListView(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(AppImages.profileHeader),
-                fit: BoxFit.fill,
-              ),
-            ),
-            child: Column(
-              children: [
-                SizedBox(height: ProfileDimens.screenTopMargin),
-                _UserProfileInfoWidget(),
-                SizedBox(height: ProfileDimens.achievementsMarginTop),
-                _AchievementsWidget(),
-                SizedBox(
-                    height: ProfileDimens.expandAchievementsButtonMarginTop),
-                _ExpandAchievementsLabelWidget(
-                  onExpandAchievementsPressed,
-                  false,
-                ),
-              ],
-            ),
-          ),
+          _DefaultHeaderWidget(onExpandAchievementsPressed),
           _JoinTheGameWidget(),
           _CardWidget(
             AppMessages.loyaltySystem.toUpperCase(),
@@ -91,9 +120,16 @@ class _ProfileRouteState extends State<ProfileRoute> {
       ),
     );
   }
+}
 
-  Widget _getExpandedWidget() {
-    int gridCrossAxisCount = 3;
+class _ExpandedWidget extends StatelessWidget {
+  final int gridCrossAxisCount = 3;
+  final Function() onExpandAchievementsPressed;
+
+  _ExpandedWidget(this.onExpandAchievementsPressed);
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       color: AppColors.colorBlackGray,
       child: Column(
@@ -137,27 +173,38 @@ class _ProfileRouteState extends State<ProfileRoute> {
       ),
     );
   }
+}
 
-  onExpandAchievementsPressed() {
-    setState(() {
-      isExpanded = !isExpanded;
-    });
-  }
+class _DefaultHeaderWidget extends StatelessWidget {
 
-  onGiftCardsPressed() {
-    //TODO will be implemented later
-  }
+  final Function() onExpandAchievementsPressed;
 
-  onBonusesPressed() {
-    //TODO will be implemented later
-  }
+  _DefaultHeaderWidget(this.onExpandAchievementsPressed);
 
-  onPaymentMethodsPressed() {
-    //TODO will be implemented later
-  }
-
-  onSignOutPressed() {
-    //TODO will be implemented later
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(AppImages.profileHeader),
+          fit: BoxFit.fill,
+        ),
+      ),
+      child: Column(
+        children: [
+          SizedBox(height: ProfileDimens.screenTopMargin),
+          _UserProfileInfoWidget(),
+          SizedBox(height: ProfileDimens.achievementsMarginTop),
+          _AchievementsWidget(),
+          SizedBox(
+              height: ProfileDimens.expandAchievementsButtonMarginTop),
+          _ExpandAchievementsLabelWidget(
+            onExpandAchievementsPressed,
+            false,
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -318,7 +365,6 @@ class _UserNameAndStepsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
@@ -326,7 +372,6 @@ class _UserNameAndStepsWidget extends StatelessWidget {
         ),
         Flexible(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
@@ -377,7 +422,7 @@ class _UserNameAndStepsWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(
               ProfileDimens.editButtonSelectorRadius,
             ),
-            child: Container(
+            child: Padding(
               padding: EdgeInsets.all(
                 ProfileDimens.editButtonHolderPadding,
               ),
@@ -501,7 +546,7 @@ class _ExpandAchievementsLabelWidget extends StatelessWidget {
           ),
         ),
         onTap: () => onExpandPressed.call(),
-        child: Container(
+        child: Padding(
           padding: EdgeInsets.all(
             ProfileDimens.expandAchievementsPadding,
           ),
@@ -526,7 +571,7 @@ class _ExpandAchievementsLabelWidget extends StatelessWidget {
 class _JoinTheGameWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Padding(
       padding: EdgeInsets.only(
         left: ProfileDimens.joinGameButtonMarginHorizontal,
         top: ProfileDimens.joinGameButtonMarginTop,
@@ -654,7 +699,7 @@ class _CardRowWidget extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(AppDimens.selectorBorderRadius),
         onTap: onPressed,
-        child: Container(
+        child: Padding(
           padding: EdgeInsets.only(
             top: ProfileDimens.cardItemPaddingVertical,
             bottom: ProfileDimens.cardItemPaddingVertical,
