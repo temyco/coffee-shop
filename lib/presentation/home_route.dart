@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/resources/app_messages.dart';
-import 'package:flutterapp/presentation/basket_route.dart';
+import 'package:flutterapp/presentation/basket/basket_route.dart';
 import 'package:flutterapp/presentation/location_route.dart';
 import 'package:flutterapp/presentation/orders_route.dart';
 import 'package:flutterapp/presentation/profile_route.dart';
