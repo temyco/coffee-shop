@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/resources/app_colors.dart';
-import 'package:flutter/services.dart';
 import 'package:flutterapp/resources/app_font_families.dart';
 
 var mainTheme = ThemeData(
@@ -27,15 +26,3 @@ const MaterialColor colorWhite = const MaterialColor(
     900: const Color(0xFFFFFFFF),
   },
 );
-
-void setStatusBarColor(
-  Color statusBarColor, {
-  Brightness statusBarIconBrightness = Brightness.dark,
-}) {
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
-      statusBarColor: statusBarColor,
-      statusBarIconBrightness: statusBarIconBrightness,
-    ),
-  );
-}

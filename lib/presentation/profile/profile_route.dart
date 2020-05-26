@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutterapp/presentation/profile/card_widget.dart';
 import 'package:flutterapp/presentation/profile/profile_dimens.dart';
@@ -8,7 +7,6 @@ import 'package:flutterapp/resources/app_dimens.dart';
 import 'package:flutterapp/resources/app_images.dart';
 import 'package:flutterapp/resources/app_messages.dart';
 import 'package:flutterapp/resources/app_text_styles.dart';
-import 'package:flutterapp/resources/app_theme.dart';
 import 'package:flutterapp/widgets/progress/arc_progress.dart';
 import 'package:flutterapp/widgets/progress/linear_progress.dart';
 import 'package:flutterapp/presentation/profile/achievement_widget.dart';
@@ -26,11 +24,6 @@ class _ProfileRouteState extends State<ProfileRoute> {
 
   @override
   Widget build(BuildContext context) {
-    setStatusBarColor(
-      AppColors.dark,
-      statusBarIconBrightness: Brightness.light,
-    );
-
     Widget widgetToShow;
 
     if (isExpanded) {

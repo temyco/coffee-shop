@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutterapp/resources/app_colors.dart';
 import 'package:flutterapp/resources/app_messages.dart';
 import 'package:flutterapp/presentation/basket_route.dart';
 import 'package:flutterapp/presentation/location_route.dart';
@@ -24,13 +26,19 @@ class _HomeRouteState extends State<HomeRoute> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: _TabView(selectedTabIndex: _selectedTabIndex),
+    return AnnotatedRegion(
+      value: SystemUiOverlayStyle(
+        statusBarColor: _getStatusBarColor(_selectedTabIndex),
+        statusBarIconBrightness: _getStatusBarIconBrightness(_selectedTabIndex),
       ),
-      bottomNavigationBar: _BottomTabsView(
-        selectedTabIndex: _selectedTabIndex,
-        onTapListener: _onTabSelected,
+      child: Scaffold(
+        body: SafeArea(
+          child: _TabView(selectedTabIndex: _selectedTabIndex),
+        ),
+        bottomNavigationBar: _BottomTabsView(
+          selectedTabIndex: _selectedTabIndex,
+          onTapListener: _onTabSelected,
+        ),
       ),
     );
   }
@@ -104,6 +112,22 @@ class _BottomTabsView extends StatelessWidget {
       currentIndex: selectedTabIndex,
       onTap: onTapListener,
     );
+  }
+}
+
+Color _getStatusBarColor(int pageIndex) {
+  if(pageIndex == profileTabIndex) {
+    return AppColors.dark;
+  } else {
+    return AppColors.white;
+  }
+}
+
+Brightness _getStatusBarIconBrightness(int pageIndex) {
+  if(pageIndex == profileTabIndex) {
+    return Brightness.light;
+  } else {
+    return Brightness.dark;
   }
 }
 
