@@ -329,13 +329,12 @@ class _UserInfoWidget extends StatelessWidget {
         ProfileDimens.userInfoItemsDefaultMargin;
 
     return Flexible(
+      fit: FlexFit.loose,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Flexible(
-            child: _UserNameAndStepsWidget(userName, stepsToFreeCoffee),
-          ),
+          _UserNameAndStepsWidget(userName, stepsToFreeCoffee),
           SizedBox(
             height: ProfileDimens.userExperienceHolderMarginTop,
           ),
@@ -387,64 +386,69 @@ class _UserNameAndStepsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          width: ProfileDimens.userInfoItemsDefaultMargin,
-        ),
-        Flexible(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: ProfileDimens.userNameMarginTop,
-              ),
-              Text(
-                userName,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.h4MediumWhite,
-              ),
-              SizedBox(
-                height: ProfileDimens.userInfoItemsDefaultMargin,
-              ),
-              Text(
-                stepsToFreeCoffee.toString() +
-                    " " +
-                    AppMessages.stepsToFreeCoffee,
-                style: AppTextStyles.captionLightSecondary,
-              ),
-              SizedBox(
-                height: ProfileDimens.userInfoItemsDefaultMargin,
-              ),
-              _StepsToFreeCoffeeWidget(
-                itemCount: 5,
-                completedCount: 2,
-              ),
-            ],
+    return Flexible(
+      fit: FlexFit.loose,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: ProfileDimens.userInfoItemsDefaultMargin,
           ),
-        ),
-        SizedBox(
-          width: ProfileDimens.editButtonMarginLeft,
-        ),
-        SimpleRippleWidget(
-          Padding(
-            padding: EdgeInsets.all(
-              ProfileDimens.editButtonHolderPadding,
-            ),
-            child: SvgPicture.asset(
-              AppImages.edit,
-              height: ProfileDimens.editButtonSize,
-              width: ProfileDimens.editButtonSize,
+          Flexible(
+            fit: FlexFit.loose,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: ProfileDimens.userNameMarginTop,
+                ),
+                Text(
+                  userName,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTextStyles.h4MediumWhite,
+                ),
+                SizedBox(
+                  height: ProfileDimens.userInfoItemsDefaultMargin,
+                ),
+                Text(
+                  stepsToFreeCoffee.toString() +
+                      " " +
+                      AppMessages.stepsToFreeCoffee,
+                  style: AppTextStyles.captionLightSecondary,
+                ),
+                SizedBox(
+                  height: ProfileDimens.userInfoItemsDefaultMargin,
+                ),
+                _StepsToFreeCoffeeWidget(
+                  itemCount: 5,
+                  completedCount: 2,
+                ),
+              ],
             ),
           ),
-          ProfileDimens.editButtonSelectorRadius,
-          () => {
-            //TODO will be implemented later
-          },
-        ),
-      ],
+          SizedBox(
+            width: ProfileDimens.editButtonMarginLeft,
+          ),
+          SimpleRippleWidget(
+            Padding(
+              padding: EdgeInsets.all(
+                ProfileDimens.editButtonHolderPadding,
+              ),
+              child: SvgPicture.asset(
+                AppImages.edit,
+                height: ProfileDimens.editButtonSize,
+                width: ProfileDimens.editButtonSize,
+              ),
+            ),
+            ProfileDimens.editButtonSelectorRadius,
+                () => {
+              //TODO will be implemented later
+            },
+          ),
+        ],
+      ),
     );
   }
 }
@@ -461,6 +465,7 @@ class _StepsToFreeCoffeeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: List.generate(itemCount, (index) => _buildItem(index)),
     );
   }

@@ -18,7 +18,7 @@ class SimpleRippleWidget extends StatelessWidget {
     return Material(
       color: AppColors.transparent,
       child: InkWell(
-        onTap: () => _onTap,
+        onTap: () => _onTap.call(),
         borderRadius: BorderRadius.circular(
           _borderRadius,
         ),

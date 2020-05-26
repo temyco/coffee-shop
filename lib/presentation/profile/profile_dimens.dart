@@ -42,5 +42,5 @@ class ProfileDimens {
   static const double cardItemPaddingHorizontal = 4;
   static const double cardItemIconMarginRight = 15;
   static const double joinGameButtonBorderRadius = 6;
-  static const double avatarAndNameHolderMarginHorizontal = 56;
+  static const double avatarAndNameHolderMarginHorizontal = 24;
 }
