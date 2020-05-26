@@ -11,6 +11,7 @@ import 'package:flutterapp/widgets/progress/arc_progress.dart';
 import 'package:flutterapp/widgets/progress/linear_progress.dart';
 import 'package:flutterapp/presentation/profile/achievement_widget.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutterapp/widgets/simple_ripple_widget.dart';
 
 class ProfileRoute extends StatefulWidget {
   @override
@@ -427,26 +428,21 @@ class _UserNameAndStepsWidget extends StatelessWidget {
         SizedBox(
           width: ProfileDimens.editButtonMarginLeft,
         ),
-        Material(
-          color: AppColors.transparent,
-          child: InkWell(
-            onTap: () => {
-              //TODO will be implemented later
-            },
-            borderRadius: BorderRadius.circular(
-              ProfileDimens.editButtonSelectorRadius,
+        SimpleRippleWidget(
+          Padding(
+            padding: EdgeInsets.all(
+              ProfileDimens.editButtonHolderPadding,
             ),
-            child: Padding(
-              padding: EdgeInsets.all(
-                ProfileDimens.editButtonHolderPadding,
-              ),
-              child: SvgPicture.asset(
-                AppImages.edit,
-                height: ProfileDimens.editButtonSize,
-                width: ProfileDimens.editButtonSize,
-              ),
+            child: SvgPicture.asset(
+              AppImages.edit,
+              height: ProfileDimens.editButtonSize,
+              width: ProfileDimens.editButtonSize,
             ),
           ),
+          ProfileDimens.editButtonSelectorRadius,
+          () => {
+            //TODO will be implemented later
+          },
         ),
       ],
     );
@@ -551,30 +547,23 @@ class _ExpandAchievementsLabelWidget extends StatelessWidget {
       arrowIcon = AppImages.arrowDown;
     }
 
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        borderRadius: BorderRadius.all(
-          Radius.circular(
-            AppDimens.selectorBorderRadius,
-          ),
+    return SimpleRippleWidget(
+      Padding(
+        padding: EdgeInsets.all(
+          ProfileDimens.expandAchievementsPadding,
         ),
-        onTap: () => onExpandPressed.call(),
-        child: Padding(
-          padding: EdgeInsets.all(
-            ProfileDimens.expandAchievementsPadding,
-          ),
-          child: Column(
-            children: [
-              Text(
-                AppMessages.achievements.toUpperCase(),
-                style: AppTextStyles.overlineMediumWhite,
-              ),
-              SvgPicture.asset(arrowIcon)
-            ],
-          ),
+        child: Column(
+          children: [
+            Text(
+              AppMessages.achievements.toUpperCase(),
+              style: AppTextStyles.overlineMediumWhite,
+            ),
+            SvgPicture.asset(arrowIcon)
+          ],
         ),
       ),
+      AppDimens.selectorBorderRadius,
+      () => onExpandPressed.call(),
     );
   }
 }
