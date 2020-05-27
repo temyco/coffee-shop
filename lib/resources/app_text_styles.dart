@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/resources/app_colors.dart';
+import 'package:flutterapp/resources/app_font_families.dart';
 import 'package:flutterapp/resources/app_text_letter_spacing.dart';
 import 'package:flutterapp/resources/app_text_sizes.dart';
 
@@ -10,32 +11,38 @@ import 'package:flutterapp/resources/app_text_sizes.dart';
 /// This must be done in corresponding widgets. Overline styles are capitalized in styleguide.
 class AppTextStyles {
 
-  /// TODO: Use AppTextFamilies constants when it's merged for fontFamily to master.
-
   static const TextStyle h1MediumPrimary = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s25,
     fontWeight: FontWeight.w500,
     color: AppColors.charcoalGray,
   );
 
   static const TextStyle h2BoldPrimary = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s20,
     fontWeight: FontWeight.w700,
     color: AppColors.dark,
   );
 
   static const TextStyle h2MediumSecondary = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s20,
     fontWeight: FontWeight.w500,
     color: AppColors.dark,
     letterSpacing: AppTextLetterSpacing.spN04,
   );
 
+  static const TextStyle buttonBoldWhite = TextStyle(
+    fontFamily: AppFontFamilies.SFUIText,
+    fontSize: AppTextSizes.s17,
+    fontWeight: FontWeight.w700,
+    color: AppColors.white,
+    letterSpacing: AppTextLetterSpacing.spN03,
+  );
+
   static const TextStyle h3MediumPrimary = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s17,
     fontWeight: FontWeight.w500,
     color: AppColors.dark,
@@ -43,7 +50,7 @@ class AppTextStyles {
   );
 
   static const TextStyle h3MediumSecondary = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s17,
     fontWeight: FontWeight.w500,
     color: AppColors.charcoalGray,
@@ -51,14 +58,14 @@ class AppTextStyles {
   );
 
   static const TextStyle h3RegularPrimary = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s17,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w400,
     color: AppColors.dark,
   );
 
   static const TextStyle h4BoldPrimary = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s15,
     fontWeight: FontWeight.w700,
     color: AppColors.dark,
@@ -66,7 +73,7 @@ class AppTextStyles {
   );
 
   static const TextStyle h4MediumPrimary = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s15,
     fontWeight: FontWeight.w500,
     color: AppColors.charcoalGray,
@@ -74,7 +81,7 @@ class AppTextStyles {
   );
 
   static const TextStyle h4MediumSecondary = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s15,
     fontWeight: FontWeight.w500,
     color: AppColors.charcoalGray,
@@ -82,7 +89,7 @@ class AppTextStyles {
   );
 
   static const TextStyle h4MediumWhite = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s15,
     fontWeight: FontWeight.w500,
     color: AppColors.paleGray,
@@ -90,7 +97,7 @@ class AppTextStyles {
   );
 
   static const TextStyle h4RegularSecondary = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s15,
     fontWeight: FontWeight.w400,
     color: AppColors.charcoalGray,
@@ -98,7 +105,7 @@ class AppTextStyles {
   );
 
   static const TextStyle h4RegularQuaternary = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s15,
     fontWeight: FontWeight.w400,
     color: AppColors.gunMetal08,
@@ -106,7 +113,7 @@ class AppTextStyles {
   );
 
   static const TextStyle h4RegularTertiary = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s15,
     fontWeight: FontWeight.w400,
     color: AppColors.gunMetal,
@@ -130,7 +137,7 @@ class AppTextStyles {
   );
 
   static const TextStyle overlineMediumPrimary = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s15,
     fontWeight: FontWeight.w500,
     color: AppColors.dark,
@@ -138,14 +145,30 @@ class AppTextStyles {
   );
 
   static const TextStyle overlineMediumRedOrange = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s15,
     fontWeight: FontWeight.w500,
     color: AppColors.redOrange,
   );
 
+  static const TextStyle overlineMediumWhite = TextStyle(
+    fontFamily: AppFontFamilies.SFUIDisplay,
+    fontSize: AppTextSizes.s10,
+    fontWeight: FontWeight.w500,
+    color: AppColors.white,
+    letterSpacing: AppTextLetterSpacing.sp1,
+  );
+
+  static const TextStyle overlineMediumGunMetal08 = TextStyle(
+    fontFamily: AppFontFamilies.SFUIDisplay,
+    fontSize: AppTextSizes.s10,
+    fontWeight: FontWeight.w500,
+    color: AppColors.gunMetal08,
+    letterSpacing: AppTextLetterSpacing.sp1,
+  );
+
   static const TextStyle overlineMediumQuaternary = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s10,
     fontWeight: FontWeight.w500,
     color: AppColors.gunMetal08,
@@ -153,7 +176,7 @@ class AppTextStyles {
   );
 
   static const TextStyle bodyMediumPrimary = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s13,
     fontWeight: FontWeight.w500,
     color: AppColors.dark,
@@ -168,21 +191,21 @@ class AppTextStyles {
   );
 
   static const TextStyle bodyMediumTertiary = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s13,
     fontWeight: FontWeight.w500,
     color: AppColors.gunMetal,
   );
 
   static const TextStyle bodyRegularPrimary = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s13,
     fontWeight: FontWeight.w400,
     color: AppColors.charcoalGray,
   );
 
   static const TextStyle bodyRegularQuaternary = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s13,
     fontWeight: FontWeight.w400,
     color: AppColors.gunMetal08,
@@ -213,7 +236,7 @@ class AppTextStyles {
   );
 
   static const TextStyle captionMediumPrimary = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s10,
     fontWeight: FontWeight.w500,
     color: AppColors.white,
@@ -221,7 +244,7 @@ class AppTextStyles {
   );
 
   static const TextStyle captionLightSecondary = TextStyle(
-    fontFamily: 'SFUIDisplay',
+    fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s10,
     fontWeight: FontWeight.w300,
     color: AppColors.white,
