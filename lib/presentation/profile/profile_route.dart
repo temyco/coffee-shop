@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutterapp/presentation/profile/card_widget.dart';
 import 'package:flutterapp/presentation/profile/profile_dimens.dart';
 import 'package:flutterapp/resources/app_colors.dart';
-import 'package:flutterapp/resources/app_dimens.dart';
 import 'package:flutterapp/resources/app_images.dart';
 import 'package:flutterapp/resources/app_messages.dart';
 import 'package:flutterapp/resources/app_text_styles.dart';
@@ -11,7 +10,7 @@ import 'package:flutterapp/widgets/progress/arc_progress.dart';
 import 'package:flutterapp/widgets/progress/linear_progress.dart';
 import 'package:flutterapp/presentation/profile/achievement_widget.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutterapp/widgets/simple_ripple_widget.dart';
+import 'package:flutterapp/widgets/ripple_widget.dart';
 
 class ProfileRoute extends StatefulWidget {
   @override
@@ -431,8 +430,8 @@ class _UserNameAndStepsWidget extends StatelessWidget {
           SizedBox(
             width: ProfileDimens.editButtonMarginLeft,
           ),
-          SimpleRippleWidget(
-            Padding(
+          RippleWidget(
+            child: Padding(
               padding: EdgeInsets.all(
                 ProfileDimens.editButtonHolderPadding,
               ),
@@ -442,8 +441,8 @@ class _UserNameAndStepsWidget extends StatelessWidget {
                 width: ProfileDimens.editButtonSize,
               ),
             ),
-            ProfileDimens.editButtonSelectorRadius,
-                () => {
+            borderRadius: ProfileDimens.editButtonSelectorRadius,
+            onTap: () => {
               //TODO will be implemented later
             },
           ),
@@ -552,8 +551,8 @@ class _ExpandAchievementsLabelWidget extends StatelessWidget {
       arrowIcon = AppImages.arrowDown;
     }
 
-    return SimpleRippleWidget(
-      Padding(
+    return RippleWidget(
+      child: Padding(
         padding: EdgeInsets.all(
           ProfileDimens.expandAchievementsPadding,
         ),
@@ -567,8 +566,7 @@ class _ExpandAchievementsLabelWidget extends StatelessWidget {
           ],
         ),
       ),
-      AppDimens.selectorBorderRadius,
-      () => onExpandPressed.call(),
+      onTap: () => onExpandPressed.call(),
     );
   }
 }

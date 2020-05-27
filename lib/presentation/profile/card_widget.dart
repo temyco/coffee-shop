@@ -4,6 +4,7 @@ import 'package:flutterapp/presentation/profile/profile_dimens.dart';
 import 'package:flutterapp/resources/app_colors.dart';
 import 'package:flutterapp/resources/app_dimens.dart';
 import 'package:flutterapp/resources/app_text_styles.dart';
+import 'package:flutterapp/widgets/ripple_widget.dart';
 
 class CardWidget extends StatelessWidget {
   final String cardTitle;
@@ -91,32 +92,28 @@ class CardRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: AppColors.white,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(AppDimens.selectorBorderRadius),
-        onTap: onPressed,
-        child: Padding(
-          padding: EdgeInsets.only(
-            top: ProfileDimens.cardItemPaddingVertical,
-            bottom: ProfileDimens.cardItemPaddingVertical,
-            right: ProfileDimens.cardItemPaddingHorizontal,
-            left: ProfileDimens.cardItemPaddingHorizontal,
-          ),
-          child: Row(
-            children: [
-              SvgPicture.asset(icon),
-              SizedBox(
-                width: ProfileDimens.cardItemIconMarginRight,
-              ),
-              Text(
-                title,
-                style: AppTextStyles.h3RegularPrimary,
-              )
-            ],
-          ),
+    return RippleWidget(
+      child: Padding(
+        padding: EdgeInsets.only(
+          top: ProfileDimens.cardItemPaddingVertical,
+          bottom: ProfileDimens.cardItemPaddingVertical,
+          right: ProfileDimens.cardItemPaddingHorizontal,
+          left: ProfileDimens.cardItemPaddingHorizontal,
+        ),
+        child: Row(
+          children: [
+            SvgPicture.asset(icon),
+            SizedBox(
+              width: ProfileDimens.cardItemIconMarginRight,
+            ),
+            Text(
+              title,
+              style: AppTextStyles.h3RegularPrimary,
+            )
+          ],
         ),
       ),
+      onTap: onPressed,
     );
   }
 }
