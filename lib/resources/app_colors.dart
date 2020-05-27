@@ -1,6 +1,7 @@
 import 'package:flutter/painting.dart';
 
 class AppColors {
+  static const Color transparent = Color(0x00000000);
   static const Color white = Color(0xFFFFFFFF);
   static const Color dark = Color(0xFF222831);
   static const Color charcoalGray = Color(0xFF393E46);
@@ -12,4 +13,6 @@ class AppColors {
   static const Color gunMetal = Color(0x4e535a);
   static const Color gunMetal08 = Color(0xcc4e535a);
   static const Color redOrange = Color(0xFFF54343);
+  static const Color cardShadow = Color(0x99BCCAE0);
+  static const Color divider = Color(0xFFD8D8D8);
 }

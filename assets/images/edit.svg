@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Edit</title>
+    <g id="Flow---Profile" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-407.000000, -61.000000)">
+            <g id="Edit" transform="translate(407.000000, 61.000000)">
+                <rect id="frame" x="0" y="0" width="20" height="20"></rect>
+                <path d="M16.2612855,2.57957151 L17.4204285,3.73871455 C18.1931905,4.51147657 18.1931905,5.76437135 17.4204285,6.53713337 L5.95756186,18 L2,18 L2,14.0424381 L13.4628666,2.57957151 C14.2356286,1.8068095 15.4885235,1.8068095 16.2612855,2.57957151 Z M11.8939047,4.1485335 L15.8514665,8.10609535" id="Shape" stroke="#E1E1E1" stroke-width="1.6" stroke-linecap="square"></path>
+            </g>
+        </g>
+    </g>
+</svg>
