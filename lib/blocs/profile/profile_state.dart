@@ -28,3 +28,7 @@ class ExpandedAchievementsState extends ProfileState {
   ExpandedAchievementsState(this.user);
 }
 
+class OpenGiftsState extends ProfileState {
+
+}
+

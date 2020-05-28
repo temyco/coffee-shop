@@ -26,15 +26,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         break;
       case ProfileEvent.LoadProfileEvent:
         yield LoadingState();
-        _user = await userRepository.getUserProfile();
-        if (_user == null) {
-          yield LoadingFailedState();
-        } else {
-          yield DisplayProfileState(_user);
-        }
+        yield await _loadProfile();
         break;
       case ProfileEvent.GiftPressedEvent:
-        //TODO implement
+        yield OpenGiftsState();
         break;
       case ProfileEvent.BonusesPressedEvent:
         //TODO implement
@@ -46,7 +41,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         //TODO implement
         break;
       case ProfileEvent.RetryEvent:
-        //TODO implement
+        yield LoadingState();
+        yield await _loadProfile();
         break;
       case ProfileEvent.JoinTheGameEvent:
         //TODO implement
@@ -66,6 +62,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     } else {
       _isExpanded = true;
       return ExpandedAchievementsState(_user);
+    }
+  }
+
+  Future<ProfileState> _loadProfile() async {
+    _user = await userRepository.getUserProfile();
+    if (_user == null) {
+      return LoadingFailedState();
+    } else {
+      return DisplayProfileState(_user);
     }
   }
 }
