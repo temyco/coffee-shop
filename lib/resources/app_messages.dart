@@ -27,4 +27,6 @@ class AppMessages {
   static const String setting = "Setting";
   static const String paymentMethods = "Payment Methods";
   static const String signOut = "Sign Out";
+  static const String loadingProfileFailed = "Loading Profile Failed.";
+  static const String retry = "Retry";
 }

@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutterapp/blocs/profile/profile_block.dart';
+import 'package:flutterapp/blocs/profile/profile_event.dart';
+import 'package:flutterapp/blocs/profile/profile_state.dart';
+import 'package:flutterapp/data/model/achievement.dart';
+import 'package:flutterapp/data/model/user.dart';
 import 'package:flutterapp/presentation/profile/card_widget.dart';
+import 'package:flutterapp/resources/app_integers.dart';
+import 'package:flutterapp/widgets/empty_placeholder_widget.dart';
 import 'package:flutterapp/presentation/profile/profile_dimens.dart';
 import 'package:flutterapp/resources/app_colors.dart';
+import 'package:flutterapp/resources/app_dimens.dart';
 import 'package:flutterapp/resources/app_images.dart';
 import 'package:flutterapp/resources/app_messages.dart';
 import 'package:flutterapp/resources/app_text_styles.dart';
@@ -20,66 +29,39 @@ class ProfileRoute extends StatefulWidget {
 }
 
 class _ProfileRouteState extends State<ProfileRoute> {
-  bool isExpanded = false;
-
   @override
   Widget build(BuildContext context) {
-    Widget widgetToShow;
-
-    if (isExpanded) {
-      widgetToShow = _ExpandedWidget(
-        onExpandAchievementsPressed,
-      );
-    } else {
-      widgetToShow = _DefaultWidget(
-        onExpandAchievementsPressed,
-        onGiftCardsPressed,
-        onBonusesPressed,
-        onPaymentMethodsPressed,
-        onSignOutPressed,
-      );
-    }
-
-    return widgetToShow;
-  }
-
-  onExpandAchievementsPressed() {
-    setState(() {
-      isExpanded = !isExpanded;
-    });
-  }
-
-  onGiftCardsPressed() {
-    //TODO will be implemented later
-  }
-
-  onBonusesPressed() {
-    //TODO will be implemented later
-  }
-
-  onPaymentMethodsPressed() {
-    //TODO will be implemented later
-  }
-
-  onSignOutPressed() {
-    //TODO will be implemented later
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      builder: (context, state) {
+        if (state is EmptyState) {
+          return EmptyPlaceholderWidget(
+            content: SizedBox(),
+          );
+        } else if (state is LoadingState) {
+          return EmptyPlaceholderWidget(
+            content: const CircularProgressIndicator(),
+          );
+        } else if (state is DisplayProfileState) {
+          return _DefaultWidget(state.user);
+        } else if (state is ExpandedAchievementsState) {
+          return _ExpandedWidget(state.user);
+        } else if (state is LoadingFailedState) {
+          return EmptyPlaceholderWidget(
+            content: ErrorWidget(),
+          );
+        } else {
+          //probably isn't the best solution
+          throw ArgumentError("Unsupported state");
+        }
+      },
+    );
   }
 }
 
 class _DefaultWidget extends StatelessWidget {
-  final Function() onExpandAchievementsPressed;
-  final Function() onGiftCardsPressed;
-  final Function() onBonusesPressed;
-  final Function() onPaymentMethodsPressed;
-  final Function() onSignOutPressed;
+  final User _user;
 
-  _DefaultWidget(
-    this.onExpandAchievementsPressed,
-    this.onGiftCardsPressed,
-    this.onBonusesPressed,
-    this.onPaymentMethodsPressed,
-    this.onSignOutPressed,
-  );
+  _DefaultWidget(this._user);
 
   @override
   Widget build(BuildContext context) {
@@ -88,14 +70,18 @@ class _DefaultWidget extends StatelessWidget {
       CardRowWidget(
         AppImages.giftCards,
         AppMessages.giftCards,
-        onGiftCardsPressed,
+        () => BlocProvider.of<ProfileBloc>(context).add(
+          ProfileEvent.GiftPressedEvent,
+        ),
       ),
     );
     loyaltySystemCardRows.add(
       CardRowWidget(
         AppImages.bonus,
         AppMessages.bonuses,
-        onBonusesPressed,
+        () => BlocProvider.of<ProfileBloc>(context).add(
+          ProfileEvent.BonusesPressedEvent,
+        ),
       ),
     );
 
@@ -104,14 +90,18 @@ class _DefaultWidget extends StatelessWidget {
       CardRowWidget(
         AppImages.payment,
         AppMessages.paymentMethods,
-        onPaymentMethodsPressed,
+        () => BlocProvider.of<ProfileBloc>(context).add(
+          ProfileEvent.PaymentMethodsPressedEvent,
+        ),
       ),
     );
     settingsCardsRow.add(
       CardRowWidget(
         AppImages.signOut,
         AppMessages.signOut,
-        onSignOutPressed,
+        () => BlocProvider.of<ProfileBloc>(context).add(
+          ProfileEvent.SignOutPressedEvent,
+        ),
       ),
     );
 
@@ -119,7 +109,7 @@ class _DefaultWidget extends StatelessWidget {
       color: AppColors.paleGray,
       child: ListView(
         children: [
-          _DefaultHeaderWidget(onExpandAchievementsPressed),
+          _DefaultHeaderWidget(_user),
           _JoinTheGameWidget(),
           CardWidget(
             AppMessages.loyaltySystem.toUpperCase(),
@@ -136,9 +126,9 @@ class _DefaultWidget extends StatelessWidget {
 }
 
 class _ExpandedWidget extends StatelessWidget {
-  final Function() onExpandAchievementsPressed;
+  final User _user;
 
-  _ExpandedWidget(this.onExpandAchievementsPressed);
+  _ExpandedWidget(this._user);
 
   @override
   Widget build(BuildContext context) {
@@ -147,14 +137,16 @@ class _ExpandedWidget extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: ProfileDimens.screenTopMargin),
-          _UserProfileInfoWidget(),
+          _UserProfileInfoWidget(_user),
           SizedBox(height: ProfileDimens.achievementsMarginTop),
-          _AchievementGridWidget(),
+          _AchievementGridWidget(_user.achievements),
           SizedBox(
             height: ProfileDimens.collapseAchievementsButtonMarginTop,
           ),
           _ExpandAchievementsLabelWidget(
-            onExpandAchievementsPressed,
+            () => BlocProvider.of<ProfileBloc>(context).add(
+              ProfileEvent.ExpandAchievementsEvent,
+            ),
             true,
           ),
           SizedBox(
@@ -167,9 +159,9 @@ class _ExpandedWidget extends StatelessWidget {
 }
 
 class _DefaultHeaderWidget extends StatelessWidget {
-  final Function() onExpandAchievementsPressed;
+  final User _user;
 
-  _DefaultHeaderWidget(this.onExpandAchievementsPressed);
+  _DefaultHeaderWidget(this._user);
 
   @override
   Widget build(BuildContext context) {
@@ -183,12 +175,14 @@ class _DefaultHeaderWidget extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: ProfileDimens.screenTopMargin),
-          _UserProfileInfoWidget(),
+          _UserProfileInfoWidget(_user),
           SizedBox(height: ProfileDimens.achievementsMarginTop),
-          _AchievementsWidget(),
+          _AchievementsWidget(_user.achievements),
           SizedBox(height: ProfileDimens.expandAchievementsButtonMarginTop),
           _ExpandAchievementsLabelWidget(
-            onExpandAchievementsPressed,
+            () => BlocProvider.of<ProfileBloc>(context).add(
+              ProfileEvent.ExpandAchievementsEvent,
+            ),
             false,
           ),
         ],
@@ -198,49 +192,52 @@ class _DefaultHeaderWidget extends StatelessWidget {
 }
 
 class _AchievementGridWidget extends StatelessWidget {
-  final int gridCrossAxisCount = 3;
+  final List<Achievement> _achievements;
+
+  _AchievementGridWidget(this._achievements);
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       flex: 1,
       child: StaggeredGridView.countBuilder(
-        crossAxisCount: gridCrossAxisCount,
+        crossAxisCount: AppIntegers.profileGridColumnCount,
         staggeredTileBuilder: (index) => StaggeredTile.fit(1),
-        itemCount: 24,
-        itemBuilder: (context, index) => Container(
-          alignment: AlignmentDirectional.center,
-          child: Column(
-            children: [
-              getGridAchievement(
-                index,
-                gridCrossAxisCount,
-              ),
-              SizedBox(
-                height: ProfileDimens.achievementsGridHorizontalSpacing,
-              ),
-            ],
-          ),
-        ),
+        itemCount: _achievements.length,
+        itemBuilder: (context, index) {
+          Achievement achievement = _achievements[index];
+          AchievementResourcesHolder resourcesHolder =
+              getAchievementResourcesHolder(achievement);
+
+          return Container(
+            alignment: AlignmentDirectional.center,
+            child: Column(
+              children: [
+                AchievementWidget(
+                  title: achievement.type,
+                  name: achievement.name,
+                  maxProgress: achievement.maxProgress,
+                  currentProgress: achievement.currentProgress,
+                  progressColor: resourcesHolder.progressColor,
+                  icon: resourcesHolder.icon,
+                ),
+                SizedBox(
+                  height: ProfileDimens.achievementsGridHorizontalSpacing,
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
 }
 
-//it's just for testing. With real API this functional will be based on real
-//Achievements list and then no needs in such method to generate test data.
-Widget getGridAchievement(int index, int crossAxisCount) {
-  switch (index % crossAxisCount) {
-    case 0:
-      return _DailyAchievement();
-    case 1:
-      return _RandomAchievement();
-    default:
-      return _BossAchievement();
-  }
-}
-
 class _UserProfileInfoWidget extends StatelessWidget {
+  final User _user;
+
+  _UserProfileInfoWidget(this._user);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -252,15 +249,16 @@ class _UserProfileInfoWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _UserAvatarWidget(),
+          _UserAvatarWidget(), //TODO display avatar and level from the User
           SizedBox(
             width: ProfileDimens.avatarHolderMarginRight,
           ),
           _UserInfoWidget(
-            'Alex Banner',
-            3,
-            240,
-            500,
+            _user.name,
+            _user.completedStepsToFreeCoffee,
+            _user.requiredStepsToFreeCoffee,
+            _user.currentLevelExperience,
+            _user.maxLevelExperience,
           ),
         ],
       ),
@@ -305,13 +303,15 @@ class _UserAvatarWidget extends StatelessWidget {
 
 class _UserInfoWidget extends StatelessWidget {
   final String userName;
-  final int stepsToFreeCoffee;
+  final int completedStepsToFreeCoffee;
+  final int requiredStepsToFreeCoffee;
   final int currentExpProgress;
   final int totalExpProgress;
 
   _UserInfoWidget(
     this.userName,
-    this.stepsToFreeCoffee,
+    this.completedStepsToFreeCoffee,
+    this.requiredStepsToFreeCoffee,
     this.currentExpProgress,
     this.totalExpProgress,
   );
@@ -333,7 +333,11 @@ class _UserInfoWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _UserNameAndStepsWidget(userName, stepsToFreeCoffee),
+          _UserNameAndStepsWidget(
+            userName,
+            completedStepsToFreeCoffee,
+            requiredStepsToFreeCoffee,
+          ),
           SizedBox(
             height: ProfileDimens.userExperienceHolderMarginTop,
           ),
@@ -376,11 +380,13 @@ class _UserInfoWidget extends StatelessWidget {
 
 class _UserNameAndStepsWidget extends StatelessWidget {
   final String userName;
-  final int stepsToFreeCoffee;
+  final int completedStepsToFreeCoffee;
+  final int requiredStepsToFreeCoffee;
 
   _UserNameAndStepsWidget(
     this.userName,
-    this.stepsToFreeCoffee,
+    this.completedStepsToFreeCoffee,
+    this.requiredStepsToFreeCoffee,
   );
 
   @override
@@ -412,7 +418,8 @@ class _UserNameAndStepsWidget extends StatelessWidget {
                   height: ProfileDimens.userInfoItemsDefaultMargin,
                 ),
                 Text(
-                  stepsToFreeCoffee.toString() +
+                  (requiredStepsToFreeCoffee - completedStepsToFreeCoffee)
+                          .toString() +
                       " " +
                       AppMessages.stepsToFreeCoffee,
                   style: AppTextStyles.captionLightSecondary,
@@ -421,8 +428,8 @@ class _UserNameAndStepsWidget extends StatelessWidget {
                   height: ProfileDimens.userInfoItemsDefaultMargin,
                 ),
                 _StepsToFreeCoffeeWidget(
-                  itemCount: 5,
-                  completedCount: 2,
+                  itemCount: requiredStepsToFreeCoffee,
+                  completedCount: completedStepsToFreeCoffee,
                 ),
               ],
             ),
@@ -442,9 +449,9 @@ class _UserNameAndStepsWidget extends StatelessWidget {
               ),
             ),
             borderRadius: ProfileDimens.editButtonSelectorRadius,
-            onTap: () => {
-              //TODO will be implemented later
-            },
+            onTap: () => BlocProvider.of<ProfileBloc>(context).add(
+              ProfileEvent.EditEvent,
+            ),
           ),
         ],
       ),
@@ -479,61 +486,43 @@ class _StepsToFreeCoffeeWidget extends StatelessWidget {
 }
 
 class _AchievementsWidget extends StatelessWidget {
+  final List<Achievement> achievements;
+
+  _AchievementsWidget(this.achievements);
+
   @override
   Widget build(BuildContext context) {
+    List<Widget> widgets = List();
+
+    if (achievements != null) {
+      var countToDisplay =
+          achievements.length > AppIntegers.profileGridColumnCount
+              ? AppIntegers.profileGridColumnCount
+              : achievements.length;
+
+      for (int i = 0; i < countToDisplay; i++) {
+        Achievement achievement = achievements[i];
+        AchievementResourcesHolder resourcesHolder =
+            getAchievementResourcesHolder(achievement);
+
+        widgets.add(Expanded(
+          flex: 1,
+          child: AchievementWidget(
+            title: achievement.type,
+            name: achievement.name,
+            maxProgress: achievement.maxProgress,
+            currentProgress: achievement.currentProgress,
+            progressColor: resourcesHolder.progressColor,
+            icon: resourcesHolder.icon,
+          ),
+        ));
+      }
+    }
+
     return Row(
-      children: [
-        Expanded(
-          child: _DailyAchievement(),
-          flex: 1,
-        ),
-        Expanded(
-          child: _RandomAchievement(),
-          flex: 1,
-        ),
-        Expanded(
-          child: _BossAchievement(),
-          flex: 1,
-        ),
-      ],
+      children: widgets,
     );
   }
-}
-
-class _DailyAchievement extends AchievementWidget {
-  _DailyAchievement()
-      : super(
-          title: AppMessages.daily,
-          name: AppMessages.destroyedCroissants,
-          maxProgress: 20,
-          currentProgress: 7,
-          progressColor: AppColors.orange,
-          icon: AppImages.goldMedal,
-        );
-}
-
-class _RandomAchievement extends AchievementWidget {
-  _RandomAchievement()
-      : super(
-          title: AppMessages.random,
-          name: AppMessages.drankLattes,
-          maxProgress: 10,
-          currentProgress: 3,
-          progressColor: AppColors.pumpkinOrange,
-          icon: AppImages.goldCup,
-        );
-}
-
-class _BossAchievement extends AchievementWidget {
-  _BossAchievement()
-      : super(
-          title: AppMessages.boss,
-          name: AppMessages.drankAmericanos,
-          maxProgress: 3,
-          currentProgress: 2,
-          progressColor: AppColors.turquoiseBlue,
-          icon: AppImages.silverMedal,
-        );
 }
 
 class _ExpandAchievementsLabelWidget extends StatelessWidget {
@@ -582,10 +571,9 @@ class _JoinTheGameWidget extends StatelessWidget {
         bottom: ProfileDimens.joinGameButtonMarginBottom,
       ),
       child: MaterialButton(
-          onPressed: () => {
-                //TODO will be implemented later
-              },
-          textColor: AppColors.white,
+          onPressed: () => BlocProvider.of<ProfileBloc>(context).add(
+                ProfileEvent.JoinTheGameEvent,
+              ),
           color: AppColors.dark,
           height: ProfileDimens.joinGameButtonHeight,
           shape: RoundedRectangleBorder(
@@ -599,4 +587,58 @@ class _JoinTheGameWidget extends StatelessWidget {
           )),
     );
   }
+}
+
+class ErrorWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          AppMessages.loadingProfileFailed,
+          style: AppTextStyles.h3RegularPrimary,
+        ),
+        SizedBox(
+          height: AppDimens.retryButtonMarginTop,
+        ),
+        MaterialButton(
+          onPressed: () => BlocProvider.of<ProfileBloc>(context).add(
+            ProfileEvent.RetryEvent,
+          ),
+          color: AppColors.turquoiseBlue,
+          child: Text(
+            AppMessages.retry.toUpperCase(),
+            style: AppTextStyles.h4MediumWhite,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+AchievementResourcesHolder getAchievementResourcesHolder(
+    Achievement achievement) {
+  var holder = AchievementResourcesHolder();
+
+  switch (achievement.level) {
+    case AchievementLevels.beginner:
+      holder.icon = AppImages.silverMedal;
+      holder.progressColor = AppColors.turquoiseBlue;
+      break;
+    case AchievementLevels.proficient:
+      holder.icon = AppImages.goldMedal;
+      holder.progressColor = AppColors.orange;
+      break;
+    case AchievementLevels.expert:
+      holder.icon = AppImages.goldCup;
+      holder.progressColor = AppColors.pumpkinOrange;
+      break;
+  }
+
+  return holder;
+}
+
+class AchievementResourcesHolder {
+  String icon;
+  Color progressColor;
 }

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterapp/blocs/profile/profile_block.dart';
+import 'package:flutterapp/blocs/profile/profile_event.dart';
+import 'package:flutterapp/data/repository/user_repository.dart';
 import 'package:flutterapp/resources/app_colors.dart';
 import 'package:flutterapp/resources/app_messages.dart';
 import 'package:flutterapp/presentation/basket_route.dart';
@@ -64,7 +68,14 @@ class _TabView extends StatelessWidget {
     } else if (selectedTabIndex == basketTabIndex) {
       return BasketRoute();
     } else if (selectedTabIndex == profileTabIndex) {
-      return ProfileRoute();
+      return BlocProvider<ProfileBloc>(
+        create: (context) => ProfileBloc(
+          userRepository: UserRepository(),
+        )..add(
+          ProfileEvent.LoadProfileEvent,
+          ),
+        child: ProfileRoute(),
+      );
     } else {
       throw ("Illegal argument exception: invalid selectedTabIndex.");
     }
@@ -116,7 +127,7 @@ class _BottomTabsView extends StatelessWidget {
 }
 
 Color _getStatusBarColor(int pageIndex) {
-  if(pageIndex == profileTabIndex) {
+  if (pageIndex == profileTabIndex) {
     return AppColors.dark;
   } else {
     return AppColors.white;
@@ -124,7 +135,7 @@ Color _getStatusBarColor(int pageIndex) {
 }
 
 Brightness _getStatusBarIconBrightness(int pageIndex) {
-  if(pageIndex == profileTabIndex) {
+  if (pageIndex == profileTabIndex) {
     return Brightness.light;
   } else {
     return Brightness.dark;
