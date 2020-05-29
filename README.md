@@ -7,6 +7,15 @@ Flutter based sample e-commerce application about coffee ordering. Main goal of 
 - Run `flutter doctor` and make sure you've installed all missing components
 - [Set up an editor you like](https://flutter.dev/docs/get-started/editor). Android Studio is prefarable choice.
 
+### Running on iOS
+- Run `open -a simulator` to launch iOS Simulator
+- Run `flutter devices` to find out that Flutter detected iOS Simulator
+- Run `flutter run -d [device-id]` to run the app on the iOS Simulator
+
+### Running on iOS Simulator for XCode 11.4
+- Run `rm -rf ios/Flutter/App.framework`
+- Run `flutter run` to rebuild and launch application on the iOS Simulator
+
 ## Technical Tools
 - [Flutter](https://flutter.dev/)
 - [Dart](https://dart.dev/)
