@@ -3,6 +3,7 @@ class AppTextLetterSpacing {
   static const double spN023 = -0.23;
   static const double spN017 = -0.17;
   static const double spN04 = -0.4;
+  static const double spN03 = -0.3;
   static const double spN02 = -0.2;
   static const double spN01 = -0.1;
   static const double spN008 = -0.08;

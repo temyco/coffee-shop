@@ -1,0 +1,46 @@
+class ProfileDimens {
+  static const double achievementProgressMarginTop = 10;
+  static const double achievementProgressSize = 46;
+  static const int arcProgressStrokeWidth = 3;
+  static const double achievementNameMarginTop = 6;
+  static const double achievementNameMarginBottom = 2;
+  static const double screenTopMargin = 26;
+  static const double achievementsMarginTop = 20;
+  static const double expandAchievementsButtonMarginTop = 32;
+  static const double achievementsGridHorizontalSpacing = 15;
+  static const double collapseAchievementsButtonMarginTop = 16;
+  static const double collapseAchievementsButtonMarginBottom = 6;
+  static const double avatarHolderMarginRight = 18;
+  static const double avatarSize = 98;
+  static const double avatarMarginTop = 10;
+  static const double userInfoItemsDefaultMargin = 4;
+  static const double userNameMarginTop = 14;
+  static const double editButtonMarginLeft = 4;
+  static const double editButtonSize = 20;
+  static const double editButtonHolderPadding = 12;
+  static const double editButtonSelectorRadius =
+      editButtonSize + editButtonHolderPadding;
+  static const double userExperienceProgressTextWidth = 124;
+  static const double userExperienceProgressBarWidth = 118;
+  static const double userExperienceProgressMarginLeft = 7.5;
+  static const double userExperienceProgressMarginTop = 8;
+  static const double userExperienceHolderMarginTop = 12;
+  static const double userExperienceProgressBarHeight = 6;
+  static const double expandAchievementsPadding = 6;
+  static const double joinGameButtonMarginHorizontal = 46;
+  static const double joinGameButtonMarginTop = 16;
+  static const double joinGameButtonMarginBottom = 20;
+  static const double joinGameButtonHeight = 44;
+  static const double cardBorderRadius = 10;
+  static const double cardShadowRadius = 10;
+  static const double cardShadowOffsetX = 0;
+  static const double cardShadowOffsetY = 4;
+  static const double cardTitlePaddingHorizontal = 4;
+  static const double cardTitlePaddingBottom = 10;
+  static const double cardItemDividerHeight = 1;
+  static const double cardItemPaddingVertical = 10;
+  static const double cardItemPaddingHorizontal = 4;
+  static const double cardItemIconMarginRight = 15;
+  static const double joinGameButtonBorderRadius = 6;
+  static const double avatarAndNameHolderMarginHorizontal = 24;
+}

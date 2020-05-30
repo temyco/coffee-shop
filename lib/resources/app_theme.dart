@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/resources/app_colors.dart';
+import 'package:flutterapp/resources/app_font_families.dart';
 
 var mainTheme = ThemeData(
   primaryColor: AppColors.white,
   accentColor: AppColors.turquoiseBlue,
+
   /// We should use SFUIDisplay for AppBar title
-  fontFamily: 'SFUIDisplay'
+  fontFamily: AppFontFamilies.SFUIDisplay,
 );
 
 // TODO create color scheme that will match our design

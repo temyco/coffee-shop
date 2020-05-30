@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/resources/app_messages.dart';
-
+import 'package:flutter/services.dart';
 import 'presentation/home_route.dart';
 import 'resources/app_theme.dart';
 
@@ -11,6 +11,12 @@ class CoffeeShop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ///we support only portrait
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return MaterialApp(
       title: AppMessages.appTitle,
       theme: mainTheme,
