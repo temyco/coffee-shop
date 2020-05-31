@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterapp/blocs/profile/profile_block.dart';
-import 'package:flutterapp/blocs/profile/profile_event.dart';
+import 'package:flutterapp/data/network_manager.dart';
 import 'package:flutterapp/data/repository/user_repository.dart';
 import 'package:flutterapp/resources/app_colors.dart';
 import 'package:flutterapp/resources/app_messages.dart';
@@ -70,10 +70,8 @@ class _TabView extends StatelessWidget {
     } else if (selectedTabIndex == profileTabIndex) {
       return BlocProvider<ProfileBloc>(
         create: (context) => ProfileBloc(
-          userRepository: UserRepository(),
-        )..add(
-          ProfileEvent.LoadProfileEvent,
-          ),
+          userRepository: UserRepository(MobileNetworkManager()),
+        ),
         child: ProfileRoute(),
       );
     } else {

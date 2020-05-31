@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterapp/blocs/profile/profile_event.dart';
 import 'package:flutterapp/blocs/profile/profile_state.dart';
+import 'package:flutterapp/data/data_load_result.dart';
 import 'package:flutterapp/data/model/user.dart';
 import 'package:flutterapp/data/repository/user_repository.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  final UserRepository userRepository;
+
+  final UserRepositoryAPI userRepository;
 
   bool _isExpanded = false;
   User _user;
@@ -66,11 +68,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   Future<ProfileState> _loadProfile() async {
-    _user = await userRepository.getUserProfile();
-    if (_user == null) {
-      return LoadingFailedState();
-    } else {
+    var dataLoadResult = await userRepository.getUserProfile();
+    if(dataLoadResult.isSuccessful()) {
+      _user = dataLoadResult.data;
       return DisplayProfileState(_user);
+    } else if(dataLoadResult.error == LoadingError.NO_CONNECTION) {
+      return NoConnectionState();
+    } else {
+      return LoadingFailedState();
     }
   }
 }

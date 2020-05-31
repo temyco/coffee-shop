@@ -22,6 +22,10 @@ class LoadingFailedState extends ProfileState {
 
 }
 
+class NoConnectionState extends ProfileState {
+
+}
+
 class ExpandedAchievementsState extends ProfileState {
   final User user;
 

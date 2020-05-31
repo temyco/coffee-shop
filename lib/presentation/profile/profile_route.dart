@@ -8,14 +8,14 @@ import 'package:flutterapp/data/model/achievement.dart';
 import 'package:flutterapp/data/model/user.dart';
 import 'package:flutterapp/presentation/profile/card_widget.dart';
 import 'package:flutterapp/resources/app_integers.dart';
-import 'package:flutterapp/widgets/empty_placeholder_widget.dart';
 import 'package:flutterapp/presentation/profile/profile_dimens.dart';
 import 'package:flutterapp/resources/app_colors.dart';
-import 'package:flutterapp/resources/app_dimens.dart';
 import 'package:flutterapp/resources/app_images.dart';
 import 'package:flutterapp/resources/app_messages.dart';
 import 'package:flutterapp/resources/app_text_styles.dart';
+import 'package:flutterapp/widgets/error_placeholder_widget.dart';
 import 'package:flutterapp/widgets/progress/arc_progress.dart';
+import 'package:flutterapp/widgets/progress/initial_progress_widget.dart';
 import 'package:flutterapp/widgets/progress/linear_progress.dart';
 import 'package:flutterapp/presentation/profile/achievement_widget.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -30,10 +30,18 @@ class ProfileRoute extends StatefulWidget {
 
 class _ProfileRouteState extends State<ProfileRoute> {
   @override
+  void initState() {
+    BlocProvider.of<ProfileBloc>(context).add(
+      ProfileEvent.LoadProfileEvent,
+    );
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProfileBloc, ProfileState>(
       listener: (context, state) {
-        if(state is OpenGiftsState) {
+        if (state is OpenGiftsState) {
           Scaffold.of(context).showSnackBar(SnackBar(
             content: Text('Gifts will be opened when ready :)'),
           ));
@@ -42,20 +50,24 @@ class _ProfileRouteState extends State<ProfileRoute> {
       listenWhen: (previous, current) => !_rebuildWidgetStates(current),
       builder: (context, state) {
         if (state is EmptyState) {
-          return EmptyPlaceholderWidget(
-            content: SizedBox(),
+          return Container(
+            color: AppColors.paleGray,
           );
         } else if (state is LoadingState) {
-          return EmptyPlaceholderWidget(
-            content: const CircularProgressIndicator(),
-          );
+          return InitialProgressWidget();
         } else if (state is DisplayProfileState) {
           return _DefaultWidget(state.user);
         } else if (state is ExpandedAchievementsState) {
           return _ExpandedWidget(state.user);
         } else if (state is LoadingFailedState) {
-          return EmptyPlaceholderWidget(
-            content: ErrorWidget(),
+          return ErrorPlaceholderWidget(
+            message: AppMessages.loadingProfileFailed,
+            onRetryPressed: _onRetryClicked,
+          );
+        } else if (state is NoConnectionState) {
+          return ErrorPlaceholderWidget(
+            message: AppMessages.noInternetConnection,
+            onRetryPressed: _onRetryClicked,
           );
         } else {
           throw ArgumentError("Unsupported state");
@@ -67,6 +79,10 @@ class _ProfileRouteState extends State<ProfileRoute> {
 
   bool _rebuildWidgetStates(ProfileState state) {
     return !(state is OpenGiftsState);
+  }
+
+  _onRetryClicked() {
+    BlocProvider.of<ProfileBloc>(context).add(ProfileEvent.RetryEvent);
   }
 }
 
@@ -82,20 +98,18 @@ class _DefaultWidget extends StatelessWidget {
       CardRowWidget(
         AppImages.giftCards,
         AppMessages.giftCards,
-            () =>
-            BlocProvider.of<ProfileBloc>(context).add(
-              ProfileEvent.GiftPressedEvent,
-            ),
+        () => BlocProvider.of<ProfileBloc>(context).add(
+          ProfileEvent.GiftPressedEvent,
+        ),
       ),
     );
     loyaltySystemCardRows.add(
       CardRowWidget(
         AppImages.bonus,
         AppMessages.bonuses,
-            () =>
-            BlocProvider.of<ProfileBloc>(context).add(
-              ProfileEvent.BonusesPressedEvent,
-            ),
+        () => BlocProvider.of<ProfileBloc>(context).add(
+          ProfileEvent.BonusesPressedEvent,
+        ),
       ),
     );
 
@@ -104,20 +118,18 @@ class _DefaultWidget extends StatelessWidget {
       CardRowWidget(
         AppImages.payment,
         AppMessages.paymentMethods,
-            () =>
-            BlocProvider.of<ProfileBloc>(context).add(
-              ProfileEvent.PaymentMethodsPressedEvent,
-            ),
+        () => BlocProvider.of<ProfileBloc>(context).add(
+          ProfileEvent.PaymentMethodsPressedEvent,
+        ),
       ),
     );
     settingsCardsRow.add(
       CardRowWidget(
         AppImages.signOut,
         AppMessages.signOut,
-            () =>
-            BlocProvider.of<ProfileBloc>(context).add(
-              ProfileEvent.SignOutPressedEvent,
-            ),
+        () => BlocProvider.of<ProfileBloc>(context).add(
+          ProfileEvent.SignOutPressedEvent,
+        ),
       ),
     );
 
@@ -160,10 +172,9 @@ class _ExpandedWidget extends StatelessWidget {
             height: ProfileDimens.collapseAchievementsButtonMarginTop,
           ),
           _ExpandAchievementsLabelWidget(
-                () =>
-                BlocProvider.of<ProfileBloc>(context).add(
-                  ProfileEvent.ExpandAchievementsEvent,
-                ),
+            () => BlocProvider.of<ProfileBloc>(context).add(
+              ProfileEvent.ExpandAchievementsEvent,
+            ),
             true,
           ),
           SizedBox(
@@ -197,10 +208,9 @@ class _DefaultHeaderWidget extends StatelessWidget {
           _AchievementsWidget(_user.achievements),
           SizedBox(height: ProfileDimens.expandAchievementsButtonMarginTop),
           _ExpandAchievementsLabelWidget(
-                () =>
-                BlocProvider.of<ProfileBloc>(context).add(
-                  ProfileEvent.ExpandAchievementsEvent,
-                ),
+            () => BlocProvider.of<ProfileBloc>(context).add(
+              ProfileEvent.ExpandAchievementsEvent,
+            ),
             false,
           ),
         ],
@@ -225,7 +235,7 @@ class _AchievementGridWidget extends StatelessWidget {
         itemBuilder: (context, index) {
           Achievement achievement = _achievements[index];
           AchievementResourcesHolder resourcesHolder =
-          getAchievementResourcesHolder(achievement);
+              getAchievementResourcesHolder(achievement);
 
           return Container(
             alignment: AlignmentDirectional.center,
@@ -326,11 +336,13 @@ class _UserInfoWidget extends StatelessWidget {
   final int currentExpProgress;
   final int totalExpProgress;
 
-  _UserInfoWidget(this.userName,
-      this.completedStepsToFreeCoffee,
-      this.requiredStepsToFreeCoffee,
-      this.currentExpProgress,
-      this.totalExpProgress,);
+  _UserInfoWidget(
+    this.userName,
+    this.completedStepsToFreeCoffee,
+    this.requiredStepsToFreeCoffee,
+    this.currentExpProgress,
+    this.totalExpProgress,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -399,9 +411,11 @@ class _UserNameAndStepsWidget extends StatelessWidget {
   final int completedStepsToFreeCoffee;
   final int requiredStepsToFreeCoffee;
 
-  _UserNameAndStepsWidget(this.userName,
-      this.completedStepsToFreeCoffee,
-      this.requiredStepsToFreeCoffee,);
+  _UserNameAndStepsWidget(
+    this.userName,
+    this.completedStepsToFreeCoffee,
+    this.requiredStepsToFreeCoffee,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -433,7 +447,7 @@ class _UserNameAndStepsWidget extends StatelessWidget {
                 ),
                 Text(
                   (requiredStepsToFreeCoffee - completedStepsToFreeCoffee)
-                      .toString() +
+                          .toString() +
                       " " +
                       AppMessages.stepsToFreeCoffee,
                   style: AppTextStyles.captionLightSecondary,
@@ -463,10 +477,9 @@ class _UserNameAndStepsWidget extends StatelessWidget {
               ),
             ),
             borderRadius: ProfileDimens.editButtonSelectorRadius,
-            onTap: () =>
-                BlocProvider.of<ProfileBloc>(context).add(
-                  ProfileEvent.EditEvent,
-                ),
+            onTap: () => BlocProvider.of<ProfileBloc>(context).add(
+              ProfileEvent.EditEvent,
+            ),
           ),
         ],
       ),
@@ -511,14 +524,14 @@ class _AchievementsWidget extends StatelessWidget {
 
     if (achievements != null) {
       var countToDisplay =
-      achievements.length > AppIntegers.profileGridColumnCount
-          ? AppIntegers.profileGridColumnCount
-          : achievements.length;
+          achievements.length > AppIntegers.profileGridColumnCount
+              ? AppIntegers.profileGridColumnCount
+              : achievements.length;
 
       for (int i = 0; i < countToDisplay; i++) {
         Achievement achievement = achievements[i];
         AchievementResourcesHolder resourcesHolder =
-        getAchievementResourcesHolder(achievement);
+            getAchievementResourcesHolder(achievement);
 
         widgets.add(Expanded(
           flex: 1,
@@ -586,49 +599,21 @@ class _JoinTheGameWidget extends StatelessWidget {
         bottom: ProfileDimens.joinGameButtonMarginBottom,
       ),
       child: MaterialButton(
-          onPressed: () =>
-              BlocProvider.of<ProfileBloc>(context).add(
-                ProfileEvent.JoinTheGameEvent,
-              ),
-          color: AppColors.dark,
-          height: ProfileDimens.joinGameButtonHeight,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              ProfileDimens.joinGameButtonBorderRadius,
-            ),
-          ),
-          child: Text(
-            AppMessages.joinTheGame,
-            style: AppTextStyles.buttonBoldWhite,
-          )),
-    );
-  }
-}
-
-class ErrorWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          AppMessages.loadingProfileFailed,
-          style: AppTextStyles.h3RegularPrimary,
+        onPressed: () => BlocProvider.of<ProfileBloc>(context).add(
+          ProfileEvent.JoinTheGameEvent,
         ),
-        SizedBox(
-          height: AppDimens.retryButtonMarginTop,
-        ),
-        MaterialButton(
-          onPressed: () =>
-              BlocProvider.of<ProfileBloc>(context).add(
-                ProfileEvent.RetryEvent,
-              ),
-          color: AppColors.turquoiseBlue,
-          child: Text(
-            AppMessages.retry.toUpperCase(),
-            style: AppTextStyles.h4MediumWhite,
+        color: AppColors.dark,
+        height: ProfileDimens.joinGameButtonHeight,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            ProfileDimens.joinGameButtonBorderRadius,
           ),
         ),
-      ],
+        child: Text(
+          AppMessages.joinTheGame,
+          style: AppTextStyles.buttonBoldWhite,
+        ),
+      ),
     );
   }
 }

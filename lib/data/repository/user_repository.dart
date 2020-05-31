@@ -1,13 +1,32 @@
 import 'dart:math';
 
+import 'package:flutterapp/data/data_load_result.dart';
 import 'package:flutterapp/data/model/achievement.dart';
 import 'package:flutterapp/data/model/user.dart';
+import 'package:flutterapp/data/network_manager.dart';
 import 'package:flutterapp/resources/app_images.dart';
 
-class UserRepository {
-  Future<User> getUserProfile() async {
-    //execute action with small pause to see loading state
-    return Future.delayed(Duration(seconds: 2), () => _generateTestUser());
+abstract class UserRepositoryAPI {
+  Future<DataLoadResult<User>> getUserProfile();
+}
+
+class UserRepository implements UserRepositoryAPI {
+
+  NetworkManagerAPI _networkManager;
+
+  UserRepository(this._networkManager);
+
+  @override
+  Future<DataLoadResult<User>> getUserProfile() async {
+    var hasConnection = await _networkManager.hasConnection();
+    if (hasConnection) {
+      //execute action with small pause to see loading state
+      var user = _generateTestUser();
+      return Future.delayed(
+          Duration(seconds: 2), () => DataLoadResult(data: user));
+    } else {
+      return Future.value(DataLoadResult(error: LoadingError.NO_CONNECTION));
+    }
   }
 
   User _generateTestUser() {
@@ -23,12 +42,12 @@ class UserRepository {
     user.achievements = List();
 
     var random = Random();
-    for(int i = 0; i < 25; i++) {
+    for (int i = 0; i < 25; i++) {
       Achievement achievement = Achievement();
       achievement.name = 'Achievement $i';
 
       var randomType = random.nextInt(3);
-      switch(randomType) {
+      switch (randomType) {
         case 0:
           achievement.type = 'Daily';
           break;
@@ -42,7 +61,7 @@ class UserRepository {
       achievement.level = random.nextInt(3);
 
       var maxProgress = random.nextInt(50);
-      if(maxProgress == 0) {
+      if (maxProgress == 0) {
         maxProgress = 15;
       }
       achievement.maxProgress = maxProgress;
