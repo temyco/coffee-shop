@@ -20,19 +20,19 @@ class ProfileRoute extends StatelessWidget {
     return StatusBarSafeArea(
       statusBarColor: AppColors.dark,
       systemOverlayStyle: SystemUiOverlayStyle.light,
-      child: _ProfileRouteContainer(),
+      child: _ProfileRouteContent(),
     );
   }
 }
 
-class _ProfileRouteContainer extends StatefulWidget {
+class _ProfileRouteContent extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _ProfileRouteContainerState();
+    return _ProfileRouteContentState();
   }
 }
 
-class _ProfileRouteContainerState extends State<_ProfileRouteContainer> {
+class _ProfileRouteContentState extends State<_ProfileRouteContent> {
   bool isExpanded = false;
 
   @override
