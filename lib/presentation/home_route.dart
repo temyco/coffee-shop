@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutterapp/presentation/basket_route.dart';
 import 'package:flutterapp/presentation/location_route.dart';
 import 'package:flutterapp/presentation/profile/profile_route.dart';
 import 'package:flutterapp/presentation/shop_route.dart';
-import 'package:flutterapp/resources/app_colors.dart';
 import 'package:flutterapp/resources/app_messages.dart';
-import 'package:flutterapp/widgets/status_bar_safe_area.dart';
 
 import 'orders_route.dart';
 
@@ -29,11 +26,7 @@ class _HomeRouteState extends State<HomeRoute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StatusBarSafeArea(
-        statusBarColor: _getStatusBarColor(_selectedTabIndex),
-        systemOverlayStyle: _getSystemOverlayStyle(_selectedTabIndex),
-        child: _TabView(selectedTabIndex: _selectedTabIndex),
-      ),
+      body: _TabView(selectedTabIndex: _selectedTabIndex),
       bottomNavigationBar: _BottomTabsView(
         selectedTabIndex: _selectedTabIndex,
         onTapListener: _onTabSelected,
@@ -110,22 +103,6 @@ class _BottomTabsView extends StatelessWidget {
       currentIndex: selectedTabIndex,
       onTap: onTapListener,
     );
-  }
-}
-
-Color _getStatusBarColor(int pageIndex) {
-  if (pageIndex == profileTabIndex) {
-    return AppColors.dark;
-  } else {
-    return AppColors.paleGray;
-  }
-}
-
-SystemUiOverlayStyle _getSystemOverlayStyle(int pageIndex) {
-  if (pageIndex == profileTabIndex) {
-    return SystemUiOverlayStyle.light;
-  } else {
-    return SystemUiOverlayStyle.dark;
   }
 }
 
