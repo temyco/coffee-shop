@@ -136,6 +136,7 @@ class _DefaultWidget extends StatelessWidget {
     return Container(
       color: AppColors.paleGray,
       child: ListView(
+        physics: ClampingScrollPhysics(),
         children: [
           _DefaultHeaderWidget(_user),
           _JoinTheGameWidget(),
