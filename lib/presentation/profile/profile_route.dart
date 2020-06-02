@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutterapp/blocs/profile/profile_block.dart';
@@ -20,15 +21,27 @@ import 'package:flutterapp/widgets/progress/linear_progress.dart';
 import 'package:flutterapp/presentation/profile/achievement_widget.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutterapp/widgets/ripple_widget.dart';
+import 'package:flutterapp/widgets/status_bar_safe_area.dart';
 
-class ProfileRoute extends StatefulWidget {
+class ProfileRoute extends StatelessWidget {
   @override
-  State<StatefulWidget> createState() {
-    return _ProfileRouteState();
+  Widget build(BuildContext context) {
+    return StatusBarSafeArea(
+      statusBarColor: AppColors.dark,
+      systemOverlayStyle: SystemUiOverlayStyle.light,
+      child: _ProfileRouteContent(),
+    );
   }
 }
 
-class _ProfileRouteState extends State<ProfileRoute> {
+class _ProfileRouteContent extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _ProfileRouteContentState();
+  }
+}
+
+class _ProfileRouteContentState extends State<_ProfileRouteContent> {
   @override
   void initState() {
     BlocProvider.of<ProfileBloc>(context).add(
