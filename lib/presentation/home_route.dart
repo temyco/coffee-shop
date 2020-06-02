@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutterapp/blocs/profile/profile_block.dart';
-import 'package:flutterapp/data/network_manager.dart';
-import 'package:flutterapp/data/repository/user_repository.dart';
-import 'package:flutterapp/resources/app_colors.dart';
-import 'package:flutterapp/resources/app_messages.dart';
 import 'package:flutterapp/presentation/basket_route.dart';
 import 'package:flutterapp/presentation/location_route.dart';
-import 'package:flutterapp/presentation/orders_route.dart';
 import 'package:flutterapp/presentation/profile/profile_route.dart';
 import 'package:flutterapp/presentation/shop_route.dart';
+import 'package:flutterapp/resources/app_messages.dart';
+
+import 'orders_route.dart';
 
 class HomeRoute extends StatefulWidget {
   @override
@@ -30,19 +25,11 @@ class _HomeRouteState extends State<HomeRoute> {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion(
-      value: SystemUiOverlayStyle(
-        statusBarColor: _getStatusBarColor(_selectedTabIndex),
-        statusBarIconBrightness: _getStatusBarIconBrightness(_selectedTabIndex),
-      ),
-      child: Scaffold(
-        body: SafeArea(
-          child: _TabView(selectedTabIndex: _selectedTabIndex),
-        ),
-        bottomNavigationBar: _BottomTabsView(
-          selectedTabIndex: _selectedTabIndex,
-          onTapListener: _onTabSelected,
-        ),
+    return Scaffold(
+      body: _TabView(selectedTabIndex: _selectedTabIndex),
+      bottomNavigationBar: _BottomTabsView(
+        selectedTabIndex: _selectedTabIndex,
+        onTapListener: _onTabSelected,
       ),
     );
   }
@@ -121,22 +108,6 @@ class _BottomTabsView extends StatelessWidget {
       currentIndex: selectedTabIndex,
       onTap: onTapListener,
     );
-  }
-}
-
-Color _getStatusBarColor(int pageIndex) {
-  if (pageIndex == profileTabIndex) {
-    return AppColors.dark;
-  } else {
-    return AppColors.white;
-  }
-}
-
-Brightness _getStatusBarIconBrightness(int pageIndex) {
-  if (pageIndex == profileTabIndex) {
-    return Brightness.light;
-  } else {
-    return Brightness.dark;
   }
 }
 
