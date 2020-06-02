@@ -11,7 +11,7 @@ class CoffeeShop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ///we support only portrait
+    /// We support only portrait
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
