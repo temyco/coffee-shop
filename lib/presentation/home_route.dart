@@ -85,6 +85,7 @@ class _BottomTabsView extends StatelessWidget {
     // TODO add correct icons
 
     return BottomNavigationBar(
+      key: Key('BottomNavigationBar'),
       unselectedItemColor: Colors.black,
       selectedItemColor: Colors.teal[400],
       items: const <BottomNavigationBarItem>[

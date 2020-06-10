@@ -60,7 +60,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       return LoadingFailedState();
     } else if (_isExpanded) {
       _isExpanded = false;
-      return DisplayProfileState(_user);
+      return ProfileLoadedState(_user);
     } else {
       _isExpanded = true;
       return ExpandedAchievementsState(_user);
@@ -71,7 +71,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     var dataLoadResult = await userRepository.getUserProfile();
     if(dataLoadResult.isSuccessful()) {
       _user = dataLoadResult.data;
-      return DisplayProfileState(_user);
+      return ProfileLoadedState(_user);
     } else if(dataLoadResult.error == LoadingError.NO_CONNECTION) {
       return NoConnectionState();
     } else {

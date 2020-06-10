@@ -68,7 +68,7 @@ class _ProfileRouteContentState extends State<_ProfileRouteContent> {
           );
         } else if (state is LoadingState) {
           return InitialProgressWidget();
-        } else if (state is DisplayProfileState) {
+        } else if (state is ProfileLoadedState) {
           return _DefaultWidget(state.user);
         } else if (state is ExpandedAchievementsState) {
           return _ExpandedWidget(state.user);
