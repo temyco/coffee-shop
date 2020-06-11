@@ -6,15 +6,15 @@ import 'package:flutterapp/data/model/user.dart';
 import 'package:flutterapp/data/network_manager.dart';
 import 'package:flutterapp/resources/app_images.dart';
 
-abstract class UserRepositoryAPI {
+abstract class UserRepository {
   Future<DataLoadResult<User>> getUserProfile();
 }
 
-class UserRepository implements UserRepositoryAPI {
+class UserRepositoryImpl implements UserRepository {
 
-  NetworkManagerAPI _networkManager;
+  NetworkManager _networkManager;
 
-  UserRepository(this._networkManager);
+  UserRepositoryImpl(this._networkManager);
 
   @override
   Future<DataLoadResult<User>> getUserProfile() async {

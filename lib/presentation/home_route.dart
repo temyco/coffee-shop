@@ -61,7 +61,7 @@ class _TabView extends StatelessWidget {
     } else if (selectedTabIndex == profileTabIndex) {
       return BlocProvider<ProfileBloc>(
         create: (context) => ProfileBloc(
-          userRepository: UserRepository(MobileNetworkManager()),
+          userRepository: UserRepositoryImpl(MobileNetworkManager()),
         ),
         child: ProfileRoute(),
       );

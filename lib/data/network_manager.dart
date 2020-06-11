@@ -1,11 +1,11 @@
 import 'package:connectivity/connectivity.dart';
 
 ///abstract class to mock it during tests
-abstract class NetworkManagerAPI {
+abstract class NetworkManager {
   Future<bool> hasConnection();
 }
 
-class MobileNetworkManager implements NetworkManagerAPI {
+class MobileNetworkManager implements NetworkManager {
   @override
   Future<bool> hasConnection() async {
     var connectivityResult = await (Connectivity().checkConnectivity());

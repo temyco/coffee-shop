@@ -12,7 +12,7 @@ void main() {
   ProfileBloc profileBloc;
 
   initProfileBloc(bool hasConnection) {
-    UserRepository userRepository = UserRepository(getConnectionManager(hasConnection));
+    UserRepositoryImpl userRepository = UserRepositoryImpl(getConnectionManager(hasConnection));
     profileBloc = ProfileBloc(userRepository: userRepository);
   }
 

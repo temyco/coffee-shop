@@ -8,7 +8,7 @@ import 'package:flutterapp/data/repository/user_repository.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
-  final UserRepositoryAPI userRepository;
+  final UserRepository userRepository;
 
   bool _isExpanded = false;
   User _user;
