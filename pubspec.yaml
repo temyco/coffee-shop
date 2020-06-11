@@ -28,6 +28,7 @@ dependencies:
   flutter_bloc: ^4.0.0
   connectivity: ^0.4.8+6
   equatable: ^1.2.0
+  flutter_simple_dependency_injection: any
 
 dev_dependencies:
   flutter_test:

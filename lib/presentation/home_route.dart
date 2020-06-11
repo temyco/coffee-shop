@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:flutterapp/blocs/profile/profile_block.dart';
-import 'package:flutterapp/data/network_manager.dart';
-import 'package:flutterapp/data/repository/user_repository.dart';
 import 'package:flutterapp/presentation/basket_route.dart';
 import 'package:flutterapp/presentation/location_route.dart';
 import 'package:flutterapp/presentation/profile/profile_route.dart';
@@ -61,7 +60,7 @@ class _TabView extends StatelessWidget {
     } else if (selectedTabIndex == profileTabIndex) {
       return BlocProvider<ProfileBloc>(
         create: (context) => ProfileBloc(
-          userRepository: UserRepositoryImpl(MobileNetworkManager()),
+          userRepository: Injector.getInjector().get(),
         ),
         child: ProfileRoute(),
       );
