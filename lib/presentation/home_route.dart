@@ -6,7 +6,7 @@ import 'package:flutterapp/presentation/location_route.dart';
 import 'package:flutterapp/presentation/orders_route.dart';
 import 'package:flutterapp/presentation/profile_route.dart';
 import 'package:flutterapp/presentation/shop_route.dart';
-import 'package:flutterapp/widgets/svg_icon.dart';
+import 'package:flutterapp/widgets/bottom_bar_icon.dart';
 
 class HomeRoute extends StatefulWidget {
   @override
@@ -83,23 +83,23 @@ class _BottomTabsView extends StatelessWidget {
       selectedItemColor: Colors.teal[400],
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: SvgIcon(AppIcons.location),
+          icon: BottomBarIcon(AppIcons.location),
           title: Text(AppMessages.locationTitle),
         ),
         BottomNavigationBarItem(
-          icon: SvgIcon(AppIcons.shop),
+          icon: BottomBarIcon(AppIcons.shop),
           title: Text(AppMessages.shopTitle),
         ),
         BottomNavigationBarItem(
-          icon: SvgIcon(AppIcons.orders),
+          icon: BottomBarIcon(AppIcons.orders),
           title: Text(AppMessages.ordersTitle),
         ),
         BottomNavigationBarItem(
-          icon: SvgIcon(AppIcons.basket),
+          icon: BottomBarIcon(AppIcons.basket),
           title: Text(AppMessages.basketTitle),
         ),
         BottomNavigationBarItem(
-          icon: SvgIcon(AppIcons.profile),
+          icon: BottomBarIcon(AppIcons.profile),
           title: Text(AppMessages.profileTitle),
         ),
       ],

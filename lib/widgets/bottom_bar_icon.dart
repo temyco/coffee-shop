@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class SvgIcon extends StatelessWidget {
-  const SvgIcon(
+class BottomBarIcon extends StatelessWidget {
+  const BottomBarIcon(
       this.iconPath
       );
 
@@ -10,11 +10,13 @@ class SvgIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var iconThemeData = IconTheme.of(context)
+
     return SvgPicture.asset(
       iconPath,
-      color: IconTheme.of(context).color,
-      width: IconTheme.of(context).size,
-      height: IconTheme.of(context).size,
+      color: iconThemeData.color,
+      width: iconThemeData.size,
+      height: iconThemeData.size,
     );
   }
 }
