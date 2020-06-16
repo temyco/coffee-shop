@@ -10,7 +10,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   final UserRepository userRepository;
 
-  bool _isExpanded = false;
+  bool _isAchievementsExpanded = false;
   User _user;
 
   ProfileBloc({
@@ -58,11 +58,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileState _handleExpandAchievementsEvent() {
     if (_user == null) {
       return LoadingFailedState();
-    } else if (_isExpanded) {
-      _isExpanded = false;
+    } else if (_isAchievementsExpanded) {
+      _isAchievementsExpanded = false;
       return ProfileLoadedState(_user);
     } else {
-      _isExpanded = true;
+      _isAchievementsExpanded = true;
       return ExpandedAchievementsState(_user);
     }
   }
