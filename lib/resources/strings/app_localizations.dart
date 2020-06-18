@@ -11,7 +11,7 @@ class AppLocalizations {
 
   AppLocalizations(this._locale);
 
-  static const Map<String, Map<String, String>> _localizedValues = {
+  static const Map<String, Map<String, String>> _localizedStrings = {
     'en': english,
     'uk': ukrainian,
   };
@@ -22,32 +22,32 @@ class AppLocalizations {
 
   ///Strings
 
-  String get basketTitle => _localizedValues[_locale.languageCode][basketTitleId];
-  String get locationTitle => _localizedValues[_locale.languageCode][locationTitleId];
-  String get ordersTitle => _localizedValues[_locale.languageCode][ordersTitleId];
-  String get profileTitle => _localizedValues[_locale.languageCode][profileTitleId];
-  String get shopTitle => _localizedValues[_locale.languageCode][shopTitleId];
+  String get basketTitle => _localizedStrings[_locale.languageCode][basketTitleId];
+  String get locationTitle => _localizedStrings[_locale.languageCode][locationTitleId];
+  String get ordersTitle => _localizedStrings[_locale.languageCode][ordersTitleId];
+  String get profileTitle => _localizedStrings[_locale.languageCode][profileTitleId];
+  String get shopTitle => _localizedStrings[_locale.languageCode][shopTitleId];
 
   ///Profile route
-  String get stepsToFreeCoffee => _localizedValues[_locale.languageCode][stepsToFreeCoffeeId];
-  String get daily => _localizedValues[_locale.languageCode][dailyId];
-  String get random => _localizedValues[_locale.languageCode][randomId];
-  String get boss => _localizedValues[_locale.languageCode][bossId];
-  String get achievements => _localizedValues[_locale.languageCode][achievementsId];
-  String get exp => _localizedValues[_locale.languageCode][expId];
-  String get destroyedCroissants => _localizedValues[_locale.languageCode][destroyedCroissantsId];
-  String get drankLattes => _localizedValues[_locale.languageCode][drankLattesId];
-  String get drankAmericanos => _localizedValues[_locale.languageCode][drankAmericanosId];
-  String get joinTheGame => _localizedValues[_locale.languageCode][joinTheGameId];
-  String get loyaltySystem => _localizedValues[_locale.languageCode][loyaltySystemId];
-  String get giftCards => _localizedValues[_locale.languageCode][giftCardsId];
-  String get bonuses => _localizedValues[_locale.languageCode][bonusesId];
-  String get setting => _localizedValues[_locale.languageCode][settingId];
-  String get paymentMethods => _localizedValues[_locale.languageCode][paymentMethodsId];
-  String get signOut => _localizedValues[_locale.languageCode][signOutId];
-  String get loadingProfileFailed => _localizedValues[_locale.languageCode][loadingProfileFailedId];
-  String get noInternetConnection => _localizedValues[_locale.languageCode][noInternetConnectionId];
-  String get retry => _localizedValues[_locale.languageCode][retryId];
+  String get stepsToFreeCoffee => _localizedStrings[_locale.languageCode][stepsToFreeCoffeeId];
+  String get daily => _localizedStrings[_locale.languageCode][dailyId];
+  String get random => _localizedStrings[_locale.languageCode][randomId];
+  String get boss => _localizedStrings[_locale.languageCode][bossId];
+  String get achievements => _localizedStrings[_locale.languageCode][achievementsId];
+  String get exp => _localizedStrings[_locale.languageCode][expId];
+  String get destroyedCroissants => _localizedStrings[_locale.languageCode][destroyedCroissantsId];
+  String get drankLattes => _localizedStrings[_locale.languageCode][drankLattesId];
+  String get drankAmericanos => _localizedStrings[_locale.languageCode][drankAmericanosId];
+  String get joinTheGame => _localizedStrings[_locale.languageCode][joinTheGameId];
+  String get loyaltySystem => _localizedStrings[_locale.languageCode][loyaltySystemId];
+  String get giftCards => _localizedStrings[_locale.languageCode][giftCardsId];
+  String get bonuses => _localizedStrings[_locale.languageCode][bonusesId];
+  String get setting => _localizedStrings[_locale.languageCode][settingId];
+  String get paymentMethods => _localizedStrings[_locale.languageCode][paymentMethodsId];
+  String get signOut => _localizedStrings[_locale.languageCode][signOutId];
+  String get loadingProfileFailed => _localizedStrings[_locale.languageCode][loadingProfileFailedId];
+  String get noInternetConnection => _localizedStrings[_locale.languageCode][noInternetConnectionId];
+  String get retry => _localizedStrings[_locale.languageCode][retryId];
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
