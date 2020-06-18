@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_simple_dependency_injection/injector.dart';
+import 'package:flutterapp/blocs/profile/profile_block.dart';
 import 'package:flutterapp/presentation/basket_route.dart';
 import 'package:flutterapp/presentation/location_route.dart';
 import 'package:flutterapp/presentation/profile/profile_route.dart';
@@ -55,7 +58,12 @@ class _TabView extends StatelessWidget {
     } else if (selectedTabIndex == basketTabIndex) {
       return BasketRoute();
     } else if (selectedTabIndex == profileTabIndex) {
-      return ProfileRoute();
+      return BlocProvider<ProfileBloc>(
+        create: (context) => ProfileBloc(
+          userRepository: Injector.getInjector().get(),
+        ),
+        child: ProfileRoute(),
+      );
     } else {
       throw ("Illegal argument exception: invalid selectedTabIndex.");
     }
@@ -76,6 +84,7 @@ class _BottomTabsView extends StatelessWidget {
     // TODO add correct icons
 
     return BottomNavigationBar(
+      key: Key('BottomNavigationBar'),
       unselectedItemColor: Colors.black,
       selectedItemColor: Colors.teal[400],
       items: const <BottomNavigationBarItem>[

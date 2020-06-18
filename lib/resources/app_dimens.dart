@@ -4,4 +4,5 @@ class AppDimens {
   static const double cardMarginVertical = 10;
   static const double cardPaddingHorizontal = 12;
   static const double cardPaddingVertical = 10;
+  static const double retryButtonMarginTop = 12;
 }
