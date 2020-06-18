@@ -12,8 +12,8 @@ import 'package:flutterapp/resources/app_integers.dart';
 import 'package:flutterapp/presentation/profile/profile_dimens.dart';
 import 'package:flutterapp/resources/app_colors.dart';
 import 'package:flutterapp/resources/app_images.dart';
-import 'package:flutterapp/resources/app_messages.dart';
 import 'package:flutterapp/resources/app_text_styles.dart';
+import 'package:flutterapp/resources/strings/app_localizations.dart';
 import 'package:flutterapp/widgets/error_placeholder_widget.dart';
 import 'package:flutterapp/widgets/progress/arc_progress.dart';
 import 'package:flutterapp/widgets/progress/initial_progress_widget.dart';
@@ -74,12 +74,12 @@ class _ProfileRouteContentState extends State<_ProfileRouteContent> {
           return _ExpandedWidget(state.user);
         } else if (state is LoadingFailedState) {
           return ErrorPlaceholderWidget(
-            message: AppMessages.loadingProfileFailed,
+            message: AppLocalizations.of(context).loadingProfileFailed,
             onRetryPressed: _onRetryClicked,
           );
         } else if (state is NoConnectionState) {
           return ErrorPlaceholderWidget(
-            message: AppMessages.noInternetConnection,
+            message: AppLocalizations.of(context).noInternetConnection,
             onRetryPressed: _onRetryClicked,
           );
         } else {
@@ -110,7 +110,7 @@ class _DefaultWidget extends StatelessWidget {
     loyaltySystemCardRows.add(
       CardRowWidget(
         AppImages.giftCards,
-        AppMessages.giftCards,
+        AppLocalizations.of(context).giftCards,
         () => BlocProvider.of<ProfileBloc>(context).add(
           ProfileEvent.GiftPressedEvent,
         ),
@@ -119,7 +119,7 @@ class _DefaultWidget extends StatelessWidget {
     loyaltySystemCardRows.add(
       CardRowWidget(
         AppImages.bonus,
-        AppMessages.bonuses,
+        AppLocalizations.of(context).bonuses,
         () => BlocProvider.of<ProfileBloc>(context).add(
           ProfileEvent.BonusesPressedEvent,
         ),
@@ -130,7 +130,7 @@ class _DefaultWidget extends StatelessWidget {
     settingsCardsRow.add(
       CardRowWidget(
         AppImages.payment,
-        AppMessages.paymentMethods,
+        AppLocalizations.of(context).paymentMethods,
         () => BlocProvider.of<ProfileBloc>(context).add(
           ProfileEvent.PaymentMethodsPressedEvent,
         ),
@@ -139,7 +139,7 @@ class _DefaultWidget extends StatelessWidget {
     settingsCardsRow.add(
       CardRowWidget(
         AppImages.signOut,
-        AppMessages.signOut,
+        AppLocalizations.of(context).signOut,
         () => BlocProvider.of<ProfileBloc>(context).add(
           ProfileEvent.SignOutPressedEvent,
         ),
@@ -154,11 +154,11 @@ class _DefaultWidget extends StatelessWidget {
           _DefaultHeaderWidget(_user),
           _JoinTheGameWidget(),
           CardWidget(
-            AppMessages.loyaltySystem.toUpperCase(),
+            AppLocalizations.of(context).loyaltySystem.toUpperCase(),
             loyaltySystemCardRows,
           ),
           CardWidget(
-            AppMessages.setting.toUpperCase(),
+            AppLocalizations.of(context).setting.toUpperCase(),
             settingsCardsRow,
           ),
         ],
@@ -364,7 +364,7 @@ class _UserInfoWidget extends StatelessWidget {
         '/' +
         totalExpProgress.toString() +
         ' ' +
-        AppMessages.exp;
+        AppLocalizations.of(context).exp;
 
     double linearProgressWidth = ProfileDimens.userExperienceProgressBarWidth -
         ProfileDimens.userInfoItemsDefaultMargin;
@@ -463,7 +463,7 @@ class _UserNameAndStepsWidget extends StatelessWidget {
                   (requiredStepsToFreeCoffee - completedStepsToFreeCoffee)
                           .toString() +
                       " " +
-                      AppMessages.stepsToFreeCoffee,
+                      AppLocalizations.of(context).stepsToFreeCoffee,
                   style: AppTextStyles.captionLightSecondary,
                 ),
                 SizedBox(
@@ -590,7 +590,7 @@ class _ExpandAchievementsLabelWidget extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              AppMessages.achievements.toUpperCase(),
+              AppLocalizations.of(context).achievements.toUpperCase(),
               style: AppTextStyles.overlineMediumWhite,
             ),
             SvgPicture.asset(arrowIcon)
@@ -624,7 +624,7 @@ class _JoinTheGameWidget extends StatelessWidget {
           ),
         ),
         child: Text(
-          AppMessages.joinTheGame,
+          AppLocalizations.of(context).joinTheGame,
           style: AppTextStyles.buttonBoldWhite,
         ),
       ),

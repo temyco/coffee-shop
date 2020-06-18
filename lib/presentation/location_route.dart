@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterapp/resources/app_colors.dart';
-import 'package:flutterapp/resources/app_messages.dart';
 import 'package:flutterapp/resources/app_text_styles.dart';
+import 'package:flutterapp/resources/strings/app_localizations.dart';
 import 'package:flutterapp/widgets/status_bar_safe_area.dart';
 
 class LocationRoute extends StatelessWidget {
@@ -13,7 +13,7 @@ class LocationRoute extends StatelessWidget {
       systemOverlayStyle: SystemUiOverlayStyle.dark,
       child: Center(
         child: Text(
-          AppMessages.locationTitle,
+          AppLocalizations.of(context).locationTitle,
           style: AppTextStyles.h1MediumPrimary,
         ),
       ),

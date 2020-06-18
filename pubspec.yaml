@@ -28,6 +28,8 @@ dependencies:
   flutter_bloc: ^4.0.0
   connectivity: ^0.4.8+6
   flutter_simple_dependency_injection: 1.0.2+1
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
@@ -36,8 +38,6 @@ dev_dependencies:
   flutter_driver:
     sdk: flutter
   test: 1.14.0
-  flutter_localizations:
-    sdk: flutter
 
 
 # For information on the generic Dart part of this file, see the

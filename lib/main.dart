@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:flutterapp/data/network_manager.dart';
 import 'package:flutterapp/data/repository/user_repository.dart';
-import 'package:flutterapp/resources/app_messages.dart';
+import 'package:flutterapp/resources/strings/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'presentation/home_route.dart';
 import 'resources/app_theme.dart';
@@ -25,10 +25,12 @@ class CoffeeShop extends StatelessWidget {
     ]);
 
     return MaterialApp(
-      title: AppMessages.appTitle,
+      title: 'CoffeeShop', // in case we have to translate this then please use
+                           // 'onGenerateTitle' instead of 'title'.
       theme: mainTheme,
       home: HomeRoute(),
       localizationsDelegates: [
+        AppLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
