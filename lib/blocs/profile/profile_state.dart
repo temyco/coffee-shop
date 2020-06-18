@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutterapp/data/model/user.dart';
 
 abstract class ProfileState {
