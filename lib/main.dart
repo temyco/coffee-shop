@@ -4,11 +4,16 @@ import 'package:flutterapp/data/network_manager.dart';
 import 'package:flutterapp/data/repository/user_repository.dart';
 import 'package:flutterapp/resources/app_messages.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'presentation/home_route.dart';
 import 'resources/app_theme.dart';
 
 void main() {
   CoffeeShopModule().initialize();
+
+  Crashlytics.instance.enableInDevMode = true;
+  FlutterError.onError = Crashlytics.instance.recordFlutterError;
+
   runApp(CoffeeShop());
 }
 

@@ -26,6 +26,8 @@ import 'package:flutterapp/widgets/status_bar_safe_area.dart';
 class ProfileRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String message;
+    message.length;
     return StatusBarSafeArea(
       statusBarColor: AppColors.dark,
       systemOverlayStyle: SystemUiOverlayStyle.light,
