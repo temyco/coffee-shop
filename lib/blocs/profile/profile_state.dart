@@ -1,7 +1,9 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutterapp/data/model/user.dart';
 
-abstract class ProfileState {
-
+abstract class ProfileState extends Equatable {
+  @override
+  List<Object> get props => [];
 }
 
 class LoadingState extends ProfileState {
