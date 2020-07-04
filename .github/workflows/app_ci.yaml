@@ -17,9 +17,11 @@ jobs:
 
       # Setup the flutter environment.
       - uses: subosito/flutter-action@v1
-        with:
-          channel: 'beta' # 'dev', 'alpha', default to: 'stable'
-          # flutter-version: '1.12.x' # you can also specify exact version of flutter
+#        with:
+#          channel: 'beta' # 'dev', 'alpha', default to: 'stable'
+#          # flutter-version: '1.12.x' # you can also specify exact version of flutter
+      - with:
+          flutter-version: '1.7.8+hotfix.4'
 
       # Get flutter dependencies.
       - run: flutter pub get
