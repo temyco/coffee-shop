@@ -6,7 +6,7 @@ on:
       - ci/cd_setup
 
 jobs:
-  build:
+  test_and_build_android:
     runs-on: ubuntu-latest
     steps:
       # Setup Java environment in order to build the Android app.
@@ -18,7 +18,7 @@ jobs:
       # Setup the flutter environment.
       - uses: subosito/flutter-action@v1
         with:
-          channel: stable
+          channel: 'stable'
 
       # Get flutter dependencies.
       - run: flutter pub get
@@ -38,11 +38,27 @@ jobs:
           name: Android
           path: build/app/outputs/apk/release/app-release.apk
 
-      # Build iOS
-      - run: flutter build ios
+  build_ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Select Xcode
+        run: sudo xcode-select -switch /Applications/Xcode_11.3.app
+      - name: Xcode version
+        run: /usr/bin/xcodebuild -version
+
+      # Setup the flutter environment.
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
+
+      # Get flutter dependencies.
+      - run: flutter pub get
+
+      - run: flutter build ios --release --no-codes
 
       # Upload generated apk to the artifacts.
       - uses: actions/upload-artifact@v1
         with:
           name: iOS
-          path: build/app/outputs/apk/release/app-release.apk
+#          path: build/app/outputs/apk/release/app-release.apk
