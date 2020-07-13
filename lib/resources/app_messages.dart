@@ -29,5 +29,13 @@ class AppMessages {
   static const String signOut = "Sign Out";
 
   /// Product Details Route
-  static const String nextButtonTitle = "Next";
+  static const String productDetailsTitle = "Product Name";
+  static const String addToBasketButtonTitle = "Add to basket";
+  static const String productName = "Flat white";
+  static const String productPrice = "\$ 12.00";
+  static const String productDescription = "We believe coffee should be as\nsimple complex as you want it to be.\nPerfect start your day";
+  static const String sizeOverline = "SIZE";
+  static const String chooseBeansOverline = "CHOOSE BEANS";
+  static const String chooseMilkOverline = "MILK";
+  static const String chooseExtrasOverline = "EXTRAS";
 }

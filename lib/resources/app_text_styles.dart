@@ -204,6 +204,13 @@ class AppTextStyles {
     color: AppColors.charcoalGray,
   );
 
+  static const TextStyle bodyRegularOrange = TextStyle(
+    fontFamily: AppFontFamilies.SFUIDisplay,
+    fontSize: AppTextSizes.s13,
+    fontWeight: FontWeight.w400,
+    color: AppColors.pumpkinOrange,
+  );
+
   static const TextStyle bodyRegularQuaternary = TextStyle(
     fontFamily: AppFontFamilies.SFUIDisplay,
     fontSize: AppTextSizes.s13,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterapp/presentation/product_details_route.dart';
+import 'package:flutterapp/presentation/productDetails/product_details_route.dart';
 import 'package:flutterapp/resources/app_messages.dart';
 
 class LocationRoute extends StatelessWidget {
