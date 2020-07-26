@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutterapp/presentation/common/viewdata/radio_list_view_data.dart';
+import 'package:flutterapp/presentation/common/widget/row_with_text_and_icon_widget.dart';
 import 'package:flutterapp/widgets/ripple_widget.dart';
 
 class RadioListWidget extends StatefulWidget {
@@ -24,7 +25,7 @@ class _RadioListWidgetState extends State<RadioListWidget> {
 
   _RadioListWidgetState(this.onItemChecked, this.items);
 
-  void _onItemPressed(int index) {
+  void _onItemClicked(int index) {
     setState(() {
       _checkedIndex = index;
     });
@@ -35,31 +36,15 @@ class _RadioListWidgetState extends State<RadioListWidget> {
     List<Widget> children = List();
     for (int i = 0; i < items.length; i++) {
       children.add(RippleWidget(
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(top: 5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      items[i].text,
-                      style: _getTextStyle(i),
-                    ),
-                    SvgPicture.asset(_getIconName(i), color: _getIconColor(i)),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 5),
-                child: Divider(),
-              )
-            ],
+          child: RowWithTextAndIconWidget(
+            items[i].text,
+            _getIconName(i),
+            _getTextStyle(i),
+            _getIconColor(i)
           ),
           onTap: () {
             setState(() {
-              _onItemPressed(i);
+              _onItemClicked(i);
             });
             onItemChecked(i);
           }));

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CheckboxListViewData {
+class CheckboxListItemViewData {
   @required String title;
   String price;
   @required TextStyle checkedTextStyle;
@@ -10,7 +10,7 @@ class CheckboxListViewData {
   @required Color checkedIconColor;
   @required Color uncheckedIconColor;
 
-  CheckboxListViewData(
+  CheckboxListItemViewData(
       this.title,
       this.price,
       this.checkedTextStyle,

@@ -2,7 +2,7 @@ import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutterapp/presentation/common/viewdata/checkbox_list_view_data.dart';
+import 'package:flutterapp/presentation/common/viewdata/checkbox_list_item_view_data.dart';
 import 'package:flutterapp/presentation/common/viewdata/radar_chart_view_data.dart';
 import 'package:flutterapp/presentation/common/viewdata/radio_group_item_view_data.dart';
 import 'package:flutterapp/presentation/common/viewdata/radio_list_view_data.dart';
@@ -160,9 +160,9 @@ class _ProductDetailsRouteState extends State<ProductDetailsRoute> {
     ];
   }
 
-  List<CheckboxListViewData> _getExtrasChoices() {
+  List<CheckboxListItemViewData> _getExtrasChoices() {
     return [
-      CheckboxListViewData(
+      CheckboxListItemViewData(
           'Vanilla Syrop',
           '+ \$ 0.5',
           AppTextStyles.bodyRegularOrange,
@@ -171,7 +171,7 @@ class _ProductDetailsRouteState extends State<ProductDetailsRoute> {
           AppImages.iconCheckboxUnchecked,
           AppColors.pumpkinOrange,
           AppColors.charcoalGray),
-      CheckboxListViewData(
+      CheckboxListItemViewData(
           'Caramel Syrop',
           '+ \$ 0.5',
           AppTextStyles.bodyRegularOrange,
@@ -288,7 +288,7 @@ class _ProductDetailsRouteState extends State<ProductDetailsRoute> {
     developer.log('onMilkRadioButtonPressed index $index');
   }
 
-  onExtrasItemChecked(CheckboxListViewData item, bool isChecked) {
+  onExtrasItemChecked(CheckboxListItemViewData item, bool isChecked) {
     developer.log('${item.title} is checked = $isChecked');
   }
 

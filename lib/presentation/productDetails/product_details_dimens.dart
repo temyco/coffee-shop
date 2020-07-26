@@ -4,7 +4,8 @@ class ProductDetailsDimens {
   static const double horizontalRadioGroupMarginTop = 9;
   static const double horizontalRadioButtonBorderWidth = 1;
   static const double horizontalRadioButtonBorderRadius = 5;
-  static const double horizontalRadioButtonVerticalPadding = 9;
+  static const double horizontalRadioButtonVerticalPaddingTop = 9;
+  static const double horizontalRadioButtonVerticalPaddingBottom = 7;
   static const double horizontalRadioButtonSPaceBetweenChildren = 13;
   static const double beansWidgetMarginTop = 30;
 
@@ -30,4 +31,7 @@ class ProductDetailsDimens {
 
   /// Extras Chooser Widget
   static const double checkboxListMarginTop = 10;
+
+  /// Row With Text And Icon Widget
+  static const double rowWithTextAndIconPassingTop = 5;
 }

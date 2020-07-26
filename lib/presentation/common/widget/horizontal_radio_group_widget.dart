@@ -55,7 +55,11 @@ class _HorizontalRadioGroupWidgetState
         child: GestureDetector(
           child: Container(
             alignment: Alignment.center,
-            padding: EdgeInsets.only(top: 9, bottom: 7),
+            padding: EdgeInsets.only(
+                top: ProductDetailsDimens
+                    .horizontalRadioButtonVerticalPaddingTop,
+                bottom: ProductDetailsDimens
+                    .horizontalRadioButtonVerticalPaddingBottom),
             decoration: BoxDecoration(
               border: Border.all(
                   color: _getBorderColor(i),
