@@ -40,20 +40,20 @@ jobs:
 
   build_ios:
     name: Build Flutter (iOS)
-      runs-on: macos-latest
-      steps:
-        - uses: actions/checkout@v1
-        - uses: subosito/flutter-action@v1
-          with:
-            channel: 'stable'
-        - run: flutter pub get
-        - run: flutter clean
-        - run: flutter build ios
-        - name: Upload iPA
-          uses: actions/upload-artifact@master
-          with:
-            name: ios-build
-            path: build/ios/iphoneos
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
+      - run: flutter pub get
+      - run: flutter clean
+      - run: flutter build ios
+      - name: Upload iPA
+        uses: actions/upload-artifact@master
+        with:
+          name: ios-build
+          path: build/ios/iphoneos
 
 #    runs-on: macos-latest
 #    steps:
