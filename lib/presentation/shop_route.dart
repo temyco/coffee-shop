@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterapp/resources/app_colors.dart';
-import 'package:flutterapp/resources/app_messages.dart';
+import 'package:flutterapp/resources/strings/app_localizations.dart';
 import 'package:flutterapp/widgets/status_bar_safe_area.dart';
 
 class ShopRoute extends StatelessWidget {
@@ -10,7 +10,7 @@ class ShopRoute extends StatelessWidget {
     return StatusBarSafeArea(
       statusBarColor: AppColors.paleGray,
       systemOverlayStyle: SystemUiOverlayStyle.dark,
-      child: Center(child: Text(AppMessages.shopTitle)),
+      child: Center(child: Text(AppLocalizations.of(context).shopTitle)),
     );
   }
 }

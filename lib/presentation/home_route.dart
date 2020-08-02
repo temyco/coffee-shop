@@ -6,7 +6,7 @@ import 'package:flutterapp/presentation/basket_route.dart';
 import 'package:flutterapp/presentation/location_route.dart';
 import 'package:flutterapp/presentation/profile/profile_route.dart';
 import 'package:flutterapp/presentation/shop_route.dart';
-import 'package:flutterapp/resources/app_messages.dart';
+import 'package:flutterapp/resources/strings/app_localizations.dart';
 
 import 'orders_route.dart';
 
@@ -87,26 +87,26 @@ class _BottomTabsView extends StatelessWidget {
       key: Key('BottomNavigationBar'),
       unselectedItemColor: Colors.black,
       selectedItemColor: Colors.teal[400],
-      items: const <BottomNavigationBarItem>[
+      items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.location_on),
-          title: Text(AppMessages.locationTitle),
+          title: Text(AppLocalizations.of(context).locationTitle),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.shop),
-          title: Text(AppMessages.shopTitle),
+          title: Text(AppLocalizations.of(context).shopTitle),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.note),
-          title: Text(AppMessages.ordersTitle),
+          title: Text(AppLocalizations.of(context).ordersTitle),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.shopping_cart),
-          title: Text(AppMessages.basketTitle),
+          title: Text(AppLocalizations.of(context).basketTitle),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.account_circle),
-          title: Text(AppMessages.profileTitle),
+          title: Text(AppLocalizations.of(context).profileTitle),
         ),
       ],
       currentIndex: selectedTabIndex,

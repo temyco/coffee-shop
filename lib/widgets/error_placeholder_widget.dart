@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/resources/app_dimens.dart';
-import 'package:flutterapp/resources/app_messages.dart';
+import 'package:flutterapp/resources/strings/app_localizations.dart';
 import 'package:flutterapp/resources/app_text_styles.dart';
 
 class ErrorPlaceholderWidget extends StatelessWidget {
@@ -30,7 +30,7 @@ class ErrorPlaceholderWidget extends StatelessWidget {
           onPressed: () => onRetryPressed.call(),
           color: Theme.of(context).accentColor,
           child: Text(
-            AppMessages.retry.toUpperCase(),
+            AppLocalizations.of(context).retry.toUpperCase(),
             style: AppTextStyles.h4MediumWhite,
           ),
         )
