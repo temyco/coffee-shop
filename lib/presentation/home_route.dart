@@ -7,7 +7,6 @@ import 'package:flutterapp/presentation/location_route.dart';
 import 'package:flutterapp/presentation/profile/profile_route.dart';
 import 'package:flutterapp/presentation/shop_route.dart';
 import 'package:flutterapp/resources/strings/app_localizations.dart';
-
 import 'orders_route.dart';
 
 class HomeRoute extends StatefulWidget {

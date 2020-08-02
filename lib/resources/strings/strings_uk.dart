@@ -24,5 +24,5 @@ const Map<String, String> ukrainian = {
   signOutId: "Вийти з аккаунта",
   loadingProfileFailedId: "Не вдалось завантажити профіль.",
   noInternetConnectionId: "Немає зв'язку",
-  retryId: "Повторити спробу"
+  retryId: "Повторити спробу",
 };

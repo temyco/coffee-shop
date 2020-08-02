@@ -17,6 +17,7 @@ import 'package:flutterapp/resources/app_images.dart';
 import 'package:flutterapp/resources/app_messages.dart';
 import 'package:flutterapp/resources/app_text_sizes.dart';
 import 'package:flutterapp/resources/app_text_styles.dart';
+import 'package:flutterapp/resources/strings/app_localizations.dart';
 
 /// TODO: 1. Add Grab a croissant widget
 /// TODO: 2. Add a view that notifies about adding smth to the basket
@@ -191,7 +192,7 @@ class _ProductDetailsRouteState extends State<ProductDetailsRoute> {
       appBar: AppBar(
         title: Center(
             child: Text(
-          AppMessages.productDetailsTitle,
+              AppLocalizations.of(context).productDetailsTitle,
           style: AppTextStyles.h3MediumPrimary,
         )),
         leading: IconButton(
@@ -217,13 +218,13 @@ class _ProductDetailsRouteState extends State<ProductDetailsRoute> {
           children: <Widget>[
             ProductDescriptionWidget(
                 AppImages.imgFlatWhite,
-                AppMessages.productName,
-                AppMessages.productPrice,
-                AppMessages.productDescription),
-            HorizontalChooserWidget(AppMessages.sizeOverline, _getSizeItems(), onSizeRadioButtonPressed),
+                AppLocalizations.of(context).productName,
+                AppLocalizations.of(context).productPrice,
+                AppLocalizations.of(context).productDescription),
+            HorizontalChooserWidget(AppLocalizations.of(context).sizeOverline, _getSizeItems(), onSizeRadioButtonPressed),
             Padding(
               padding: const EdgeInsets.only(top: ProductDetailsDimens.beansWidgetMarginTop),
-              child: HorizontalChooserWidget(AppMessages.chooseBeansOverline, _getBeansItems(), onBeansRadioButtonPressed),
+              child: HorizontalChooserWidget(AppLocalizations.of(context).chooseBeansOverline, _getBeansItems(), onBeansRadioButtonPressed),
             ),
             Center(
               child: AspectRatio(
@@ -241,14 +242,14 @@ class _ProductDetailsRouteState extends State<ProductDetailsRoute> {
                 margin: const EdgeInsets.only(
                     left: ProductDetailsDimens.milkChooserMarginHorizontal,
                     right: ProductDetailsDimens.milkChooserMarginHorizontal),
-                child: MilkChooserWidget(AppMessages.chooseMilkOverline, _getMilkChoices(), onMilkRadioButtonPressed)),
+                child: MilkChooserWidget(AppLocalizations.of(context).chooseMilkOverline, _getMilkChoices(), onMilkRadioButtonPressed)),
             Container(
                 margin: EdgeInsets.only(
                     top: ProductDetailsDimens.extrasWidgetMarginTop,
                     left: ProductDetailsDimens.extrasWidgetMarginHorizontal,
                     right: ProductDetailsDimens.extrasWidgetMarginHorizontal),
                 child: ExtrasChooserWidget(
-                  AppMessages.chooseExtrasOverline,
+                  AppLocalizations.of(context).chooseExtrasOverline,
                   _getExtrasChoices(),
                   onExtrasItemChecked,
                 )),
@@ -266,7 +267,7 @@ class _ProductDetailsRouteState extends State<ProductDetailsRoute> {
                         borderRadius: BorderRadius.all(Radius.circular(
                             ProductDetailsDimens
                                 .addToBasketButtonBorderRadius))),
-                    child: Text(AppMessages.addToBasketButtonTitle,
+                    child: Text(AppLocalizations.of(context).addToBasketButtonTitle,
                         style: AppTextStyles.buttonBoldWhite),
                     color: AppColors.dark,
                     onPressed: () {}))

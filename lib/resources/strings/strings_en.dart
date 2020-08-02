@@ -26,5 +26,16 @@ const Map<String, String> english = {
   signOutId: "Sign Out",
   loadingProfileFailedId: "Loading Profile Failed.",
   noInternetConnectionId: "No Internet Connection.",
-  retryId: "Retry"
+  retryId: "Retry",
+
+  /// Product Details Route
+  productDetailsTitleId: "Product Name",
+  addToBasketButtonTitleId: "Add to basket",
+  productNameId: "Flat white",
+  productPriceId: "\$ 12.00",
+  productDescriptionId: "We believe coffee should be as\nsimple complex as you want it to be.\nPerfect start your day",
+  sizeOverlineId: "SIZE",
+  chooseBeansOverlineId: "CHOOSE BEANS",
+  chooseMilkOverlineId: "MILK",
+  chooseExtrasOverlineId: "EXTRAS"
 };

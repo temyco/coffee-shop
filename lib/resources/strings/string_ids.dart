@@ -24,3 +24,15 @@ const String signOutId = "signOut";
 const String loadingProfileFailedId = "loadingProfileFailed";
 const String noInternetConnectionId = "noInternetConnection";
 const String retryId = "retry";
+
+/// Product Details Route
+const String productDetailsTitleId = "productDetailsTitle";
+const String addToBasketButtonTitleId = "addToBasketButtonTitle";
+const String productNameId = "productName";
+const String productPriceId = "productPrice";
+const String productDescriptionId = "productDescription";
+const String sizeOverlineId = "sizeOverline";
+const String chooseBeansOverlineId = "chooseBeansOverline";
+const String chooseMilkOverlineId = "chooseMilkOverline";
+const String chooseExtrasOverlineId = "chooseExtrasOverline";
+

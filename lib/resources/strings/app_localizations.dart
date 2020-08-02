@@ -48,6 +48,17 @@ class AppLocalizations {
   String get loadingProfileFailed => _localizedStrings[_locale.languageCode][loadingProfileFailedId];
   String get noInternetConnection => _localizedStrings[_locale.languageCode][noInternetConnectionId];
   String get retry => _localizedStrings[_locale.languageCode][retryId];
+
+  /// Product Details Route
+  String get productDetailsTitle => _localizedStrings[_locale.languageCode][productDetailsTitleId];
+  String get addToBasketButtonTitle => _localizedStrings[_locale.languageCode][addToBasketButtonTitleId];
+  String get productName => _localizedStrings[_locale.languageCode][productNameId];
+  String get productPrice => _localizedStrings[_locale.languageCode][productPriceId];
+  String get productDescription => _localizedStrings[_locale.languageCode][productDescriptionId];
+  String get sizeOverline => _localizedStrings[_locale.languageCode][sizeOverlineId];
+  String get chooseBeansOverline => _localizedStrings[_locale.languageCode][chooseBeansOverlineId];
+  String get chooseMilkOverline => _localizedStrings[_locale.languageCode][chooseMilkOverlineId];
+  String get chooseExtrasOverline => _localizedStrings[_locale.languageCode][chooseExtrasOverlineId];
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
