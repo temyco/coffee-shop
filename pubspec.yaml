@@ -30,6 +30,7 @@ dependencies:
   flutter_simple_dependency_injection: 1.0.2+1
   flutter_localizations:
     sdk: flutter
+  mp_chart: ^0.2.1
 
 dev_dependencies:
   flutter_test:
@@ -52,8 +53,10 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/images/1.5x/
     - assets/images/2.0x/
     - assets/images/3.0x/
+    - assets/images/4.0x/
   fonts:
     - family: SFUIDisplay
       fonts:

@@ -15,4 +15,7 @@ class AppColors {
   static const Color redOrange = Color(0xFFF54343);
   static const Color cardShadow = Color(0x99BCCAE0);
   static const Color divider = Color(0xFFD8D8D8);
+  static const Color pinkishGray = Color(0xFFC5C5C5);
+  static const Color whiteTwo = Color(0xFFE0E0E0);
+  static const Color warmGrey = Color(0xB3979797);
 }

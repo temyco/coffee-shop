@@ -19,4 +19,15 @@ class AppImages {
   static const String signOut = _imagesPath + "sign_out.svg";
   static const String profileHeader = _imagesPath + "profile_header.png";
   static const String arrowUp = _imagesPath + "arrow_up.svg";
+
+  /// Product Details Route
+  static const String imgFlatWhite = _imagesPath + "img_flat_white.png";
+  static const String iconCupSmall = _imagesPath + "ic_cup_small.svg";
+  static const String iconCupMedium = _imagesPath + "ic_cup_medium.svg";
+  static const String iconCupBig = _imagesPath + "ic_cup_big.svg";
+  static const String iconRadioCircleUnselected = _imagesPath + "ic_radio_circle_unchecked.svg";
+  static const String iconRadioCircleSelected = _imagesPath + "ic_radio_circle_checked.svg";
+  static const String iconCheckboxUnchecked = _imagesPath + "ic_checkbox_unchecked.svg";
+  static const String iconCheckboxChecked = _imagesPath + "ic_checkbox_checked.svg";
+  static const String iconBasket = _imagesPath + "ic_basket.svg";
 }
